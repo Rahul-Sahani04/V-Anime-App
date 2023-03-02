@@ -1,0 +1,38 @@
+.main-content{
+    display: flex;
+    flex-wrap: wrap;
+}
+ul {
+    list-style-type: none;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    width: 15em;
+    justify-content: flex-start;
+}
+
+.episode {
+    flex: 0 0 calc(33.33% - 20px);
+    /* Three episodes per row, with 20px spacing between each */
+    margin: 5px;
+    padding: 5px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.link {
+    text-decoration: none;
+    color: #212121;
+
+}
+a:active{
+    color: #212121;
+}
+
+.video{
+    flex: 1;
+}

@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body {
+  background : beige ;
+  margin : 0 ;
+  padding : 0 ;
+  transition: all .3s;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background:rgba(255, 99, 71, .3);
+  border-radius:2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background:rgba(255, 99, 71, .9);
+  border-radius:2px;
+}
+.container {
+  width: 90%;
+  margin: 0 auto;
+  display :flex;
+  justify-content:space-evenly;
+  flex-wrap:wrap;
+}
+
+.card{
+  margin : auto;
+  height: 450px;
+  width: 300px;
+  overflow : hidden;
+  border-radius : 20px;
+  background : white;
+  margin-top:50px;
+  transition: all .2s;
+  box-shadow:5px 5px 15px rgba(0,0,0, .3);
+}
+
+.card:hover {
+  box-shadow: 10px 10px 25px rgba(0,0,0, .5);
+  transform: scale(110%, 110%) translate(-5px, -5px);
+  /* z-index: 1; */
+}
+
+.card:hover img{
+  box-shadow: 6px 8px 6px rgba(0,0,0, .5);
+  transform: scale(110%, 110%) translate(-5px, -5px);
+  /* z-index: 1; */
+}
+
+.card:hover .icon svg{
+  animation : iconjln 1s;
+}
+
+.img-cover{
+  position: relative;
+}
+
+.card img{
+  width: 300px;
+  height: 300px;
+  object-fit:cover;
+  /* border-radius: 20px; */
+  box-shadow: 2px 5px 2px rgba(0,0,0, .3);
+}
+.overlay{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  z-index: 1;
+  transition: .5s ease;
+}
+.syp{
+  height: 100%;
+  overflow: hidden;
+}
+.card hr{
+  height: 5px;
+  color: black;
+  background-color: black;
+}
+
+.icon{
+  position:absolute;
+  top:0;
+  padding : 25px;
+  right:0;
+  border-bottom-left-radius:20px;
+  backdrop-filter: blur(20px);
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+
+.desc{
+  padding : 1.5em ;
+  font-family: 'Poppins', sans-serif;
+}
+.desc h2{
+  display:inline;
+  overflow: scroll;
+}
+
+.desc p{
+
+  display:inline;
+}
+.tdesc{
+  margin-bottom:40px;
+  width:100%;
+  height:50px;
+  overflow: auto;
+}
+
+.desc a{
+  text-decoration: none;
+  background-color: dodgerblue;
+  padding: 15px 25px;
+  color:white;
+  border-radius: 15px;
+  display:block;
+  text-align: center;
+  transition: all .2s;
+  
+}
+.desc a:hover{
+  background-color: SteelBlue;
+}
+
+.card:hover img{
+  filter: blur(15px);
+  background-color: black;
+  backface-visibility:hidden ;
+}
+.card:hover .overlay {
+  opacity: 1;
+  color: black;
+  font-size: large;
+  font-weight: 900;
+  padding: 8px;
+}
+
+.desc a:hover svg{
+  animation : iconjln 1s;
+}
+
+.overlay .syp:hover{
+  text-shadow: 2px 2px 2px #f1b2c3;
+}
