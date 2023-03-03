@@ -1,154 +1,104 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 
-body {
-  background : beige ;
-  margin : 0 ;
-  padding : 0 ;
-  transition: all .3s;
-}
-::-webkit-scrollbar {
-  width: 5px;
-}
-::-webkit-scrollbar-thumb {
-  background:rgba(255, 99, 71, .3);
-  border-radius:2px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background:rgba(255, 99, 71, .9);
-  border-radius:2px;
-}
-.container {
-  width: 90%;
-  margin: 0 auto;
-  display :flex;
-  justify-content:space-evenly;
-  flex-wrap:wrap;
+
+.card-container {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(17, 25, 40, 0.25);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);  
+  padding: 15px;  
+  filter: drop-shadow(0 30px 10px rgba(0,0,0,0.125));
+  text-align: center;
+  width: 280px;
+  height: 350px;
 }
 
-.card{
-  margin : auto;
-  height: 450px;
-  width: 300px;
-  overflow : hidden;
-  border-radius : 20px;
-  background : white;
-  margin-top:50px;
-  transition: all .2s;
-  box-shadow:5px 5px 15px rgba(0,0,0, .3);
+.title{
+  color: white;
+  text-decoration: none;
+  height: 10%;
 }
 
-.card:hover {
-  box-shadow: 10px 10px 25px rgba(0,0,0, .5);
-  transform: scale(110%, 110%) translate(-5px, -5px);
-  /* z-index: 1; */
-}
-
-.card:hover img{
-  box-shadow: 6px 8px 6px rgba(0,0,0, .5);
-  transform: scale(110%, 110%) translate(-5px, -5px);
-  /* z-index: 1; */
-}
-
-.card:hover .icon svg{
-  animation : iconjln 1s;
-}
-
-.img-cover{
-  position: relative;
-}
-
-.card img{
-  width: 300px;
-  height: 300px;
-  object-fit:cover;
-  /* border-radius: 20px; */
-  box-shadow: 2px 5px 2px rgba(0,0,0, .3);
-}
-.overlay{
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
+.wrapper {
   width: 100%;
-  opacity: 0;
-  z-index: 1;
-  transition: .5s ease;
-}
-.syp{
   height: 100%;
-  overflow: hidden;
-}
-.card hr{
-  height: 5px;
-  color: black;
-  background-color: black;
+  
 }
 
-.icon{
-  position:absolute;
-  top:0;
-  padding : 25px;
-  right:0;
-  border-bottom-left-radius:20px;
-  backdrop-filter: blur(20px);
-  background-color: rgba(255, 255, 255, 0.5);
+.banner-image {
+  background-position: center;
+  background-size: cover;
+  height: 70%;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255, 0.255)
+}
+/* 
+h4{
+  font-family: 'Righteous', sans-serif;
+  color: rgba(255,255,255,0.98);
+  text-transform: uppercase;
+  font-size: 2rem;
+} */
+
+p {
+  color: #fff;
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+  font-size: 0.8rem;
+  line-height: 150%;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.button-wrapper{
+  margin-top: 0;
+  position: absolute;
+  top: 300px;
+}
+
+.btn {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-size: 0.8rem;  
+  letter-spacing: 2px;  
   cursor: pointer;
 }
 
-.desc{
-  padding : 1.5em ;
-  font-family: 'Poppins', sans-serif;
-}
-.desc h2{
-  display:inline;
-  overflow: scroll;
+.btn + .btn {
+  margin-left: 10px;
 }
 
-.desc p{
-
-  display:inline;
-}
-.tdesc{
-  margin-bottom:40px;
-  width:100%;
-  height:50px;
-  overflow: auto;
-}
-
-.desc a{
-  text-decoration: none;
-  background-color: dodgerblue;
-  padding: 15px 25px;
-  color:white;
-  border-radius: 15px;
-  display:block;
-  text-align: center;
-  transition: all .2s;
+.outline {
+  background: transparent;
+  color: rgba(0, 212, 255, 0.9);
+  border: 1px solid rgba(0, 212, 255, 0.6);
+  transition: all .3s ease;
   
 }
-.desc a:hover{
-  background-color: SteelBlue;
+
+.outline:hover{
+  transform: scale(1.125);
+  color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.9);
+  transition: all .3s ease;  
 }
 
-.card:hover img{
-  filter: blur(15px);
-  background-color: black;
-  backface-visibility:hidden ;
-}
-.card:hover .overlay {
-  opacity: 1;
-  color: black;
-  font-size: large;
-  font-weight: 900;
-  padding: 8px;
+.fill {
+  background: rgba(0, 212, 255, 0.9);
+  color: rgba(255,255,255,0.95);
+  filter: drop-shadow(0);
+  font-weight: bold;
+  transition: all .3s ease; 
 }
 
-.desc a:hover svg{
-  animation : iconjln 1s;
-}
-
-.overlay .syp:hover{
-  text-shadow: 2px 2px 2px #f1b2c3;
+.fill:hover{
+  transform: scale(1.125);  
+  border-color: rgba(255, 255, 255, 0.9);
+  filter: drop-shadow(0 10px 5px rgba(0,0,0,0.125));
+  transition: all .3s ease;    
 }

@@ -3,7 +3,7 @@ import '../main.css';
 import Card_Component from '../components/card';
 import MY_Navbar2 from '../components/Navbar_2';
 import ThemeToggleButton from '../components/toggleTheme';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 const ItemPerPage = 5;
 
 const Search = ({ query_y }) => {
@@ -35,25 +35,24 @@ const Search = ({ query_y }) => {
     }
 
     const fetchAnime = async (query, page) => {
-        const response = await fetch(`https://api.jikan.moe/v4/anime?q="${query}"&page=${page}&order_by=title&sort=asc`);
+        let formattedQuery = query.replace(/\s+/g, "%20").toLowerCase(); 
+        console.log(formattedQuery); // "attack-on-titan"
+        const response = await fetch(`https://api.consumet.org/anime/gogoanime/${formattedQuery}?page=${page}`);
         const data = await response.json();
-        const totalPages = data.pagination.last_visible_page;
-        const Totalitems = data.pagination.items.count;
-        console.log(data.data);
-        setAnimeList(data.data);
-        setTotalPages(totalPages);
-        setTotalItems(Totalitems);
+        console.log(data);
+        setAnimeList(data.results);
         setQuery(temp);
-        console.log(`TOTAL PAGE: ${totalPages} & ITems: ${Totalitems} & ${location.search.split("=")[1]}`);
+        const Query = "";
+        setQuery(Query);
     };
 
     useEffect(() => {
         console.log("Welcome to Search " + location.search);
-        if(location.search != undefined || location.search != null){
+        if (location.search != undefined || location.search != null) {
             temp = location.search.split("=")[1];
             fetchAnime(temp, page);
         }
-        else{
+        else {
             fetchAnime(Query, page);
         }
     }, []);
@@ -67,19 +66,26 @@ const Search = ({ query_y }) => {
                 <div className='search1-box content-wrap'>
 
                     <input className='search-box' value={Query} type={"text"} onChange={e => setQuery(e.target.value)} />
-                    <input className='button-27' value={"Search"} type={"Button"} onClick={() => fetchAnime(Query, 1)} />
+                    <Link to={{
+                        pathname: '/search',
+                        search: `?query=${Query}`
+                    }} >
+                        <input className='button-27' value={"Search"} type={"Button"} onClick={() => fetchAnime(Query, 1)} />
+                    </Link>
 
                 </div>
                 <div className='container' key={"D-ID"}>
                     {
                         animeList?.map((anime, index) => (
-                            <Card_Component className={'anime-card'} title={anime.title} description={anime.synopsis} image={anime.images.jpg.large_image_url} key={index} />
+                            // <Link to={`/watch/${anime.id}-episode-1`} className={'main-card'}>
+                                <Card_Component className={'anime-card'} title={anime.title} id={anime.id} description={""} image={anime.image} key={index} />
+                            // </Link>
                         )
                         )}
                 </div>
 
             </div>
-        </div>
+        </div >
     )
 
 }

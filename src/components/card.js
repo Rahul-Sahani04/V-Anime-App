@@ -1,26 +1,50 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './card.css'
-const Card = ({ title, description, image, href_q, theme_mode }) => {
+const Card = ({ title, id, description, image, href_q, theme_mode }) => {
   return (
-    <a href={"" + href_q} target="_blank" rel="noopener noreferrer" className='a-nodec'>
-
-      <div className={`${theme_mode}`}>
-        <div className={`card `}>
-          <div className='img-cover'>
-            <div className='overlay'>
-              <p className='syp'>{description}</p>
-            </div>
-            <img src={image} alt={title} />
-          </div>
-          <div className="desc">
-            <h2>{title}</h2>
-            {/* <hr></hr> */}
-          </div>
-        </div>
+    <div className="card-container">
+      <div className="wrapper">
+        {/* <div class="banner-image" style={{backgroundImage:{image}}}> </div> */}
+        <img src={image} className="banner-image" />
+        <h4 className='title'>{title}</h4>
+        {/* <p>Lorem ipsum dolor sit amet, <br />
+          consectetur adipiscing elit.</p> */}
       </div>
-    </a>
+      <div className="button-wrapper">
+        <button className="btn outline">DETAILS</button>
+        <Link to={{
+
+          pathname: '/watch',
+          search: `?query=${id}&ep=episode-1`
+          }}
+           className={'main-card'}>
+          <button className="btn fill">Watch Now</button>
+        </Link>
+      </div>
+    </div>
   );
 };
 
 export default Card;
 
+
+
+
+  // <a href={"" + href_q} target="_blank" rel="noopener noreferrer" className='a-nodec'>
+
+  //   <div className={`${theme_mode}`}>
+  //     <div className={`card `}>
+  //       <div className='img-cover'>
+  //         <div className='overlay'>
+  //           <p className='syp'>{description}</p>
+  //         </div>
+  //         <img src={image} alt={title} />
+  //       </div>
+  //       <div className="desc">
+  //         <h2>{title}</h2>
+  //         {/* <hr></hr> */}
+  //       </div>
+  //     </div>
+  //   </div>
+  // </a>
