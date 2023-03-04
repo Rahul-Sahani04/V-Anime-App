@@ -118,7 +118,7 @@ function Watch() {
                 <input type={"submit"} onClick={() => fetchEpisodes(Query)} />
                 <div className='pagination'>
                     <button onClick={handlePrevPage}>Prev</button>
-                    
+
                     <span>
                         Page {page} of {animeList.episodes ? Math.ceil(animeList.episodes.length / episodesPerPage) : 0}
                     </span>
@@ -148,7 +148,12 @@ function Watch() {
 
                     </div>
                     <div className='video'>
-                        <iframe src={WatchUrl} width={"1080px"} height={"600px"}></iframe>
+                        <iframe src={WatchUrl} width={"860px"} height={"600px"} allow="fullscreen"></iframe>
+                    </div>
+                    <div className='desc'>
+                        <p >
+                            {animeList.description}
+                        </p>
                     </div>
                 </div>
 

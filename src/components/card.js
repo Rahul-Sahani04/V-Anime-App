@@ -5,11 +5,9 @@ const Card = ({ title, id, description, image, href_q, theme_mode }) => {
   return (
     <div className="card-container">
       <div className="wrapper">
-        {/* <div class="banner-image" style={{backgroundImage:{image}}}> </div> */}
         <img src={image} className="banner-image" />
         <h4 className='title'>{title}</h4>
-        {/* <p>Lorem ipsum dolor sit amet, <br />
-          consectetur adipiscing elit.</p> */}
+
       </div>
       <div className="button-wrapper">
         <button className="btn outline">DETAILS</button>

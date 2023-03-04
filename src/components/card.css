@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 
 
+.butt{
+  padding: 10px;
+}
+
 .card-container {
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -12,13 +16,13 @@
   filter: drop-shadow(0 30px 10px rgba(0,0,0,0.125));
   text-align: center;
   width: 280px;
-  height: 350px;
+  height: 400px;
 }
 
 .title{
   color: white;
   text-decoration: none;
-  height: 10%;
+  height: 30%;
 }
 
 .wrapper {
@@ -56,7 +60,8 @@ p {
 .button-wrapper{
   margin-top: 0;
   position: absolute;
-  top: 300px;
+  top: 89%;
+  left: 8%;
 }
 
 .btn {

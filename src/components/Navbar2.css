@@ -1,0 +1,33 @@
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15%;
+  padding: 1.2vh;
+  width: fit-content;
+}
+
+
+.header-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
+
+  
+.header-items {
+  position: static;
+  top: -1px;
+  display: block;
+  padding: 10px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.header-items:hover {
+  color: #e8f06d;
+  /* text-shadow: #1e1e1e 3px 3px 3px; */
+  transition: ease-in-out 0.25s;
+}
