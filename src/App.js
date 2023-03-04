@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import './main.css';
 import './components/card.css';
-import MY_Navbar from './components/Navbar_2'
+// import MY_Navbar from './components/Navbar_2';
+import "./components/Navbar.css";
 function App() {
   const [Query_A, setQueryA] = useState('');
 
