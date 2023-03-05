@@ -6,7 +6,10 @@
     font-family: 'Fira Sans', sans-serif;
 
 }
-
+body{
+  min-height: 100vh;
+  display: grid;
+}
 .r-image{
   position: absolute;
   display: flex;

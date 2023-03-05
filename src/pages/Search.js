@@ -4,7 +4,7 @@ import Card_Component from '../components/card';
 import MY_Navbar2 from '../components/Navbar_2';
 import ThemeToggleButton from '../components/toggleTheme';
 import { Link, useLocation } from 'react-router-dom';
-const ItemPerPage = 5;
+import Wavy from '../components/wavy_loader';
 
 const Search = ({ query_y }) => {
     const [Query, setQuery] = useState("One Piece");
@@ -13,6 +13,8 @@ const Search = ({ query_y }) => {
     const [animeList, setAnimeList] = useState([]);
     const [totalPages, setTotalPages] = useState(1);
     const [Totalitems, setTotalItems] = useState(1);
+
+    const [dataLoaded, setDataLoaded] = useState(false);
 
     const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -35,15 +37,17 @@ const Search = ({ query_y }) => {
     }
 
     const fetchAnime = async (query, page) => {
-        let formattedQuery = query.replace(/\s+/g, "%20").toLowerCase(); 
+        setDataLoaded(false);
+        let formattedQuery = query.replace(/\s+/g, "%20").toLowerCase();
         console.log(formattedQuery); // "attack-on-titan"
         const response = await fetch(`https://api.consumet.org/anime/gogoanime/${formattedQuery}?page=${page}`);
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         setAnimeList(data.results);
         setQuery(temp);
-        const Query = "";
+        const Query = query;
         setQuery(Query);
+        setDataLoaded(true);
     };
 
     useEffect(() => {
@@ -56,6 +60,13 @@ const Search = ({ query_y }) => {
             fetchAnime(Query, page);
         }
     }, []);
+
+
+    // if (!dataLoaded) {
+    //     return <Wavy />
+    // }
+    // else {
+
     return (
         <div className={`app`}>
             <div className={isDarkMode ? 'app light-theme' : 'app dark-theme'}>
@@ -74,19 +85,26 @@ const Search = ({ query_y }) => {
                     </Link>
 
                 </div>
-                <div className='container' key={"D-ID"}>
-                    {
-                        animeList?.map((anime, index) => (
-                            // <Link to={`/watch/${anime.id}-episode-1`} className={'main-card'}>
+                {dataLoaded && (
+                    <div className='container' key={"D-ID"}>
+                        {
+                            animeList?.map((anime, index) => (
+                                // <Link to={`/watch/${anime.id}-episode-1`} className={'main-card'}>
                                 <Card_Component className={'anime-card'} title={anime.title} id={anime.id} description={""} image={anime.image} key={index} />
-                            // </Link>
-                        )
-                        )}
-                </div>
+                                // </Link>
+                            )
+                            )}
+                    </div>
+                )}
+
+                {!dataLoaded && (
+                    <Wavy />
+                )}
 
             </div>
         </div >
     )
 
+    // }
 }
 export default Search;

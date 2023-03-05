@@ -4,7 +4,7 @@ import MY_Navbar2 from '../components/Navbar_2';
 import ThemeToggleButton from '../components/toggleTheme';
 import './WatchAnime.css';
 import { Link, useLocation } from 'react-router-dom';
-
+import Wavy from '../components/wavy_loader';
 
 function Watch() {
     const location = useLocation()
@@ -13,11 +13,15 @@ function Watch() {
     const [animeList, setAnimeList] = useState({});
     const [WatchUrl, setWatchUrl] = useState("");
 
+    const [Server, setServer] = useState("Streamsb");
+    const [ServerList, setServerList] = useState([]);
+
     const [TotalEP, setTotalEP] = useState(1);
     const [EP, setEP] = useState(1);
 
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [dataLoaded, setDataLoaded] = useState(false);
+    const [EpLoaded, setEpLoaded] = useState(false);
 
     const [page, setPage] = useState(1);
     const episodesPerPage = 50;
@@ -52,37 +56,79 @@ function Watch() {
 
 
     const fetchEpisodes = async (query) => {
+        setEpLoaded(false);
         const response = await fetch(`https://api.consumet.org/anime/gogoanime/info/${query}`)
         const data = await response.json();
         const animeList = data;
         setAnimeList(animeList);
         const TotalEP = await animeList.totalEpisodes;
         setTotalEP(TotalEP);
-        console.log(animeList);
-        console.log("TITLE: " + animeList.title);
-        console.log("Total Ep: " + TotalEP);
-        console.log("Episode : " + animeList.episodes[0].id);
+        // console.log(animeList);
+        // console.log("TITLE: " + animeList.title);
+        // console.log("Total Ep: " + TotalEP);
+        // console.log("Episode : " + animeList.episodes[0].id);
         setEP(animeList.episodes[0].id)
+        setEpLoaded(true);
     };
 
     const fetchAnime = async (Que, Epi_No) => {
         let syntext = Que + "-" + Epi_No;
-        console.log("TEXT" + syntext);
+        // console.log("TEXT" + syntext);
+        setDataLoaded(false);
+        let server_data;
+
         if (Epi_No) {
             const servers = await fetch(`https://api.consumet.org/anime/gogoanime/servers/${syntext}`)
-            const server_data = await servers.json();
-            console.log("servers: ");
-            console.log(server_data);
-            const WatchUrl = server_data[2].url;
-            setWatchUrl(WatchUrl);
+            server_data = await servers.json();
+
+            const ServerList = server_data;
+            setServerList(ServerList);
+            
+            
+            
+            // console.log("servers: ");
+            // console.log(server_data);
+            // const WatchUrl = server_data[2].url;
+            // setWatchUrl(WatchUrl);
             // setDataLoaded(true);
         } else {
             const response = await fetch(`https://api.consumet.org/anime/gogoanime/servers/${Que}`)
-            const server_data = await response.json();
-            const WatchUrl = server_data[2].url;
-            setWatchUrl(WatchUrl);
-            console.log(WatchUrl);
+            server_data = await response.json();
+
+
+            const ServerList = server_data;
+            setServerList(ServerList);
+            console.log(ServerList);
+
+            // const WatchUrl = server_data[2].url;
+            // setWatchUrl(WatchUrl);
+            // console.log(WatchUrl);
         }
+
+        for (let index = 0; index < server_data.length; index++) {
+            let ele = server_data[index];
+            if (ele.name == Server) {
+                const WatchUrl = server_data[index].url;
+                setWatchUrl(WatchUrl);
+            }
+            else{
+                const WatchUrl = server_data[0].url;
+                setWatchUrl(WatchUrl);
+                
+            }
+
+        }
+
+        setDataLoaded(true);
+    };
+
+    const fetchQuery = async (Que, Epi_No) => {
+        let syntext = Que + "-episode" + Epi_No;
+        setDataLoaded(false);
+        const servers = await fetch(`https://api.consumet.org/anime/gogoanime/servers/${syntext}`)
+        const server_data = await servers.json();
+        const WatchUrl = server_data[2].url;
+        setWatchUrl(WatchUrl);
         setDataLoaded(true);
     };
 
@@ -96,26 +142,45 @@ function Watch() {
     useEffect(() => {
         const Query = new URLSearchParams(location.search).get("query");
         const EP = new URLSearchParams(location.search).get("ep");
+        let newQuery;
+        let newEpID;
+        if (!Query) {
+            newQuery = Query;
+            newEpID = EP.split("-episode")[1];
+            newQuery = EP.split("-episode")[0];
+            setQuery(newQuery);
+            fetchEpisodes(newQuery);
+            console.log("NEW ID: ", newQuery);
+            console.log("NEW EP: ", newEpID);
+        } else {
+            setQuery(Query);
+            fetchEpisodes(Query);
+            console.log("ID ELSE: ", Query);
+        }
 
-        setQuery(Query);
         setEP(EP);
 
-        fetchEpisodes(Query);
-        if (EP) {
-            console.log("C EP: " + EP);
+        console.log("ID: ", newQuery);
+        if (EP && newQuery) {
+            console.log("FETCH QUERY");
+            fetchQuery(newQuery, newEpID);
+        }
+        else if (EP) {
             fetchAnime(Query, EP);
         }
-        console.log(animeList);
     }, []);
 
-    if (!dataLoaded) {
-        return <div>Loading...</div>;
-    } else {
-        return (
-            <div className={`app`}>
+
+    // if (!dataLoaded) {
+    //     return <Wavy />;
+    // } else {
+    return (
+        <div className={`app`}>
+            <MY_Navbar2 />
+            <div>
+
                 <h1> {animeList.title}</h1>
-                <input type={"text"} onChange={e => handleChange(e.target.value)} />
-                <input type={"submit"} onClick={() => fetchEpisodes(Query)} />
+
                 <div className='pagination'>
                     <button onClick={handlePrevPage}>Prev</button>
 
@@ -144,23 +209,43 @@ function Watch() {
                                 </Link>
                             </div>
                         ))}
+                        {!EpLoaded && (
+                            <Wavy />
+                        )
+
+                        }
 
 
                     </div>
-                    <div className='video'>
-                        <iframe src={WatchUrl} width={"860px"} height={"600px"} allow="fullscreen"></iframe>
-                    </div>
+                    {dataLoaded && (
+                        <div className='video'>
+                            <iframe src={WatchUrl} width={"860px"} height={"500px"} allow="fullscreen"></iframe>
+                            <div className='servers'>
+                                <h3>Server List</h3>
+                            {ServerList && ServerList.map((Sname, index) => (
+                                <div className='server-list' key={index} >
+                                    {Sname.name}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                    {!dataLoaded && (
+                        <div style={{ width: '910px' }}>
+                            <Wavy />
+                        </div>
+                    )}
                     <div className='desc'>
                         <p >
                             {animeList.description}
                         </p>
                     </div>
                 </div>
+            </div>
 
-
-            </div >
-        );
-    }
+        </div >
+    );
 }
+// }
 
 export default Watch;

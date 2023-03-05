@@ -1,0 +1,31 @@
+
+.wavy {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+
+}
+.wavy span {
+  position: absolute;
+  top: calc(12px * var(--i));
+  left: calc(12px * var(--i));
+  right: calc(12px * var(--i));
+  bottom: calc(12px * var(--i));
+  border: 10px solid #2f2f2f;
+  border-top: 10px solid greenyellow;
+  border-left: 10px solid greenyellow;
+  border-radius: 50%;
+  filter: hue-rotate(calc(90deg * var(--i)));
+  animation: wavy 1s alternate infinite;
+  animation-delay: calc(0.1s * var(--i));
+}
+@keyframes wavy {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
