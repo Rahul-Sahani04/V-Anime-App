@@ -12,28 +12,55 @@ function Recom(props) {
   const [dataLoaded, setDataLoaded] = useState(false);
 
   // console.log(recomList);
+  // const fetchRecom = async (page_no) => {
+  //   setDataLoaded(false);
+  //   const response = await fetch(`https://api.consumet.org/anime/gogoanime/recent-episodes?page=${page_no}`);
+  //   const data = await response.json();
+  //   setHasNextPage(data.hasNextPage);
+
+  //   setRecomList(data.results);
+  //   setTotalPages(totalPages);
+
+  //   setDataLoaded(true);
+  // };
+  const [isLoading, setIsLoading] = useState(false);
+
   const fetchRecom = async (page_no) => {
-    setDataLoaded(false);
-    const response = await fetch(`https://api.consumet.org/anime/gogoanime/recent-episodes?page=${page_no}`);
-    const data = await response.json();
-    setHasNextPage(data.hasNextPage);
-    // console.log("NEXT : " + HasNextPage);
-    // console.log(data.results);
-    setRecomList(data.results);
-    setTotalPages(totalPages);
-    // console.log(`TOTAL PAGE: ${totalPages}`);
-    setDataLoaded(true);
+      setIsLoading(true);
+      const response = await fetch(`https://api.consumet.org/anime/gogoanime/recent-episodes?page=${page_no}`);
+      const data = await response.json();
+      setHasNextPage(data.hasNextPage);
+      setRecomList((prev) => [...prev, ...data.results]);
+
+      setIsLoading(false);
   };
 
+  const handleScroll = () => {
+    const windowHeight = window.innerHeight;
+    const scrollHeight = document.body.scrollHeight;
+    const scrollPosition = window.scrollY;
 
+    if (scrollHeight - (scrollPosition + windowHeight) < 50 && !dataLoaded && HasNextPage) {
+        setIsLoading(true);
+        setPage((prev) => prev + 1);
+    }
+};
+
+  
   useEffect(() => {
     fetchRecom(1);
-  }, []);
+    window.addEventListener('scroll', handleScroll);
 
-  if (!dataLoaded) {
-    return <Wavy />
-  }
-  else {
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+    };
+}, []);
+
+useEffect(() => {
+    if (page > 1) {
+        fetchRecom(page);
+    }
+}, [page]);
 
     return (
       <div>
@@ -44,9 +71,11 @@ function Recom(props) {
             </div>
           ))}
         </div>
+        {isLoading && (
+          <Wavy />
+        )}
       </div>
     );
   }
-}
 
 export default Recom;

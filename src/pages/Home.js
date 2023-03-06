@@ -5,6 +5,7 @@ import ThemeToggleButton from '../components/toggleTheme';
 import MY_Navbar2 from '../components/Navbar_2';
 import Recom from './Recom';
 import Search from './Search';
+import Eyes from '../components/eyes';
 
 function Home() {
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -29,9 +30,9 @@ function Home() {
         <div className={`app`}>
             <div className={isDarkMode ? 'app light-theme' : 'app dark-theme'}>
                 <MY_Navbar2 theme={isDarkMode ? 'light-theme' : 'dark-theme'}/>
-                <div className='toggle'>
+                {/* <div className='toggle'>
                     <ThemeToggleButton isDarkMode={isDarkMode} onToggle={handleThemeToggle} />
-                </div>
+                </div> */}
 
                 <br />
                 <div className='search1-box content-wrap'>

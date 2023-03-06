@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+.eye-container {
+display: flex;
+right: 0px;
+
+}
+
+.eye-container .eyes {
+    position: relative;
+width: 25px;
+height: 25px;
+display: block;
+background-color: #fff;
+margin: 0 5px;
+border-radius: 50%;
+box-shadow: 0 5px 45px rgba(0, 0, 0, 0.2), inset 0 0 15px #f5af19,
+  inset 0 0 25px #f5af19;
+}
+.eye-container .eyes::before {
+content: "";
+top: 50%;
+left: 1px;
+transform: translate(-50%, -50%);
+width: 20px;
+height: 20px;
+border-radius: 50%;
+background: #000;
+position: absolute;
+border: 10px solid skyblue;
+box-sizing: border-box;
+}

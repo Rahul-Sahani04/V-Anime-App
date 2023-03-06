@@ -3,17 +3,18 @@ import React from "react";
 import "./Navbar2.css";
 
 function MY_Navbar2(props) {
-  const theme  = props.theme;
+  const theme = props.theme;
   return (
     <div className={`content`}>
-    <div className={`header-links `}>
-      <Link className={`header-items` } to="/home">Home</Link>
-      <Link className={`header-items` } to="/movie">Movie</Link>
-      {/* <Link className={`header-items` } to="/popular">Popular</Link> */}
-      <Link className={`header-items` } to="/top_anime">Top Anime</Link>
-      <Link className="header-items" to="/watch">Watch Here</Link>
-      <Link className="header-items" to="/random_img">Random Image</Link>
-    </div>
+      <div className={`header-links `}>
+        <div className="logo"></div>
+        <Link className={`header-items`} to="/home">Home</Link>
+        <Link className={`header-items`} to="/movie">Movie</Link>
+        {/* <Link className={`header-items` } to="/popular">Popular</Link> */}
+        <Link className={`header-items`} to="/top_anime">Top Anime</Link>
+        <Link className="header-items" to="/watch">Watch Here</Link>
+        <Link className="header-items" to="/random_img">Random Image</Link>
+      </div>
     </div>
   );
 }

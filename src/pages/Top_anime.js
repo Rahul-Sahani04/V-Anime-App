@@ -16,7 +16,7 @@ function Top_Anime(props) {
         const data = await response.json();
         setHasNextPage(data.hasNextPage);
         setRecomList((prev) => [...prev, ...data.results]);
-        // setTotalPages(data.totalPages);
+
         setIsLoading(false);
     };
 

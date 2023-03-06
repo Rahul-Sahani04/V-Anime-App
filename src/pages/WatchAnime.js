@@ -19,6 +19,8 @@ function Watch() {
     const [TotalEP, setTotalEP] = useState(1);
     const [EP, setEP] = useState(1);
 
+    const [DownloadLink, setDownloadLink] = useState("");
+
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [dataLoaded, setDataLoaded] = useState(false);
     const [EpLoaded, setEpLoaded] = useState(false);
@@ -53,6 +55,11 @@ function Watch() {
     const handleLinkClick = (episodeId) => {
         fetchAnime(episodeId);
     };
+    
+    const handleServerClick = (episodeId, server) => {
+        console.log("EP ID & Server: " + episodeId + server)
+        fetchAnime(episodeId, "", server);
+    };
 
 
     const fetchEpisodes = async (query) => {
@@ -71,7 +78,15 @@ function Watch() {
         setEpLoaded(true);
     };
 
-    const fetchAnime = async (Que, Epi_No) => {
+
+    const fetchDownloadLink = async (query_id) => {
+        const response = await fetch(`https://api.consumet.org/anime/gogoanime/watch/${query_id}`)
+        const data = await response.json(); 
+        const DownloadLink = data.download;
+        setDownloadLink(DownloadLink);
+    };
+
+    const fetchAnime = async (Que, Epi_No, Server) => {
         let syntext = Que + "-" + Epi_No;
         // console.log("TEXT" + syntext);
         setDataLoaded(false);
@@ -83,14 +98,8 @@ function Watch() {
 
             const ServerList = server_data;
             setServerList(ServerList);
+            fetchDownloadLink(syntext);
             
-            
-            
-            // console.log("servers: ");
-            // console.log(server_data);
-            // const WatchUrl = server_data[2].url;
-            // setWatchUrl(WatchUrl);
-            // setDataLoaded(true);
         } else {
             const response = await fetch(`https://api.consumet.org/anime/gogoanime/servers/${Que}`)
             server_data = await response.json();
@@ -98,11 +107,7 @@ function Watch() {
 
             const ServerList = server_data;
             setServerList(ServerList);
-            console.log(ServerList);
-
-            // const WatchUrl = server_data[2].url;
-            // setWatchUrl(WatchUrl);
-            // console.log(WatchUrl);
+            fetchDownloadLink(Que);
         }
 
         for (let index = 0; index < server_data.length; index++) {
@@ -110,10 +115,13 @@ function Watch() {
             if (ele.name == Server) {
                 const WatchUrl = server_data[index].url;
                 setWatchUrl(WatchUrl);
+                console.log( "FOUND: " + ele.name + " " + Server)
+                break;
             }
             else{
                 const WatchUrl = server_data[0].url;
                 setWatchUrl(WatchUrl);
+                console.log(ele.name + " " + Server)
                 
             }
 
@@ -219,15 +227,18 @@ function Watch() {
                     </div>
                     {dataLoaded && (
                         <div className='video'>
-                            <iframe src={WatchUrl} width={"860px"} height={"500px"} allow="fullscreen"></iframe>
+                            <iframe title='Video-player' src={WatchUrl} width={"860px"} height={"500px"} allow="fullscreen" className='video-inside'></iframe>
                             <div className='servers'>
-                                <h3>Server List</h3>
+                                <h3>Server List: </h3>
                             {ServerList && ServerList.map((Sname, index) => (
-                                <div className='server-list' key={index} >
+                                <div className='server-list' key={index} onClick={() => handleServerClick(EP, Sname.name)}>
                                     {Sname.name}
                                     </div>
                                 ))}
                             </div>
+                            <div className='Download-Link'>
+                                <a href={DownloadLink} target={'_blank'} className={'buttonDownload'}>Download</a>
+                                </div>
                         </div>
                     )}
                     {!dataLoaded && (

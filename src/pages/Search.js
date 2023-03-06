@@ -71,9 +71,9 @@ const Search = ({ query_y }) => {
         <div className={`app`}>
             <div className={isDarkMode ? 'app light-theme' : 'app dark-theme'}>
                 <MY_Navbar2 />
-                <div className='toggle'>
+                {/* <div className='toggle'>
                     <ThemeToggleButton isDarkMode={isDarkMode} onToggle={handleThemeToggle} />
-                </div>
+                </div> */}
                 <div className='search1-box content-wrap'>
 
                     <input className='search-box' value={Query} type={"text"} onChange={e => setQuery(e.target.value)} />
