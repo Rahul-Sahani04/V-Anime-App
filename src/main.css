@@ -11,15 +11,15 @@ body{
   display: grid;
 }
 .r-image{
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
 }
 
 .r-image img{
+  position: relative;
   min-width: 300px;
   min-height: 300px;
+  top: 25dvh;
+  left: 25dvw;
 }
 
 
@@ -289,43 +289,6 @@ header h1 strong {
   justify-content: flex-start;
   flex-wrap:wrap;
 }
-
-/* Navbar CSS */
-/* 
-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-    background-color: #333;
-  }
-  
-  ul {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  li {
-    flex: 1;
-    text-align: center;
-  }
-  
-  a {
-    display: block;
-    padding: 10px;
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  li:hover {
-    /* background-color: #444; 
-    box-shadow: #1e1e1e 3px 3px 3px;
-    border-radius: 10px;
-    transition: ease-in-out 0.25s;
-  }
-   */
 
    .logo{
     height: 100px;

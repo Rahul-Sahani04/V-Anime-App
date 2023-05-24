@@ -57,7 +57,7 @@ function Top_Anime(props) {
         <div className='app'>
             <MY_Navbar2 />
 
-            {!isLoading && (
+            {/* {!isLoading && ( */}
                 <div className='container' key={"D-ID"} >
                     {recomList.map((recom, index) => (
                         <div className='card-here' key={"ID" + index} >
@@ -65,7 +65,7 @@ function Top_Anime(props) {
                         </div>
                     ))}
                 </div>
-            )}
+            {/* )} */}
 
             {isLoading && (
                 <Wavy />

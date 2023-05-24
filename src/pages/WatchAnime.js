@@ -5,8 +5,12 @@ import ThemeToggleButton from '../components/toggleTheme';
 import './WatchAnime.css';
 import { Link, useLocation } from 'react-router-dom';
 import Wavy from '../components/wavy_loader';
+import Episode_Button from '../components/button';
+import { Next_Button, Prev_Button } from '../components/Next_Prev_Button';
 
 function Watch() {
+    let epi_no = "";
+
     const location = useLocation()
 
     const [Query, setQuery] = useState("Naruto");
@@ -190,19 +194,21 @@ function Watch() {
                 <h1> {animeList.title}</h1>
 
                 <div className='pagination'>
-                    <button onClick={handlePrevPage}>Prev</button>
+                    <button onClick={handlePrevPage}><Prev_Button/></button>
 
                     <span>
                         Page {page} of {animeList.episodes ? Math.ceil(animeList.episodes.length / episodesPerPage) : 0}
                     </span>
 
-                    <button onClick={handleNextPage}>Next</button>
+                    <button onClick={handleNextPage}><Next_Button/></button>
                 </div>
                 <div className='main-content'>
                     <div className='content' >
 
                         {animeList.episodes && animeList.episodes.slice(startIndex, endIndex).map((episode, index) => (
-                            <div className='episode' key={index} >
+                            <div 
+                            className='episode' 
+                            key={index} >
                                 <Link
                                     className='link'
                                     // to={`/watch/${episode.id}`}
@@ -213,7 +219,8 @@ function Watch() {
                                     }}
                                     onClick={() => handleLinkClick(episode.id)}
                                 >
-                                    {episode.id.split("-").pop()}
+                                    {/* {episode.id.split("-").pop()} */}
+                                    <Episode_Button epi_Id={episode.id.split("-").pop()} />
                                 </Link>
                             </div>
                         ))}
@@ -247,6 +254,9 @@ function Watch() {
                         </div>
                     )}
                     <div className='desc'>
+                        <div>
+                            <img src={animeList.image} width={"200px"} height={"200px"} />
+                        </div>
                         <p >
                             {animeList.description}
                         </p>

@@ -48,25 +48,23 @@ function Movie(props) {
     }, [page]);
 
 
-    if (isLoading) {
-        return <Wavy />
-    }
-    else {
 
 
-        return (
-            <div className='app'>
-                <MY_Navbar2 />
-                <div className='container' key={"D-ID"} >
-                    {recomList.map((recom, index) => (
-                        <div className='card-here' key={"ID" + index} >
-                            <Card_Component theme_mode={props.theme} className={'anime-card'} id={recom.id} title={recom.title} image={recom.image} />
-                        </div>
-                    ))}
-                </div>
+    return (
+        <div className='app'>
+            <MY_Navbar2 />
+            <div className='container' key={"D-ID"} >
+                {recomList.map((recom, index) => (
+                    <div className='card-here' key={"ID" + index} >
+                        <Card_Component theme_mode={props.theme} className={'anime-card'} id={recom.id} title={recom.title} image={recom.image} />
+                    </div>
+                ))}
             </div>
-        );
-    }
+            {isLoading && (
+                <Wavy />
+            )}
+        </div>
+    );
 
 }
 

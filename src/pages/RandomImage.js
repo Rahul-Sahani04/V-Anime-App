@@ -26,12 +26,6 @@ function Random_image() {
     }, []);
 
 
-
-    // if (isLoading) {
-    //     // return <Wavy />
-    // }
-    // else {
-
     return (
         <div className='app'>
             <MY_Navbar2 className={"navbar"} />
