@@ -234,7 +234,7 @@ function Watch() {
                     </div>
                     {dataLoaded && (
                         <div className='video'>
-                            <iframe title='Video-player' src={WatchUrl} width={"752px"} height={"423px"} allow="fullscreen" className='video-inside'></iframe>
+                            <iframe scrolling='no' frameBorder={0} title='Video-player' src={WatchUrl} width={"752px"} height={"423px"} allow="fullscreen" className='video-inside'></iframe>
                             <div className='servers'>
                                 <h3>Server List: </h3>
                                 <div className='server-list'>

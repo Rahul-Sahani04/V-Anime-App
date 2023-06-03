@@ -43,6 +43,7 @@ a:active {
 .video-inside {
     border-radius: 10px;
     border: groove;
+    overflow: hidden;
 }
 
 .desc {
