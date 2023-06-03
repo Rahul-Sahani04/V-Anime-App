@@ -59,7 +59,7 @@ function Watch() {
     const handleLinkClick = (episodeId) => {
         fetchAnime(episodeId);
     };
-    
+
     const handleServerClick = (episodeId, server) => {
         console.log("EP ID & Server: " + episodeId + server)
         fetchAnime(episodeId, "", server);
@@ -85,7 +85,7 @@ function Watch() {
 
     const fetchDownloadLink = async (query_id) => {
         const response = await fetch(`https://api.consumet.org/anime/gogoanime/watch/${query_id}`)
-        const data = await response.json(); 
+        const data = await response.json();
         const DownloadLink = data.download;
         setDownloadLink(DownloadLink);
     };
@@ -103,7 +103,7 @@ function Watch() {
             const ServerList = server_data;
             setServerList(ServerList);
             fetchDownloadLink(syntext);
-            
+
         } else {
             const response = await fetch(`https://api.consumet.org/anime/gogoanime/servers/${Que}`)
             server_data = await response.json();
@@ -119,14 +119,14 @@ function Watch() {
             if (ele.name == Server) {
                 const WatchUrl = server_data[index].url;
                 setWatchUrl(WatchUrl);
-                console.log( "FOUND: " + ele.name + " " + Server)
+                console.log("FOUND: " + ele.name + " " + Server)
                 break;
             }
-            else{
+            else {
                 const WatchUrl = server_data[0].url;
                 setWatchUrl(WatchUrl);
                 console.log(ele.name + " " + Server)
-                
+
             }
 
         }
@@ -194,21 +194,21 @@ function Watch() {
                 <h1> {animeList.title}</h1>
 
                 <div className='pagination'>
-                    <button onClick={handlePrevPage}><Prev_Button/></button>
+                    <button onClick={handlePrevPage}><Prev_Button /></button>
 
                     <span>
                         Page {page} of {animeList.episodes ? Math.ceil(animeList.episodes.length / episodesPerPage) : 0}
                     </span>
 
-                    <button onClick={handleNextPage}><Next_Button/></button>
+                    <button onClick={handleNextPage}><Next_Button /></button>
                 </div>
                 <div className='main-content'>
                     <div className='content' >
 
                         {animeList.episodes && animeList.episodes.slice(startIndex, endIndex).map((episode, index) => (
-                            <div 
-                            className='episode' 
-                            key={index} >
+                            <div
+                                className='episode'
+                                key={index} >
                                 <Link
                                     className='link'
                                     // to={`/watch/${episode.id}`}
@@ -220,7 +220,7 @@ function Watch() {
                                     onClick={() => handleLinkClick(episode.id)}
                                 >
                                     {/* {episode.id.split("-").pop()} */}
-                                    <Episode_Button epi_Id={episode.id.split("-").pop()} />
+                                    <Episode_Button epi_Id={parseInt(episode.id.split("-").pop())} />
                                 </Link>
                             </div>
                         ))}
@@ -237,15 +237,18 @@ function Watch() {
                             <iframe title='Video-player' src={WatchUrl} width={"752px"} height={"423px"} allow="fullscreen" className='video-inside'></iframe>
                             <div className='servers'>
                                 <h3>Server List: </h3>
-                            {ServerList && ServerList.map((Sname, index) => (
-                                <div className='server-list' key={index} onClick={() => handleServerClick(EP, Sname.name)}>
-                                    {Sname.name}
-                                    </div>
-                                ))}
+                                <div className='server-list'>
+                                    {ServerList && ServerList.map((Sname, index) => (
+                                        <div key={index} onClick={() => handleServerClick(EP, Sname.name)}>
+                                            {/* {Sname.name} */}
+                                            <Episode_Button epi_Id={Sname.name} />
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                             <div className='Download-Link'>
                                 <a href={DownloadLink} target={'_blank'} className={'buttonDownload'}>Download</a>
-                                </div>
+                            </div>
                         </div>
                     )}
                     {!dataLoaded && (

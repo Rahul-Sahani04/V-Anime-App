@@ -14,7 +14,14 @@
     -webkit-transition: all 0.2s ease-in;
     -moz-transition: all 0.2s ease-in;
     transition: all 0.2s ease-in;
+  }
+  
+  .button-ep-1{
     width: 4.5em;
+  }
+  .button-ep-2{
+    width: 14em;
+    margin: 2px;
   }
   
   .button-ep:hover {

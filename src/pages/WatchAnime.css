@@ -62,21 +62,14 @@ a:active {
 
 
 .server-list {
-    display: inline-flex;
-    padding: 5px;
-    margin: 5px;
-    background-color: #f1f1f1;
-    color: #212121;
-    border-radius: 5px;
-}
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 
-.server-list:hover {
-    background-color: #4CC713;
-    cursor: pointer;
 }
 
 .servers {
-    display: inline-flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
