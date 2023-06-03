@@ -2,6 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './card.css'
 const Card = ({ title, id, description, image, href_q, theme_mode }) => {
+
+  function busy() {
+    alert("This button is not working at the moment ;)");
+  }
+  
   return (
     <div className="card-container">
       <div className="wrapper">
@@ -10,7 +15,7 @@ const Card = ({ title, id, description, image, href_q, theme_mode }) => {
 
       </div>
       <div className="button-wrapper">
-        <button className="btn outline">DETAILS</button>
+        <button className="btn outline" onClick={busy}>DETAILS</button>
         <Link to={{
 
           pathname: '/watch',
