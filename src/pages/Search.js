@@ -3,11 +3,11 @@ import '../main.css';
 import Card_Component from '../components/card';
 import MY_Navbar2 from '../components/Navbar_2';
 import ThemeToggleButton from '../components/toggleTheme';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Wavy from '../components/wavy_loader';
 
 const Search = ({ query_y }) => {
-    const [Query, setQuery] = useState("One Piece");
+    const [Query, setQuery] = useState("");
     let temp = "";
     const [page, setPage] = useState(1);
     const [animeList, setAnimeList] = useState([]);
@@ -24,6 +24,8 @@ const Search = ({ query_y }) => {
 
 
     const location = useLocation();
+    const Navigate = useNavigate();
+
     const fetchLocation = async () => {
         const temp = location.search.split("=");
         setQuery(temp[1]);
@@ -52,20 +54,15 @@ const Search = ({ query_y }) => {
 
     useEffect(() => {
         console.log("Welcome to Search " + location.search);
-        if (location.search != undefined || location.search != null) {
-            temp = location.search.split("=")[1];
+        if (location.search != undefined && location.search != null && location.search.split("=")[1] != "") {
+            console.log("My temp: ", temp);
             fetchAnime(temp, page);
         }
         else {
-            fetchAnime(Query, page);
+            console.log("EMpty");
+            Navigate("/home")
         }
     }, []);
-
-
-    // if (!dataLoaded) {
-    //     return <Wavy />
-    // }
-    // else {
 
     return (
         <div className={`app`}>
@@ -89,9 +86,7 @@ const Search = ({ query_y }) => {
                     <div className='container' key={"D-ID"}>
                         {
                             animeList?.map((anime, index) => (
-                                // <Link to={`/watch/${anime.id}-episode-1`} className={'main-card'}>
                                 <Card_Component className={'anime-card'} title={anime.title} id={anime.id} description={""} image={anime.image} key={index} />
-                                // </Link>
                             )
                             )}
                     </div>

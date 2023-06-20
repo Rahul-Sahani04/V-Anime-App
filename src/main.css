@@ -50,6 +50,7 @@ header h1 strong {
     display: -ms-flexbox;
     display: inline-flex;
     justify-content: center;
+    align-items: center;
 
 }
 
@@ -160,6 +161,8 @@ header h1 strong {
 
 .search1-box{
   width: 500px;
+  right: -64%;
+  top: -16%;
 }
 
 .main-card{
