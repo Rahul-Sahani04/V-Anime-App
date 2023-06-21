@@ -55,11 +55,12 @@ const Search = ({ query_y }) => {
     useEffect(() => {
         console.log("Welcome to Search " + location.search);
         if (location.search != undefined && location.search != null && location.search.split("=")[1] != "") {
+            temp = location.search.split("=")[1];
             console.log("My temp: ", temp);
             fetchAnime(temp, page);
         }
         else {
-            console.log("EMpty");
+            // console.log("EMpty");
             Navigate("/home")
         }
     }, []);
