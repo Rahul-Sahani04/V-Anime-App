@@ -259,17 +259,17 @@ function Watch() {
                         <div className='video'>
                             {/* <iframe scrolling='no' frameBorder={0} title='Video-player' src={WatchUrl} width={"775px"} height={"423px"} allow="fullscreen" className='video-inside'></iframe> */}
                             <PlyrComponent hlsSource={WatchUrl}/>
-                            <div className='servers'>
+                            {/* <div className='servers'>
                                 <h3>Server List: </h3>
                                 <div className='server-list'>
                                     {ServerList && ServerList.map((Sname, index) => (
                                         <div key={index} onClick={() => handleServerClick(EP, Sname.name)}>
-                                            {/* {Sname.name} */}
+                                            /* {Sname.name} 
                                             <Episode_Button epi_Id={Sname.name} />
                                         </div>
                                     ))}
                                 </div>
-                            </div>
+                            </div> */}
                             <div className='Download-Link'>
                                 <a href={DownloadLink} target={'_blank'} className={'buttonDownload'}>Download</a>
                             </div>

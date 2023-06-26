@@ -6,7 +6,7 @@ import { Options } from "plyr";
 
 const videoOptions = null;
 const videoSource = null;
-const hlsSource = "https://www010.vipanicdn.net/streamhls/f967ac6e1a055f4491cc97e76c3394df/ep.8.1677594854.1080.m3u8";
+const hlsSource = "";
 
 /**
  * This is a custom hook in TypeScript React that loads and attaches an HLS video source to a Plyr
@@ -86,14 +86,14 @@ const CustomPlyrInstance = React.forwardRef<
 /**  The `PlyrComponent` is a functional component that renders a video player using the Plyr library and
 supports HLS video streaming. If it is supported, it renders the `CustomPlyrInstance` component passing in the `ref`,
 `source`, `options`, and `hlsSource` props. If HLS is not supported, it renders a message saying so. */
-const PlyrComponent = () => {
+const PlyrComponent = ({ hlsSource }: { hlsSource: string }) => {
   const ref = React.useRef<APITypes>(null);
   const supported = Hls.isSupported();
 
   return (
     <div className="wrapper">
       {supported ? (
-        /**  `<CustomPlyrInstance>` is a custom React component that renders a video player using the
+        /** `<CustomPlyrInstance>` is a custom React component that renders a video player using the
         Plyr library and supports HLS video streaming. It takes in several props: */
         <CustomPlyrInstance
           ref={ref}
