@@ -8,6 +8,8 @@ import Wavy from '../components/wavy_loader';
 import Episode_Button from '../components/button';
 import { Next_Button, Prev_Button } from '../components/Next_Prev_Button';
 
+import PlyrComponent from '../components/VideoPlayer';
+
 function Watch() {
     let epi_no = "";
 
@@ -144,6 +146,25 @@ function Watch() {
         setDataLoaded(true);
     };
 
+    const fetchM3U8 = async (Que, Epi_No, ep_id) => {
+        let syntext = ""
+        if (ep_id === "Y") {
+            syntext = Que + "-" + Epi_No;
+            // console.log("text; ", syntext);
+        } else {
+            syntext = Que + "-episode" + Epi_No;
+            // console.log("text; ", syntext);
+        }
+        setDataLoaded(false);
+        const servers = await fetch(`https://api.consumet.org/anime/gogoanime/watch/${syntext}`)
+        const server_data = await servers.json();
+        console.log(server_data);
+        const WatchUrl = server_data.sources[server_data.sources.length - 3].url;
+        console.log("M3U8: ", WatchUrl)
+        setWatchUrl(WatchUrl);
+        setDataLoaded(true);
+    };
+
 
 
 
@@ -175,9 +196,11 @@ function Watch() {
         console.log("ID: ", newQuery);
         if (EP && newQuery) {
             console.log("FETCH QUERY");
-            fetchQuery(newQuery, newEpID);
+            fetchM3U8(newQuery, newEpID, "N");
         }
         else if (EP) {
+            console.log("FETCH QUERY");
+            fetchM3U8(Query, EP, "Y");
             fetchAnime(Query, EP);
         }
     }, []);
@@ -234,7 +257,8 @@ function Watch() {
                     </div>
                     {dataLoaded && (
                         <div className='video'>
-                            <iframe scrolling='no' frameBorder={0} title='Video-player' src={WatchUrl} width={"775px"} height={"423px"} allow="fullscreen" className='video-inside'></iframe>
+                            {/* <iframe scrolling='no' frameBorder={0} title='Video-player' src={WatchUrl} width={"775px"} height={"423px"} allow="fullscreen" className='video-inside'></iframe> */}
+                            <PlyrComponent hlsSource={WatchUrl}/>
                             <div className='servers'>
                                 <h3>Server List: </h3>
                                 <div className='server-list'>
