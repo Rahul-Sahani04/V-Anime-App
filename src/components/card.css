@@ -21,9 +21,10 @@
 }
 
 .title{
-  color: white;
+  color: #fff;
+  height: 15%;
   text-decoration: none;
-  height: 30%;
+  overflow: hidden;
 }
 
 .wrapper {
@@ -59,10 +60,10 @@ p {
 }
 
 .button-wrapper{
+  left: 5%;
   margin-top: 0;
   position: absolute;
-  top: 85%;
-  left: 8%;
+  top: 87%;
 }
 
 .btn {

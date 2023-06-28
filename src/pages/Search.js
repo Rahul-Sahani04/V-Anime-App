@@ -74,7 +74,7 @@ const Search = ({ query_y }) => {
                 </div> */}
                 <div className='search1-box content-wrap'>
 
-                    <input className='search-box' value={Query} type={"text"} onChange={e => setQuery(e.target.value)} />
+                    <input className='search-box' value={Query.split("%20").join(" ")} type={"text"} onChange={e => setQuery(e.target.value)} />
                     <Link to={{
                         pathname: '/search',
                         search: `?query=${Query}`
