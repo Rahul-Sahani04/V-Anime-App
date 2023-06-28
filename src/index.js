@@ -8,6 +8,7 @@ import Pop_anime from './pages/Pop_anime';
 import Top_anime from './pages/Top_anime';
 import Search from './pages/Search';
 import Watch from './pages/WatchAnime';
+import AnimeDetails from './pages/Details';
 
 import {
   createBrowserRouter,
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
   {
    path: "/top_anime",
    element: <Top_anime />,
+  },
+  {
+   path: "/details/",
+   element: <AnimeDetails />,
   },
   {
    path: "/watch",

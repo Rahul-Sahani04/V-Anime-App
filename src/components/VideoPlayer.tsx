@@ -6,6 +6,7 @@ import { Options } from "plyr";
 
 const videoOptions = null;
 const videoSource = null;
+const defaultOptions: Plyr.Options = {};
 const hlsSource = "";
 
 /**
@@ -86,20 +87,22 @@ const CustomPlyrInstance = React.forwardRef<
 /**  The `PlyrComponent` is a functional component that renders a video player using the Plyr library and
 supports HLS video streaming. If it is supported, it renders the `CustomPlyrInstance` component passing in the `ref`,
 `source`, `options`, and `hlsSource` props. If HLS is not supported, it renders a message saying so. */
-const PlyrComponent = ({ hlsSource }: { hlsSource: string }) => {
+const PlyrComponent = ({ QualityData }: { QualityData: string }) => {
   const ref = React.useRef<APITypes>(null);
   const supported = Hls.isSupported();
+  var QualityData = QualityData;
 
   return (
     <div className="wrapper">
+      {/* <div>{QualityData}</div> */}
       {supported ? (
         /** `<CustomPlyrInstance>` is a custom React component that renders a video player using the
         Plyr library and supports HLS video streaming. It takes in several props: */
         <CustomPlyrInstance
           ref={ref}
           source={videoSource}
-          options={videoOptions}
-          hlsSource={hlsSource}
+          options={defaultOptions}
+          hlsSource={QualityData}
         />
       ) : (
         "HLS is not supported in your browser"
@@ -109,3 +112,6 @@ const PlyrComponent = ({ hlsSource }: { hlsSource: string }) => {
 };
 
 export default PlyrComponent;
+function updateQuality(e: number): void {
+  throw new Error("Function not implemented.");
+}

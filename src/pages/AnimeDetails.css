@@ -1,0 +1,66 @@
+.main_content{
+    display: inline;
+}
+
+.anime-poster{
+    width: 15%;
+}
+.anime-poster img{
+    width: -webkit-fill-available;
+}
+
+
+.button{
+    /* font-size:25px; */
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing:2px;
+    color:#fff;
+    outline:4px solid #fff;
+    padding:5px 5px;
+    position:relative;
+    overflow:hidden;
+    transition:color 1s;
+}
+.button span{
+    color: #000;
+}
+.button:hover{
+    color:rgb(226, 43, 43) !important;
+}
+
+.button:hover span{
+    color:rgb(226, 43, 43) !important;
+}
+.button::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left: -28px;
+    width:60%;
+    height:100%;
+    background-color: #fff;
+    transform:skewX(35deg);
+    z-index:-1;
+    transition:all .5s;
+    overflow: hidden;
+}
+
+
+.button:hover::before{
+    width: 150%;
+}
+
+div .space{
+    width: 20vh;
+    height: 10vh;
+}
+
+p .description{
+    height: 24vh;
+}
+
+p .description .active{
+    height: fit-content;
+    overflow: visible;
+}

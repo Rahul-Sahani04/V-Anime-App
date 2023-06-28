@@ -50,14 +50,15 @@ a:active {
     flex: 1;
     width: fit-content;
     max-width: 20%;
-    height: 250px;
+    height: 388px;
+    margin: 0px 5px 5px 5px;
 }
 
 .desc p {
     
     text-align: left;
     padding-right: 5%;
-    height: 100%;
+    height: 48%;
     overflow-y: scroll;
 }
 

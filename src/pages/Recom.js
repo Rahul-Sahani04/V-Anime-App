@@ -66,9 +66,7 @@ useEffect(() => {
       <div>
         <div className='container' key={"D-ID"}>
           {recomList.map((recom, index) => (
-            <div className='card-here'>
               <Card_Component theme_mode={props.theme} className={'anime-card'} id={recom.id} title={recom.title} image={recom.image} key={"ID" + index} />
-            </div>
           ))}
         </div>
         {isLoading && (

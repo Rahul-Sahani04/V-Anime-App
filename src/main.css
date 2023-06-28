@@ -6,6 +6,17 @@
     font-family: 'Fira Sans', sans-serif;
 
 }
+
+.xhashtag .item {
+  margin: 0 6px 6px 0;
+  display: block;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  float: left;
+}
+
 body{
   min-height: 100vh;
   display: grid;

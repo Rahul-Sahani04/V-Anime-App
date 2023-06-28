@@ -6,7 +6,7 @@ const Card = ({ title, id, description, image, href_q, theme_mode }) => {
   function busy() {
     alert("This button is not working at the moment ;)");
   }
-  
+
   return (
     <div className="card-container">
       <div className="wrapper">
@@ -15,13 +15,21 @@ const Card = ({ title, id, description, image, href_q, theme_mode }) => {
 
       </div>
       <div className="button-wrapper">
-        <button className="btn outline" onClick={busy}>DETAILS</button>
+        <Link to={{
+
+          pathname: '/details',
+          search: `?id=${id}`
+        }}
+          className={'main-card'}>
+          <button className="btn outline">DETAILS</button>
+        </Link>
+
         <Link to={{
 
           pathname: '/watch',
           search: `?query=${id}&ep=episode-1`
-          }}
-           className={'main-card'}>
+        }}
+          className={'main-card'}>
           <button className="btn fill">Watch Now</button>
         </Link>
       </div>

@@ -18,6 +18,7 @@ function Watch() {
     const [Query, setQuery] = useState("Naruto");
     const [animeList, setAnimeList] = useState({});
     const [WatchUrl, setWatchUrl] = useState("");
+    const [videoLink, setvideoLink] = useState([]);
 
     const [Server, setServer] = useState("Streamsb");
     const [ServerList, setServerList] = useState([]);
@@ -59,7 +60,10 @@ function Watch() {
     }
 
     const handleLinkClick = (episodeId) => {
-        fetchAnime(episodeId);
+        const Query = new URLSearchParams(location.search).get("query");
+        const EP = new URLSearchParams(location.search).get("ep");
+        // fetchAnime(episodeId);
+        fetchM3U8(Query, EP, "EP");
     };
 
     const handleServerClick = (episodeId, server) => {
@@ -151,6 +155,8 @@ function Watch() {
         if (ep_id === "Y") {
             syntext = Que + "-" + Epi_No;
             // console.log("text; ", syntext);
+        }else if (ep_id === "EP") {
+            syntext = Epi_No;
         } else {
             syntext = Que + "-episode" + Epi_No;
             // console.log("text; ", syntext);
@@ -160,7 +166,14 @@ function Watch() {
         const server_data = await servers.json();
         console.log(server_data);
         const WatchUrl = server_data.sources[server_data.sources.length - 3].url;
+        var templinks = [];
+        for (let index = 0; index < server_data.sources.length; index++) {
+            templinks.push(server_data.sources[index].url);   
+        }
+        const videoLink = templinks;
+        setvideoLink(videoLink);
         console.log("M3U8: ", WatchUrl)
+        console.log("M3U8: ", videoLink)
         setWatchUrl(WatchUrl);
         setDataLoaded(true);
     };
@@ -258,7 +271,7 @@ function Watch() {
                     {dataLoaded && (
                         <div className='video'>
                             {/* <iframe scrolling='no' frameBorder={0} title='Video-player' src={WatchUrl} width={"775px"} height={"423px"} allow="fullscreen" className='video-inside'></iframe> */}
-                            <PlyrComponent hlsSource={WatchUrl}/>
+                            <PlyrComponent QualityData={WatchUrl}/>
                             {/* <div className='servers'>
                                 <h3>Server List: </h3>
                                 <div className='server-list'>
