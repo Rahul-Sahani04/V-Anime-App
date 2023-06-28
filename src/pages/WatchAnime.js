@@ -63,12 +63,12 @@ function Watch() {
         const Query = new URLSearchParams(location.search).get("query");
         const EP = new URLSearchParams(location.search).get("ep");
         // fetchAnime(episodeId);
-        fetchM3U8(Query, EP, "EP");
+        fetchM3U8(Query, episodeId, "EP");
     };
 
     const handleServerClick = (episodeId, server) => {
         console.log("EP ID & Server: " + episodeId + server)
-        fetchAnime(episodeId, "", server);
+        // fetchAnime(episodeId, "", server);
     };
 
 
@@ -214,7 +214,7 @@ function Watch() {
         else if (EP) {
             console.log("FETCH QUERY");
             fetchM3U8(Query, EP, "Y");
-            fetchAnime(Query, EP);
+            // fetchAnime(Query, EP);
         }
     }, []);
 
