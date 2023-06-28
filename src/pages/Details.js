@@ -12,7 +12,7 @@ const AnimeDetails = () => {
     const location = useLocation()
 
     const [EpLoaded, setEpLoaded] = useState(false);
-    const [Query, setQuery] = useState("Naruto");
+    const [Query, setQuery] = useState("");
     const [animeList, setAnimeList] = useState({});
 
     const [image, setImage] = useState("");
@@ -61,6 +61,7 @@ const AnimeDetails = () => {
 
     useEffect(() => {
         const Query = new URLSearchParams(location.search).get("id");
+        setQuery(Query);
         console.log("Query: ", Query);
 
         fetchInfo(Query);
