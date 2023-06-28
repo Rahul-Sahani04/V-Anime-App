@@ -34,7 +34,7 @@ const AnimeDetails = () => {
         const data = await response.json();
         const animeList = data;
         setAnimeList(animeList);
-        console.log(animeList);
+        // console.log(animeList);
         const image = animeList.image;
         setImage(image);
 
@@ -62,7 +62,7 @@ const AnimeDetails = () => {
     useEffect(() => {
         const Query = new URLSearchParams(location.search).get("id");
         setQuery(Query);
-        console.log("Query: ", Query);
+        // console.log("Query: ", Query);
 
         fetchInfo(Query);
     }, []);

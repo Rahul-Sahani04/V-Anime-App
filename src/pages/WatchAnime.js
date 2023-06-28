@@ -66,10 +66,10 @@ function Watch() {
         fetchM3U8(Query, episodeId, "EP");
     };
 
-    const handleServerClick = (episodeId, server) => {
-        console.log("EP ID & Server: " + episodeId + server)
+    // const handleServerClick = (episodeId, server) => {
+    //     // console.log("EP ID & Server: " + episodeId + server)
         // fetchAnime(episodeId, "", server);
-    };
+    // };
 
 
     const fetchEpisodes = async (query) => {
@@ -80,10 +80,10 @@ function Watch() {
         setAnimeList(animeList);
         const TotalEP = await animeList.totalEpisodes;
         setTotalEP(TotalEP);
-        // console.log(animeList);
-        // console.log("TITLE: " + animeList.title);
-        // console.log("Total Ep: " + TotalEP);
-        // console.log("Episode : " + animeList.episodes[0].id);
+        // // console.log(animeList);
+        // // console.log("TITLE: " + animeList.title);
+        // // console.log("Total Ep: " + TotalEP);
+        // // console.log("Episode : " + animeList.episodes[0].id);
         setEP(animeList.episodes[0].id)
         setEpLoaded(true);
     };
@@ -98,7 +98,7 @@ function Watch() {
 
     const fetchAnime = async (Que, Epi_No, Server) => {
         let syntext = Que + "-" + Epi_No;
-        // console.log("TEXT" + syntext);
+        // // console.log("TEXT" + syntext);
         setDataLoaded(false);
         let server_data;
 
@@ -125,13 +125,13 @@ function Watch() {
             if (ele.name == Server) {
                 const WatchUrl = server_data[index].url;
                 setWatchUrl(WatchUrl);
-                console.log("FOUND: " + ele.name + " " + Server)
+                // // console.log("FOUND: " + ele.name + " " + Server)
                 break;
             }
             else {
                 const WatchUrl = server_data[0].url;
                 setWatchUrl(WatchUrl);
-                console.log(ele.name + " " + Server)
+                // console.log(ele.name + " " + Server)
 
             }
 
@@ -154,17 +154,17 @@ function Watch() {
         let syntext = ""
         if (ep_id === "Y") {
             syntext = Que + "-" + Epi_No;
-            // console.log("text; ", syntext);
+            // // console.log("text; ", syntext);
         }else if (ep_id === "EP") {
             syntext = Epi_No;
         } else {
             syntext = Que + "-episode" + Epi_No;
-            // console.log("text; ", syntext);
+            // // console.log("text; ", syntext);
         }
         setDataLoaded(false);
         const servers = await fetch(`https://api.consumet.org/anime/gogoanime/watch/${syntext}`)
         const server_data = await servers.json();
-        console.log(server_data);
+        // console.log(server_data);
         const WatchUrl = server_data.sources[server_data.sources.length - 3].url;
         var templinks = [];
         for (let index = 0; index < server_data.sources.length; index++) {
@@ -172,8 +172,8 @@ function Watch() {
         }
         const videoLink = templinks;
         setvideoLink(videoLink);
-        console.log("M3U8: ", WatchUrl)
-        console.log("M3U8: ", videoLink)
+        // console.log("M3U8: ", WatchUrl)
+        // console.log("M3U8: ", videoLink)
         setWatchUrl(WatchUrl);
         setDataLoaded(true);
     };
@@ -182,7 +182,7 @@ function Watch() {
 
 
     // const formattedQuery = Query.replace(/\s+/g, "-").toLowerCase(); 
-    // console.log(formattedQuery); // "attack-on-titan"
+    // // console.log(formattedQuery); // "attack-on-titan"
 
 
     useEffect(() => {
@@ -196,23 +196,23 @@ function Watch() {
             newQuery = EP.split("-episode")[0];
             setQuery(newQuery);
             fetchEpisodes(newQuery);
-            console.log("NEW ID: ", newQuery);
-            console.log("NEW EP: ", newEpID);
+            // console.log("NEW ID: ", newQuery);
+            // console.log("NEW EP: ", newEpID);
         } else {
             setQuery(Query);
             fetchEpisodes(Query);
-            console.log("ID ELSE: ", Query);
+            // console.log("ID ELSE: ", Query);
         }
 
         setEP(EP);
 
-        console.log("ID: ", newQuery);
+        // console.log("ID: ", newQuery);
         if (EP && newQuery) {
-            console.log("FETCH QUERY");
+            // console.log("FETCH QUERY");
             fetchM3U8(newQuery, newEpID, "N");
         }
         else if (EP) {
-            console.log("FETCH QUERY");
+            // console.log("FETCH QUERY");
             fetchM3U8(Query, EP, "Y");
             // fetchAnime(Query, EP);
         }

@@ -11,7 +11,7 @@ function Recom(props) {
 
   const [dataLoaded, setDataLoaded] = useState(false);
 
-  // console.log(recomList);
+  // // console.log(recomList);
   // const fetchRecom = async (page_no) => {
   //   setDataLoaded(false);
   //   const response = await fetch(`https://api.consumet.org/anime/gogoanime/recent-episodes?page=${page_no}`);

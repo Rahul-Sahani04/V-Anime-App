@@ -31,20 +31,20 @@ const Search = ({ query_y }) => {
         setQuery(temp[1]);
         if (location.state?.fromHome == true) {
             setQuery(location.search.split("="));
-            console.log("QQQ " + Query);
+            // console.log("QQQ " + Query);
         }
         const fromHome = location.state?.fromHome;
-        console.log(fromHome);
+        // console.log(fromHome);
 
     }
 
     const fetchAnime = async (query, page) => {
         setDataLoaded(false);
         let formattedQuery = query.replace(/\s+/g, "%20").toLowerCase();
-        console.log(formattedQuery); // "attack-on-titan"
+        // console.log(formattedQuery); // "attack-on-titan"
         const response = await fetch(`https://api.consumet.org/anime/gogoanime/${formattedQuery}?page=${page}`);
         const data = await response.json();
-        // console.log(data);
+        // // console.log(data);
         setAnimeList(data.results);
         setQuery(temp);
         const Query = query;
@@ -53,14 +53,14 @@ const Search = ({ query_y }) => {
     };
 
     useEffect(() => {
-        console.log("Welcome to Search " + location.search);
+        // console.log("Welcome to Search " + location.search);
         if (location.search != undefined && location.search != null && location.search.split("=")[1] != "") {
             temp = location.search.split("=")[1];
-            console.log("My temp: ", temp);
+            // console.log("My temp: ", temp);
             fetchAnime(temp, page);
         }
         else {
-            // console.log("EMpty");
+            // // console.log("EMpty");
             Navigate("/home")
         }
     }, []);
