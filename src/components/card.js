@@ -1,28 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './card.css'
-const Card = ({ title, otherTitle, id, total_Ep, image, href_q, theme_mode }) => {
+const Card = ({ title, otherTitle, id, SubOrDub, image, href_q, theme_mode }) => {
 
   return (
     <div className="transition-all duration-300 ease-in-out card-container hover:scale-105 ">
       <div className="wrapper">
         <img src={image} className="banner-image object-fill" />
         {
-          title ? <h4 className='font-semibold font-sans text-base overflow-hidden h-16'>{title}</h4> : <h4 className='font-semibold font-sans text-base overflow-hidden'>{otherTitle}</h4>
+          title ? <h4 className='m-2 font-semibold font-sans text-base overflow-hidden h-6'>{title}</h4> : <h4 className='font-semibold font-sans text-base overflow-hidden'>{otherTitle}</h4>
         }
 
-      </div>
-      <p className='font-sans '>
-        {total_Ep}
+      <p className='mr-5 font-sans relative flex'>
+        {SubOrDub}
       </p>
-      <div className="button-wrapper">
+      </div>
+      <div className="button-wrapper justify-between">
         <Link to={{
 
           pathname: '/details',
           search: `?id=${id}`
         }}
           className={'main-card'}>
-          <button className="btn outline">DETAILS</button>
+          <button className="btn outline mr-1 hover:z-30">DETAILS</button>
         </Link>
 
         <Link to={{
@@ -31,7 +31,7 @@ const Card = ({ title, otherTitle, id, total_Ep, image, href_q, theme_mode }) =>
           search: `?query=${id}&ep=episode-1`
         }}
           className={'main-card'}>
-          <button className="btn fill">Watch Now</button>
+          <button className="btn fill ml-1 hover:z-30">Watch Now</button>
         </Link>
       </div>
     </div>

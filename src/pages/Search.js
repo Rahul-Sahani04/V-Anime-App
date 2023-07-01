@@ -15,9 +15,8 @@ const Search = ({ query_y }) => {
     let temp = '';
     const [page, setPage] = useState(1);
     const [animeList, setAnimeList] = useState([]);
-    // const [anime_id, setAnime_ID] = useState(null);
-    // const [totalPages, setTotalPages] = useState(1);
-    // const [Totalitems, setTotalItems] = useState(1);
+    const [totalEpisodes, setTotalEpisodes] = useState(0);
+
     const [dataLoaded, setDataLoaded] = useState(false);
 
     const location = useLocation();
@@ -25,30 +24,25 @@ const Search = ({ query_y }) => {
 
     const [isDarkMode, setIsDarkMode] = useState(false);
 
-    // const handleThemeToggle = () => {
-    //     setIsDarkMode(!isDarkMode);
-    // };
-
-
-    // const fetchLocation = async () => {
-    //     const temp = location.search.split('=');
-    //     setQuery(temp[1]);
-    //     if (location.state?.fromHome === true) {
-    //         setQuery(location.search.split('=')[1]);
-    //     }
-    //     const fromHome = location.state?.fromHome;
-    // };
-
     const fetchAnime = async (query, page) => {
         setDataLoaded(false)
         let formattedQuery = query.replace(/\s+/g, '%20').toLowerCase();
         const response = await fetch(`https://api.consumet.org/anime/gogoanime/${formattedQuery}?page=${page}`);
         const data = await response.json();
-        setAnimeList(data.results);
+        const animeList = data.results;
+        setAnimeList(animeList);
         setQuery(temp);
         const Query = query;
         setQuery(Query);
         setDataLoaded(true);
+    };
+    const fetchTotalEpisodes = async (query) => {
+        setDataLoaded(false)
+        const response = await fetch(`https://api.consumet.org/anime/gogoanime/info/${query}`);
+        const data = await response.json();
+        const totalEpisodes = data.totalEpisodes;
+        setTotalEpisodes(totalEpisodes)
+        return totalEpisodes;
     };
 
     useEffect(() => {
@@ -61,15 +55,15 @@ const Search = ({ query_y }) => {
     }, []);
 
     return (
-        <div className={`app ${isDarkMode ? 'light-theme' : 'dark-theme'} z-10`}>
+        <div className={` app ${isDarkMode ? 'light-theme' : 'dark-theme'} z-10`}>
             <MY_Navbar2 />
-            <div className='flex flex-grow lg:grid-cols-4 gap-4 justify-between'>
+            <div className='flex flex-grow lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-between'>
 
                 {dataLoaded ? (
-                    <div className='col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5' key={'D-ID'}>
+                    <div className="col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5" key={"D-ID"} >
                         {animeList?.map((anime, index) => (
                             <div key={index}>
-                                <Card_Component className='anime-card' title={anime.title} otherTitle={anime.otherName} id={anime.id} total_Ep={anime.totalEpisodes} image={anime.image} />
+                                <Card_Component className='anime-card' title={anime.title} otherTitle={anime.otherName} id={anime.id} SubOrDub={anime.subOrDub} image={anime.image} />
                             </div>
                         )
                         )}
@@ -77,7 +71,7 @@ const Search = ({ query_y }) => {
                 ) : (
                     <Wavy />
                 )}
-                <div className='justify-end right-0'>
+                <div className=' justify-end right-0 hidden lg:block xl:block laptop:w-1/2'>
                     <Sidebar />
                 </div>
             </div>

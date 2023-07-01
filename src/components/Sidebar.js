@@ -22,11 +22,11 @@ const Sidebar = () => {
     }, []);
 
     return (
-        <div className="flex flex-col bg-gray-900 text-white w-96">
+        <div className="rounded-xl lg:flex flex-col bg-gray-900 text-white w-96">
             {isLoading ? <Wavy /> : (
                 <>
                     <div className="p-4 ">
-                        <h2 className="text-2xl font-bold items-center">Most Popular</h2>
+                        <p className="text-2xl font-bold items-center">Most Popular</p>
                     </div>
                     <div className="flex-grow overflow-y-auto">
                         <ul className="px-4 py-2 space-y-2">
@@ -38,8 +38,8 @@ const Sidebar = () => {
                                         pathname: '/details',
                                         search: `?id=${recom.id}`
                                     }}>
-                                        <li className="m-4 text-gray-300 hover:text-lime-500 cursor-pointer overflow-hidden " key={recom.id}>
-                                            {recom.title}
+                                        <li className="m-4 h-full text-gray-300 hover:text-lime-500 cursor-pointer overflow-hidden" key={recom.id}>
+                                            <p className='text-sm text-left overflow-hidden'>{recom.title}</p>
                                         </li>
                                     </Link>
                                     <hr className='text-gray-300' />

@@ -28,14 +28,13 @@ function Random_image() {
 
     return (
         <div className='app'>
-            <MY_Navbar2 className={"navbar"} />
+            <MY_Navbar2 />
             <div className='butt'>
                 <input value={"Generate More"} type={'button'} onClick={() => fetchImages()} className="btn fill" />
             </div>
             {!isLoading && (
-
-                    <div className='container r-image'>
-                        <img key={randomNumber} src={images} />
+                    <div className='w-full flex r-image'>
+                        <img className='align-middle content-center' key={randomNumber} src={images} />
                     </div>
                 )
             }

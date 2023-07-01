@@ -29,6 +29,7 @@ function Watch() {
     const [EP, setEP] = useState(1);
 
     const [DownloadLink, setDownloadLink] = useState("");
+    const [Description, setDescription] = useState("");
 
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [dataLoaded, setDataLoaded] = useState(false);
@@ -82,10 +83,8 @@ function Watch() {
         setAnimeList(animeList);
         const TotalEP = await animeList.totalEpisodes;
         setTotalEP(TotalEP);
-        // // console.log(animeList);
-        // // console.log("TITLE: " + animeList.title);
-        // // console.log("Total Ep: " + TotalEP);
-        // // console.log("Episode : " + animeList.episodes[0].id);
+        const Description = animeList.description;
+        setDescription(Description || false);
         setEP(animeList.episodes[0].id)
         setEpLoaded(true);
     };
@@ -222,10 +221,10 @@ function Watch() {
 
                 <h1 className='xl:text-2xl m-5'> {animeList.title}</h1>
 
-                <div className='flex justify-start items-center m-3'>
+                <div className='flex justify-start items-center m-3 '>
                     <button onClick={handlePrevPage} className='m-2'><Prev_Button /></button>
 
-                    <span className='text-slate-100 m-2'>
+                    <span className='text-slate-100 m-2 '>
                         Page {page} of {animeList.episodes ? Math.ceil(animeList.episodes.length / episodesPerPage) : 0}
                     </span>
 
@@ -260,14 +259,10 @@ function Watch() {
 
 
                     </div>
-                    <div className=' sm:w-[250px] w-[400px] md:w-[800px] lg:w-[500px] xl:w-[700px] xl:col-span-2 lg:col-span-1 col-span-1 object-contain justify-center'>
+                    <div className='w-fit sm:w-fit md:w-fit lg:w-[500px] xl:w-[700px] xl:col-span-2 lg:col-span-1 col-span-1 object-contain justify-center'>
                         {dataLoaded && (
                             <>
                                 <PlyrComponent QualityData={WatchUrl} />
-                                <div className='Download-Link'>
-                                    {/* <a href={DownloadLink} target={'_blank'} className={''}>Download</a> */}
-                                    <button type="button" className="transition-all duration-300 ease-in- text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" onClick={() => navigate(DownloadLink)}>Download</button>
-                                </div>
                             </>
                         )}
                         {!dataLoaded && (
@@ -276,16 +271,18 @@ function Watch() {
                             </div>
                         )}
                     </div>
-                    <div className='justify-items-end bottom-0'>
-                        <div>
-                            <img src={animeList.image} className='w-6/12' />
+                     <div className='w-fit xl:w-5/6 lg:w-6/12 justify-items-end bottom-0  xl:-right-8 lg:relative lg:-right-36'>
+                        <div >
+                            <img src={animeList.image} className='' />
                         </div>
-                        <p className={`text-left col-span-1 ${!IsMore ? "h-24" : "flex"} overflow-hidden  mt-2`}>
-                            {animeList.description}
+                        <p className={`w-fit text-left col-span-1 ${!IsMore ? "h-24" : "flex"} overflow-hidden  mt-2`}>
+                            {Description}
                         </p>
+                        {Description.length >= 125 && (
                         <div className='cursor-pointer font-sans font-extrabold' onClick={() => { setIsMore(!IsMore) }}>
                             + More
                         </div>
+                        )}
                     </div>
                 </div>
             </div>

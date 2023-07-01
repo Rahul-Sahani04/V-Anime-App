@@ -27,11 +27,12 @@ function Home() {
 
     return (
         <div className={`app`}>
-            <MY_Navbar2 theme={isDarkMode ? 'light-theme' : 'dark-theme'} />
+            <MY_Navbar2 />
             <div className=''>
                 <AnimeCarousel />
             </div>
-            <div className={isDarkMode ? 'app light-theme' : 'app dark-theme'}>
+            <div className={""}>
+                <p className='text-xl text-left mt-10 ml-6 font-bold'>Recommended Animes</p>
                 {/* <div className='toggle'>
                     <ThemeToggleButton isDarkMode={isDarkMode} onToggle={handleThemeToggle} />
                 </div> */}

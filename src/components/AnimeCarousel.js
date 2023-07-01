@@ -50,36 +50,38 @@ const AnimeCarousel = ({ slideInterval = 5000 }) => {
         return styles;
     }
 
+
     return (
         <div className="relative h-[600px] mt-10 xl:mt-0">
             <div className="relative rounded-lg place-items-start w-full " >
                 {recomList.map((slide, index) => (
                     <div
-                        style={ImageBackground(slide.image)}
-                        key={index}
-                        className={`xl:mt-10  absolute w-full h-full transform transition-transform duration-500 ${index === currentSlide ? 'opacity-100 translate-x-0' : 'hidden -translate-x-full'
-                            }`
-
-                        }
-                    >
+                    style={ImageBackground(slide.image)}
+                    key={index}
+                    className={` xl:mt-10  absolute w-full h-full transform transition-transform duration-500 ${index === currentSlide ? 'opacity-100 translate-x-0' : 'hidden -translate-x-full'
+                }`
+                
+            }
+            >
+                        <div class="blur-effect h-full"></div>
                         {/* <img src={slide.image} alt={slide.title} className="w-1/6 h-auto object-cover" /> */}
-                        <div className="absolute bottom-0 w-full p-4 bg-black bg-opacity-50">
-                            <h2 className="text-xl font-semibold text-white ">{slide.title}</h2>
-                            <p className="text-gray-300 text-left">{slide.genres.join(", ")}</p>
-                            <div className="mt-4">
+                        <div className="absolute bottom-0 w-full p-4 bg-black bg-opacity-60">
+                            <p className="text-xl text-white font-extrabold text-left">{slide.title}</p>
+                            <p className="text-gray-300 text-left font-bold">{slide.genres.join(", ")}</p>
+                            <div className="mt-4 object-center justify-items-center">
                                 <Link to={{
                                     pathname: '/details',
                                     search: `?id=${slide.id}`
                                 }}>
-                                    <button className="px-4 py-2 text-white bg-gray-500 rounded hover:bg-gray-600">
+                                    <button className="self-center px-4 py-2 text-white bg-gray-500 rounded hover:bg-gray-600">
                                         DETAILS
                                     </button>
                                 </Link>
                                 <Link to={{
-                                pathname: '/watch',
-                                search: `?query=${slide.id}`
+                                    pathname: '/watch',
+                                    search: `?query=${slide.id}`
                                 }}>
-                                    <button  className=" ml-3 px-4 py-2 mr-2 text-white bg-blue-500 rounded hover:bg-blue-600">
+                                    <button className="self-center ml-3 px-4 py-2 mr-2 text-white bg-blue-500 rounded hover:bg-blue-600">
                                         WATCH NOW
                                     </button>
                                 </Link>

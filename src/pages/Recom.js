@@ -52,9 +52,9 @@ useEffect(() => {
 
     return (
       <div>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 relative' key={"D-ID"}>
+        <div className='ml-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 relative' key={"D-ID"}>
           {recomList.map((recom, index) => (
-              <Card_Component theme_mode={props.theme} className={'anime-card'} id={recom.id} title={recom.title} image={recom.image} key={"ID" + index} />
+              <Card_Component theme_mode={props.theme} className={'anime-card'} id={recom.id} title={recom.title} image={recom.image} key={"ID" + index} SubOrDub={recom.subOrDub}/>
           ))}
         </div>
         {isLoading && (

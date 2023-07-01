@@ -54,17 +54,17 @@ function Movie(props) {
         <div className='app'>
             <MY_Navbar2 />
 
-            <div className='flex flex-grow lg:grid-cols-4 gap-4 justify-between'>
+            <div className='flex flex-grow lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-between'>
                 {isLoading ? <Wavy /> : (
-                    <div className='col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5' key={"D-ID"} >
+                    <div className="col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5" key={"D-ID"} >
                         {recomList.map((recom, index) => (
                             <div className='card-here' key={"ID" + index} >
-                                <Card_Component theme_mode={props.theme} className={'anime-card'} id={recom.id} title={recom.title} image={recom.image} />
+                                <Card_Component theme_mode={props.theme} className={'anime-card'} id={recom.id} title={recom.title} image={recom.image} SubOrDub={recom.subOrDub} />
                             </div>
                         ))}
                     </div>
                 )}
-                <div className='justify-end right-0'>
+                <div className=' justify-end right-0 hidden lg:block xl:block laptop:w-1/2'>
                     <Sidebar />
                 </div>
             </div>
