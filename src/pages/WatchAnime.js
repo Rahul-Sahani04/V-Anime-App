@@ -232,7 +232,7 @@ function Watch() {
                     <button onClick={handleNextPage} className='m-2'><Next_Button /></button>
                 </div>
 
-                <div className='grid grid-cols-1 md:grid-cols-1 lg:grid xl:grid-cols-4 gap-2 justify-start transition-all duration-300 ease-in-out '>
+                <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-2 justify-start transition-all duration-300 ease-in-out ">
                     <div className='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-10 lg:grid-cols-3 gap-y-4 m-4 lg:w-9/12 h-fit' >
 
                         {animeList.episodes && animeList.episodes.slice(startIndex, endIndex).map((episode, index) => (
@@ -260,7 +260,7 @@ function Watch() {
 
 
                     </div>
-                    <div className=' sm:w-[250px] w-[400px] md:w-[800px] lg:w-[700px] xl:w-[700px] col-span-2 object-contain justify-center'>
+                    <div className=' sm:w-[250px] w-[400px] md:w-[800px] lg:w-[500px] xl:w-[700px] xl:col-span-2 lg:col-span-1 col-span-1 object-contain justify-center'>
                         {dataLoaded && (
                             <>
                                 <PlyrComponent QualityData={WatchUrl} />
@@ -276,11 +276,11 @@ function Watch() {
                             </div>
                         )}
                     </div>
-                    <div className='justify-items-end'>
+                    <div className='justify-items-end bottom-0'>
                         <div>
                             <img src={animeList.image} className='w-6/12' />
                         </div>
-                        <p className={`text-left col-span-1 ${!IsMore ? "xl:h-24 " : "flex"} overflow-hidden  mt-2`}>
+                        <p className={`text-left col-span-1 ${!IsMore ? "h-24" : "flex"} overflow-hidden  mt-2`}>
                             {animeList.description}
                         </p>
                         <div className='cursor-pointer font-sans font-extrabold' onClick={() => { setIsMore(!IsMore) }}>
