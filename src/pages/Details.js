@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import '../main.css';
-import './AnimeDetails.css';
-import MY_Navbar2 from '../components/Navbar_2';
-import { ContainerMain } from './DetailsStyle';
-import Wavy from '../components/wavy_loader';
-import { FaPlay } from "react-icons/fa";
-import Episode_Button from '../components/button';
 
-const AnimeDetails = () => {
-    const location = useLocation()
+import MY_Navbar2 from '../components/Navbar_2';
+import Wavy from '../components/wavy_loader';
+
+const AnimeDetails = ({ Anime_ID }) => {
+    const location = useLocation();
 
     const [EpLoaded, setEpLoaded] = useState(false);
     const [Query, setQuery] = useState("");
     const [animeList, setAnimeList] = useState({});
+    const [active, setActive] = useState("");
 
     const [image, setImage] = useState("");
     const [title, setTitle] = useState("");
@@ -24,17 +21,13 @@ const AnimeDetails = () => {
     const [status, setStatus] = useState("");
     const [type, setType] = useState("");
     const [genres, setGenres] = useState("");
-    const [active, setActive] = useState("");
-    // const [, set] = useState("");
-
 
     const fetchInfo = async (query) => {
         setEpLoaded(false);
-        const response = await fetch(`https://api.consumet.org/anime/gogoanime/info/${query}`)
+        const response = await fetch(`https://api.consumet.org/anime/gogoanime/info/${query}`);
         const data = await response.json();
         const animeList = data;
         setAnimeList(animeList);
-        // console.log(animeList);
         const image = animeList.image;
         setImage(image);
 
@@ -50,78 +43,74 @@ const AnimeDetails = () => {
         setStatus(status);
         const type = animeList.type;
         setType(type);
-        const genres = animeList.genres.join(", ");
-        setGenres(genres);
+        if (animeList.genres) {
+            const genres = animeList.genres.join(", ");
+            setGenres(genres);
+        } else {
+            setGenres("N/A")
+        }
         setEpLoaded(true);
-        // const TotalEP = await animeList.totalEpisodes;
-        // setTotalEP(TotalEP);
-        // setEP(animeList.episodes[0].id)
-        // setEpLoaded(true);
     };
 
     useEffect(() => {
-        const Query = new URLSearchParams(location.search).get("id");
+        const Query = Anime_ID || new URLSearchParams(location.search).get("id");
         setQuery(Query);
-        // console.log("Query: ", Query);
-
         fetchInfo(Query);
     }, []);
 
-    const ShowMoreDesc = (active) => {
-        if (active == "") {
-            const active = "active";
-            setActive(active);
-        } else {
-            const active = "";
-            setActive(active);
-        }
-    }
-    return (
+    const handleMouseEnter = () => {
+        setActive(true);
+    };
 
+    const handleMouseLeave = () => {
+        setActive(false);
+    };
+
+    return (
         <div>
             <MY_Navbar2 />
-            <div className='space'></div>
-            {!EpLoaded && (
-                <Wavy />
-            )}
-            {EpLoaded && (
-                <ContainerMain>
-                    <div className='infos'>
-                        <h3>{OtherName}</h3>
+            <div className="w-10/12 m-5">
+                {!EpLoaded && (
 
-                        <h1>{title}</h1>
-                        <p>{type}</p>
+                    <Wavy />
+                )}
+                {EpLoaded && (
+                    <div className="sm:flex md:flex lg:flex  xl:flex">
+                        <div className="infos text-left">
+                            <h3 className="text-teal-100 text-lg">{OtherName}</h3>
+                            <h1 className="text-teal-100 text-4xl">{title}</h1>
+                            <p className="text-left m-3">{type}</p>
+                            <div className="grid gap-4 grid-cols-1 m-3 md:grid-cols-1 lg:grid-cols-1">
 
-                        <p className={"description " + active}>{desc}</p>
-                        <p onClick={ShowMoreDesc}>More +</p>
-                        <p><b>Genres: </b>{genres}</p>
-                        <p><b>Status: </b>{status}</p>
-                        <p>Total Episodes: {TotalEP}</p>
-
-                        <div className="btns">
-                            <div className="">
-                                <Link to={{
-                                    pathname: '/watch',
-                                    search: `?query=${Query}&ep=episode-1`
-                                }}
-                                    className={'main-card'}>
-                                    <Episode_Button epi_Id={"Watch Now"} />
-                                </Link>
-                            </div>
-
-                            {/* <div className="trailer">
-                                <p>trailer</p>
+                                {/* <div className="rounded-lg overflow-hidden">
+                                <img className="w-5/12" src={image} alt={title} />
                             </div> */}
+                                <p
+                                    className={`w-8/12 text-left overflow-hidden md:text-clip ${active ? 'active' : ''
+                                        }`}
+                                >
+                                    {desc}
+                                </p>
+                                <p className="text-left">
+                                    <b>Genres: </b>
+                                    {genres || "N/A"}
+                                </p>
+                                <p className="text-left">
+                                    <b>Status: </b>
+                                    {status}
+                                </p>
+                                <p className="text-left">
+                                    <b>Total Episodes:</b> {TotalEP}
+                                </p>
+                            </div>
+                        </div>
+                        <div className='object-contain w-[550px] sm:w-[500px] md:w-[750px] lg:w-[800px] xl:w-[1200px] '>
+                                        <img src={image} className='rounded-lg drop-shadow-lg' />
                         </div>
                     </div>
-
-                    <div className='image'>
-                        <img src={image} alt='aki' />
-                    </div>
-                </ContainerMain>
-            )}
-        </div >
-
+                )}
+            </div>
+        </div>
     );
 };
 

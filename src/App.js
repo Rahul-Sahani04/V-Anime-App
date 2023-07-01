@@ -5,8 +5,10 @@ import './components/card.css';
 // import MY_Navbar from './components/Navbar_2';
 import "./components/Navbar.css";
 import TrendingAnimeComponent from './components/TrendingAnimeApi';
+import { inject } from '@vercel/analytics';
 
 function App() {
+  inject();
   const [Query_A, setQueryA] = useState('');
   return (
     <div className='app'>
@@ -29,11 +31,11 @@ function App() {
             <input className='button-27' value={"Search"} type={"Button"} />
           </Link>
         </div>
-          {/* <div className="xhashtag">
+        {/* <div className="xhashtag">
             <span class="title">Top search:</span>
             <a href="/search?keyword=One%20Piece" className="item">One Piece</a>
           </div> */}
-          {/* <TrendingAnimeComponent /> */}
+        {/* <TrendingAnimeComponent /> */}
       </div>
     </div>
   );

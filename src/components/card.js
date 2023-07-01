@@ -1,19 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './card.css'
-const Card = ({ title, id, description, image, href_q, theme_mode }) => {
-
-  function busy() {
-    alert("This button is not working at the moment ;)");
-  }
+const Card = ({ title, otherTitle, id, total_Ep, image, href_q, theme_mode }) => {
 
   return (
-    <div className="card-container">
+    <div className="transition-all duration-300 ease-in-out card-container hover:scale-105 ">
       <div className="wrapper">
-        <img src={image} className="banner-image" />
-        <h4 className='title'>{title}</h4>
+        <img src={image} className="banner-image object-fill" />
+        {
+          title ? <h4 className='font-semibold font-sans text-base overflow-hidden h-16'>{title}</h4> : <h4 className='font-semibold font-sans text-base overflow-hidden'>{otherTitle}</h4>
+        }
 
       </div>
+      <p className='font-sans '>
+        {total_Ep}
+      </p>
       <div className="button-wrapper">
         <Link to={{
 

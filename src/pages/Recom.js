@@ -11,18 +11,6 @@ function Recom(props) {
 
   const [dataLoaded, setDataLoaded] = useState(false);
 
-  // // console.log(recomList);
-  // const fetchRecom = async (page_no) => {
-  //   setDataLoaded(false);
-  //   const response = await fetch(`https://api.consumet.org/anime/gogoanime/recent-episodes?page=${page_no}`);
-  //   const data = await response.json();
-  //   setHasNextPage(data.hasNextPage);
-
-  //   setRecomList(data.results);
-  //   setTotalPages(totalPages);
-
-  //   setDataLoaded(true);
-  // };
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchRecom = async (page_no) => {
@@ -64,7 +52,7 @@ useEffect(() => {
 
     return (
       <div>
-        <div className='container' key={"D-ID"}>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 relative' key={"D-ID"}>
           {recomList.map((recom, index) => (
               <Card_Component theme_mode={props.theme} className={'anime-card'} id={recom.id} title={recom.title} image={recom.image} key={"ID" + index} />
           ))}

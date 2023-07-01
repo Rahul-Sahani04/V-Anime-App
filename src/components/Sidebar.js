@@ -1,0 +1,56 @@
+import React, { useState, useEffect, useRef } from 'react';
+import Wavy from './wavy_loader';
+import { Link } from 'react-router-dom';
+
+const Sidebar = () => {
+    const [recomList, setRecomList] = useState([]);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const fetchAnime = async (page_no) => {
+        setIsLoading(true);
+        const response = await fetch(`https://api.consumet.org/anime/gogoanime/top-airing?page=${page_no}`);
+        const data = await response.json();
+        setRecomList(data.results);
+        setIsLoading(false);
+    };
+
+
+    useEffect(() => {
+        fetchAnime(1);
+    }, []);
+
+    return (
+        <div className="flex flex-col bg-gray-900 text-white w-96">
+            {isLoading ? <Wavy /> : (
+                <>
+                    <div className="p-4 ">
+                        <h2 className="text-2xl font-bold items-center">Most Popular</h2>
+                    </div>
+                    <div className="flex-grow overflow-y-auto">
+                        <ul className="px-4 py-2 space-y-2">
+                            {recomList?.map((recom, index) => (
+                                <div className='flex h-28 items-center'>
+                                    <img src={recom.image} className='w-[60px] h-[80px] rounded-lg' />
+                                    <Link to={{
+
+                                        pathname: '/details',
+                                        search: `?id=${recom.id}`
+                                    }}>
+                                        <li className="m-4 text-gray-300 hover:text-lime-500 cursor-pointer overflow-hidden " key={recom.id}>
+                                            {recom.title}
+                                        </li>
+                                    </Link>
+                                    <hr className='text-gray-300' />
+                                </div>
+                            ))}
+                        </ul>
+                    </div>
+                </>
+            )}
+        </div>
+    );
+};
+
+export default Sidebar;

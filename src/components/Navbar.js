@@ -5,8 +5,8 @@ import "./Navbar.css";
 function MY_Navbar() {
   
   return (
-    <div className="content-image">
-    <div className="header-links">
+    <div className="w-full flex py-6 justify-between items-center navbar">
+    <div className="">
       <Link className="header-items" to="/home">Home</Link>
       <Link className="header-items" to="/movie">Movie</Link>
       <Link className="header-items" to="/popular">Popular</Link>

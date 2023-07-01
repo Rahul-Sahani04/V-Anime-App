@@ -16,5 +16,11 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
+  "theme": {
+    "extends": {
+      "mySans": ["Fira Sans", "sans-serif"],
+    },
+  },
+
   "include": ["./src"]
 }

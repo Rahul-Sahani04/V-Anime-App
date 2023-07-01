@@ -5,16 +5,16 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 function Next_Button({ }) {
     return (
-        <button className='button-br'>
-            <FaArrowRight className='.arrow-icon'/>
+        <button className='button-br text-slate-800'>
             <span>Next</span>
+            <FaArrowRight className='.arrow-icon'/>
         </button>
     );
 }
 
 function Prev_Button({ }) {
     return (
-        <button className='button-br'>
+        <button className='button-br text-slate-800'>
             <FaArrowLeft className='.arrow-icon'/>
             <span>Prev</span>
         </button>

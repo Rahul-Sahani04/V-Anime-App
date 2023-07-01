@@ -3,6 +3,7 @@ import '../main.css';
 import Card_Component from '../components/card';
 import MY_Navbar2 from '../components/Navbar_2';
 import Wavy from '../components/wavy_loader';
+import Sidebar from '../components/Sidebar';
 
 function Movie(props) {
     const [recomList, setRecomList] = useState([]);
@@ -17,7 +18,6 @@ function Movie(props) {
         const data = await response.json();
         setHasNextPage(data.hasNextPage);
         setRecomList((prev) => [...prev, ...data.results]);
-        // setTotalPages(data.totalPages);
         setIsLoading(false);
     };
 
@@ -53,16 +53,22 @@ function Movie(props) {
     return (
         <div className='app'>
             <MY_Navbar2 />
-            <div className='container' key={"D-ID"} >
-                {recomList.map((recom, index) => (
-                    <div className='card-here' key={"ID" + index} >
-                        <Card_Component theme_mode={props.theme} className={'anime-card'} id={recom.id} title={recom.title} image={recom.image} />
+
+            <div className='flex flex-grow lg:grid-cols-4 gap-4 justify-between'>
+                {isLoading ? <Wavy /> : (
+                    <div className='col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5' key={"D-ID"} >
+                        {recomList.map((recom, index) => (
+                            <div className='card-here' key={"ID" + index} >
+                                <Card_Component theme_mode={props.theme} className={'anime-card'} id={recom.id} title={recom.title} image={recom.image} />
+                            </div>
+                        ))}
                     </div>
-                ))}
+                )}
+                <div className='justify-end right-0'>
+                    <Sidebar />
+                </div>
             </div>
-            {isLoading && (
-                <Wavy />
-            )}
+
         </div>
     );
 

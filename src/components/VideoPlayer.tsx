@@ -37,7 +37,7 @@ const useHls = (src: string, options: Options | null) => {
      * You can all your custom event listener here
      * For this example we iterate over the qualities and pass them to plyr player
      * ref.current.plyr.play() ❌
-     * // console.log.bind(console, 'MANIFEST_PARSED') ✅
+     * console.log.bind(console, 'MANIFEST_PARSED') ✅
      * NOTE: you can only start play the audio here
      * Uncaught (in promise) DOMException: play() failed because the user didn't interact with the document first.
      */
@@ -53,7 +53,7 @@ const useHls = (src: string, options: Options | null) => {
        the video. It takes in a `newQuality` parameter which is the new quality selected by the
        user. */
         onChange: (newQuality: number) => {
-          // console.log("changes", newQuality);
+          console.log("changes", newQuality);
           levels.forEach((level, levelIndex) => {
             if (level.height === newQuality) {
               hls.current.currentLevel = levelIndex;
@@ -112,6 +112,3 @@ const PlyrComponent = ({ QualityData }: { QualityData: string }) => {
 };
 
 export default PlyrComponent;
-function updateQuality(e: number): void {
-  throw new Error("Function not implemented.");
-}
