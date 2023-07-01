@@ -102,10 +102,18 @@ const AnimeDetails = ({ Anime_ID }) => {
                                 <p className="text-left">
                                     <b>Total Episodes:</b> {TotalEP}
                                 </p>
+                                <Link to={{
+                                    pathname: '/watch',
+                                    search: `?query=${slide.id}`
+                                }}>
+                                    <button className=" ml-3 px-4 py-2 mr-2 text-white bg-blue-500 rounded hover:bg-blue-600">
+                                        WATCH NOW
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                         <div className='object-contain w-[550px] sm:w-[500px] md:w-[750px] lg:w-[800px] xl:w-[1200px] '>
-                                        <img src={image} className='rounded-lg drop-shadow-lg' />
+                            <img src={image} className='rounded-lg drop-shadow-lg' />
                         </div>
                     </div>
                 )}
