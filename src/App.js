@@ -8,7 +8,7 @@ import { inject } from '@vercel/analytics';
 
 function App() {
   inject();
-  const [Query_A, setQueryA] = useState('');
+  const [Query, setQuery] = useState('');
   return (
     <div className='app'>
       <div className="content-image">
@@ -18,15 +18,11 @@ function App() {
           <Link className="header-items" to="/popular">Popular</Link>
           <Link className="header-items" to="/top_anime">Top Anime</Link>
         </div>
-        <div className='search1-box content-wrap'>
-
-          <input className='search-box' value={Query_A} type={"text"} onChange={e => setQueryA(e.target.value)} />
-          <Link className="header-items" to={{
-            pathname: "/search",
-            search: `?query=${Query_A}`,
-            state: { fromHome: true }
-          }}>
-            <input className='button-27' value={"Search"} type={"Button"} />
+        <div className='w-2/6 object-contain flex items-center bg-slate-800 rounded-full overflow-hidden px-2 py-1 justify-end transition-all duration-300 ease-in-out shadow-lg'>
+          <input className='transition-all duration-500 ease-in-out indent-4  text-gray-200 text-lg flex-grow outline-none focus:caret-slate-900 border-4 border-slate-800 bg-slate-800 focus:border-lime-500 object-contain h-[55px] rounded-full mr-2 ' type='text' onChange={(e) => setQuery(e.target.value)} />
+          <Link key={Query} to={{ pathname: '/search', search: `?query=${Query}` }}>
+            {/* <input className='button-27 transition-colors duration-300 ease-in-out ' value={'Search'} type='Button ' onClick={() => renderNew(Query)} /> */}
+            <button type="button" className="transition-all duration-300 ease-in-out text-white border bg-gray-900 hover:scale-125 hover:drop-shadow-xl focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Search</button>
           </Link>
         </div>
         {/* <div className="xhashtag">
