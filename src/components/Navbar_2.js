@@ -31,6 +31,24 @@ function MY_Navbar2(props) {
     window.location.reload()
   }
 
+  const ToggleAll = () =>{
+    if (isToggleActive === false) {
+      setSearchActive(false);
+      setToggleActive(!isToggleActive);
+    } else {
+      setToggleActive(!isToggleActive);
+    }
+  }
+
+  const ToggleSearch = () =>{
+    if (isSearchActive === true) {
+      setToggleActive(false);
+      setSearchActive(!isSearchActive);
+    } else {
+      setSearchActive(!isSearchActive);
+    }
+  }
+
   useEffect(() => {
     if (location.search !== undefined && location.search !== null) {
       setQuery(location.search.split('=')[1]);
@@ -58,7 +76,7 @@ function MY_Navbar2(props) {
             <Link className="header-link-animation" to="/random_img">Random Image</Link>
           </li>
           <li className='header-li'>
-            <div className='justify-self-end hover:text-blue-500 transition-all duration-300 ease-in-out hover:scale-150 scale-200 m-4 text-slate-200 ' onClick={() => setSearchActive(!isSearchActive)} >
+            <div className='justify-self-end hover:text-blue-500 transition-all duration-300 ease-in-out hover:scale-150 scale-200 m-4 text-slate-200 ' onClick={() => ToggleAll()} >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                 <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd" />
               </svg>
@@ -66,7 +84,7 @@ function MY_Navbar2(props) {
 
           </li>
         </ul>
-        <div className={`sm:hidden flex flex-1 justify-end items-center z-50`} onClick={() => setToggleActive(!isToggleActive)}>
+        <div className={`sm:hidden flex flex-1 justify-end items-center z-50`} onClick={() => ToggleAll()}>
           {isToggleActive ? <Menu_Down /> : <Menu_Up />}
           <div
             className={`${!isToggleActive ? "hidden" : "flex mb-10"
@@ -87,7 +105,7 @@ function MY_Navbar2(props) {
                 <Link className="m-2 hover:text-lime-500 text-slate-200" to="/random_img">Random Image</Link>
               </li>
               <li className='font-poppins font-medium cursor-pointer text-[16px] "text-dimWhite" "mb-4"'>
-                <div className='justify-self-end hover:text-blue-500 scale-200 m-4 text-slate-200 ' onClick={() => setSearchActive(!isSearchActive)} >
+                <div className='justify-self-end hover:text-blue-500 scale-200 m-4 text-slate-200 ' onClick={() => ToggleSearch()} >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                     <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd" />
                   </svg>
