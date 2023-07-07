@@ -20,12 +20,10 @@ function Watch() {
     const [Query, setQuery] = useState("");
     const [animeList, setAnimeList] = useState({});
     const [WatchUrl, setWatchUrl] = useState("");
-    const [videoLink, setvideoLink] = useState([]);
 
-    const [Server, setServer] = useState("Streamsb");
-    const [ServerList, setServerList] = useState([]);
+    const [Titles, setTitles] = useState([]);
 
-    const [TotalEP, setTotalEP] = useState(1);
+    const [TotalEP, setTotalEP] = useState([]);
     const [EP, setEP] = useState(1);
 
     const [DownloadLink, setDownloadLink] = useState("");
@@ -58,170 +56,62 @@ function Watch() {
         setIsDarkMode(!isDarkMode);
     };
 
-    function handleChange(que) {
-        setQuery(que);
-    }
-
     const handleLinkClick = (episodeId) => {
-        const Query = new URLSearchParams(location.search).get("query");
-        const EP = new URLSearchParams(location.search).get("ep");
-        // fetchAnime(episodeId);
-        fetchM3U8(Query, episodeId, "EP");
+        fetchM3U8(episodeId);
     };
 
-    // const handleServerClick = (episodeId, server) => {
-    //     // console.log("EP ID & Server: " + episodeId + server)
-    // fetchAnime(episodeId, "", server);
-    // };
 
-
-    const fetchEpisodes = async (query) => {
-        setEpLoaded(false);
-        const response = await fetch(`https://api.consumet.org/anime/gogoanime/info/${query}`)
-        const data = await response.json();
+    const fetchAnimeInfo = async (id) => {
+        setDataLoaded(false);
+        const response = await fetch(`https://api.enime.moe/anime/${id}`)  // Zoro
+        const data = await response.json()
         const animeList = data;
         setAnimeList(animeList);
-        const TotalEP = await animeList.totalEpisodes;
-        setTotalEP(TotalEP);
-        const Description = animeList.description;
-        setDescription(Description || false);
-        setEP(animeList.episodes[0].id)
-        setEpLoaded(true);
-    };
-
-
-    const fetchDownloadLink = async (query_id) => {
-        const response = await fetch(`https://api.consumet.org/anime/gogoanime/watch/${query_id}`)
-        const data = await response.json();
-        const DownloadLink = data.download;
-        setDownloadLink(DownloadLink);
-    };
-
-    const fetchAnime = async (Que, Epi_No, Server) => {
-        let syntext = Que + "-" + Epi_No;
-        // // console.log("TEXT" + syntext);
-        setDataLoaded(false);
-        let server_data;
-
-        if (Epi_No) {
-            const servers = await fetch(`https://api.consumet.org/anime/gogoanime/servers/${syntext}`)
-            server_data = await servers.json();
-
-            const ServerList = server_data;
-            setServerList(ServerList);
-            fetchDownloadLink(syntext);
-
-        } else {
-            const response = await fetch(`https://api.consumet.org/anime/gogoanime/servers/${Que}`)
-            server_data = await response.json();
-
-
-            const ServerList = server_data;
-            setServerList(ServerList);
-            fetchDownloadLink(Que);
+        if (typeof animeList.title === 'object') {
+            const Titles = animeList.title["english"];
+            setTitles(Titles);
+        } else if (typeof animeList.title === 'array') {
+            const Titles = animeList.title[0];
+            setTitles(Titles);
         }
-
-        for (let index = 0; index < server_data.length; index++) {
-            let ele = server_data[index];
-            if (ele.name == Server) {
-                const WatchUrl = server_data[index].url;
-                setWatchUrl(WatchUrl);
-                // // console.log("FOUND: " + ele.name + " " + Server)
-                break;
-            }
-            else {
-                const WatchUrl = server_data[0].url;
-                setWatchUrl(WatchUrl);
-                // console.log(ele.name + " " + Server)
-
-            }
-
+        else {
+            const Titles = animeList.title;
+            setTitles(Titles);
         }
-
+        fetchM3U8(animeList.episodes[0].id);
+        setTotalEP(animeList.episodes);
+        setEpLoaded(true)
+        setDescription(animeList.description);
         setDataLoaded(true);
-    };
-
-    const fetchQuery = async (Que, Epi_No) => {
-        let syntext = Que + "-episode" + Epi_No;
-        setDataLoaded(false);
-        const servers = await fetch(`https://api.consumet.org/anime/gogoanime/servers/${syntext}`)
-        const server_data = await servers.json();
-        const WatchUrl = server_data[2].url;
+    }
+    const fetchM3U8 = async (id) => {
+        const data = await fetch(`https://api.consumet.org/anime/enime/watch?episodeId=${id}`)  // Zoro
+        const anime_link = await data.json();
+        const WatchUrl = anime_link.sources[anime_link.sources.length - 1].url;
         setWatchUrl(WatchUrl);
-        setDataLoaded(true);
-    };
-
-    const fetchM3U8 = async (Que, Epi_No, ep_id) => {
-        let syntext = ""
-        if (ep_id === "Y") {
-            syntext = Que + "-" + Epi_No;
-            // // console.log("text; ", syntext);
-        } else if (ep_id === "EP") {
-            syntext = Epi_No;
-        } else {
-            syntext = Que + "-episode" + Epi_No;
-            // // console.log("text; ", syntext);
-        }
-        setDataLoaded(false);
-        const servers = await fetch(`https://api.consumet.org/anime/gogoanime/watch/${syntext}`)
-        const server_data = await servers.json();
-        // console.log(server_data);
-        const WatchUrl = server_data.sources[server_data.sources.length - 3].url;
-        var templinks = [];
-        for (let index = 0; index < server_data.sources.length; index++) {
-            templinks.push(server_data.sources[index].url);
-        }
-        const videoLink = templinks;
-        setvideoLink(videoLink);
-        // console.log("M3U8: ", WatchUrl)
-        // console.log("M3U8: ", videoLink)
-        setWatchUrl(WatchUrl);
-        setDataLoaded(true);
     };
 
     useEffect(() => {
         const Query = new URLSearchParams(location.search).get("query");
-        const EP = new URLSearchParams(location.search).get("ep");
+        setQuery(Query);
         if (Query === undefined || Query === null || Query === "") {
             navigate("/home");
         }
-        if (EP === undefined || EP === null || EP === "") {
-            navigate(`/watch?query=${Query}&ep=episode-1`);
-        }
-        let newQuery;
-        let newEpID;
-        if (!Query) {
-            newQuery = Query;
-            newEpID = EP.split("-episode")[1];
-            newQuery = EP.split("-episode")[0];
-            setQuery(newQuery);
-            fetchEpisodes(newQuery);
-        } else {
-            setQuery(Query);
-            fetchEpisodes(Query);
-        }
-        setEP(EP);
-        
-        if (EP && newQuery) {
-            fetchM3U8(newQuery, newEpID, "N");
-        }
-        else if (EP) {
-            fetchM3U8(Query, EP, "Y");
+        else {
+            fetchAnimeInfo(Query);
         }
     }, []);
 
 
-    // if (!dataLoaded) {
-    //     return <Wavy />;
-    // } else {
+
     return (
         <div className={`app`}>
             <MY_Navbar2 />
             <div>
 
-                <h1 className='xl:text-2xl m-5'> {animeList.title}</h1>
+                <h1 className='xl:text-2xl m-5'> {Titles}</h1>
 
-                <div className='flex justify-start items-center m-3 '>
+                <div className='flex xl:justify-start lg:justify-start  justify-center items-center m-3 ml-5 w-full lg:w-2/6 xl:w-2/6'>
                     <button onClick={handlePrevPage} className='m-2'><Prev_Button /></button>
 
                     <span className='text-slate-100 m-2 '>
@@ -234,7 +124,7 @@ function Watch() {
                 <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-2 justify-start transition-all duration-300 ease-in-out ">
                     <div className='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-10 lg:grid-cols-3 gap-y-4 m-4 lg:w-9/12 h-fit' >
 
-                        {animeList.episodes && animeList.episodes.slice(startIndex, endIndex).map((episode, index) => (
+                        {TotalEP && TotalEP.slice(startIndex, endIndex).map((episode, index) => (
                             <div
                                 className='h-fit col-span-1'
                                 key={index} >
@@ -247,7 +137,7 @@ function Watch() {
                                     }}
                                     onClick={() => handleLinkClick(episode.id)}
                                 >
-                                    <Episode_Button epi_Id={parseInt(episode.id.split("-").pop())} />
+                                    <Episode_Button epi_num={parseInt(episode.number)} />
                                 </Link>
                             </div>
                         ))}
@@ -271,17 +161,17 @@ function Watch() {
                             </div>
                         )}
                     </div>
-                     <div className='w-fit xl:w-5/6 lg:w-6/12 justify-items-end bottom-0  xl:-right-8 lg:relative lg:-right-36'>
+                    <div className='w-fit xl:w-8/12 lg:w-6/12 justify-items-end bottom-0  xl:-right-20 lg:relative lg:-right-36'>
                         <div >
-                            <img src={animeList.image} className='' />
+                            <img src={animeList.coverImage} className='' />
                         </div>
                         <p className={`w-fit text-left col-span-1 ${!IsMore ? "h-24" : "flex"} overflow-hidden  mt-2`}>
                             {Description}
                         </p>
-                        {Description.length >= 125 && (
-                        <div className='cursor-pointer font-sans font-extrabold' onClick={() => { setIsMore(!IsMore) }}>
-                            + More
-                        </div>
+                        {Description && Description.length >= 125 && (
+                            <div className='cursor-pointer font-sans font-bold' onClick={() => { setIsMore(!IsMore) }}>
+                                    {!IsMore ? "+ Show More" : "- Show Less"}
+                            </div>
                         )}
                     </div>
                 </div>

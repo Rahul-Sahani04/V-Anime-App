@@ -1,6 +1,7 @@
 .button-br {
     display: flex;
     height: 2em;
+    padding: 10px;
     width: fit-content;
     align-items: center;
     justify-content: center;
@@ -11,6 +12,7 @@
     cursor: pointer;
     border: none;
     background: #fff;
+    font-size: 80%;
    }
    
    .button-br > .arrow-icon {

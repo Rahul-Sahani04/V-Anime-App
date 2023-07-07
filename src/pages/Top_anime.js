@@ -6,18 +6,16 @@ import Wavy from '../components/wavy_loader';
 import Sidebar from '../components/Sidebar';
 function Top_Anime(props) {
     const [recomList, setRecomList] = useState([]);
-    const [HasNextPage, setHasNextPage] = useState(true);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
 
     const fetchAnime = async (page_no) => {
         setIsLoading(true);
-        const response = await fetch(`https://api.consumet.org/anime/gogoanime/top-airing?page=${page_no}`);
+        const response = await fetch(`https://api.enime.moe/popular?page=${page_no}`);
         const data = await response.json();
-        setHasNextPage(data.hasNextPage);
-        setRecomList((prev) => [...prev, ...data.results]);
-
+        setRecomList((prev) => [...prev, ...data.data]);
+        console.log(recomList)
         setIsLoading(false);
     };
 
@@ -26,14 +24,14 @@ function Top_Anime(props) {
         const scrollHeight = document.body.scrollHeight;
         const scrollPosition = window.scrollY;
 
-        if (scrollHeight - (scrollPosition + windowHeight) < 50 && !isLoading && HasNextPage) {
+        if (scrollHeight - (scrollPosition + windowHeight) < 50 && !isLoading) {
             setIsLoading(true);
             setPage((prev) => prev + 1);
         }
     };
 
     useEffect(() => {
-        fetchAnime(1);
+        fetchAnime(page);
         window.addEventListener('scroll', handleScroll);
 
         return () => {
@@ -63,7 +61,7 @@ function Top_Anime(props) {
                     <div className="col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5" key={"D-ID"} >
                         {recomList.map((recom, index) => (
                             <div className='card-here' key={"ID" + index} >
-                                <Card_Component theme_mode={props.theme} className={'anime-card'} id={recom.id} title={recom.title} image={recom.image} SubOrDub={recom.subOrDub} />
+                                <Card_Component className={'anime-card'} id={recom.slug} title={recom.title.english ? recom.title.english : recom.slug.split('-').join(" ")} image={recom.coverImage} SubOrDub={recom.subOrDub} />
                             </div>
                         ))}
                     </div>

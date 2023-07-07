@@ -27,9 +27,10 @@ const Search = ({ query_y }) => {
     const fetchAnime = async (query, page) => {
         setDataLoaded(false)
         let formattedQuery = query.replace(/\s+/g, '%20').toLowerCase();
-        const response = await fetch(`https://api.consumet.org/anime/gogoanime/${formattedQuery}?page=${page}`);
+        const response = await fetch(`https://api.consumet.org/anime/enime/${formattedQuery}?page=${page}`);
         const data = await response.json();
         const animeList = data.results;
+        
         setAnimeList(animeList);
         setQuery(temp);
         const Query = query;
@@ -38,7 +39,7 @@ const Search = ({ query_y }) => {
     };
     const fetchTotalEpisodes = async (query) => {
         setDataLoaded(false)
-        const response = await fetch(`https://api.consumet.org/anime/gogoanime/info/${query}`);
+        const response = await fetch(`https://api.consumet.org/anime/enime/info?id=${query}`);
         const data = await response.json();
         const totalEpisodes = data.totalEpisodes;
         setTotalEpisodes(totalEpisodes)
@@ -63,7 +64,7 @@ const Search = ({ query_y }) => {
                     <div className="col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5" key={"D-ID"} >
                         {animeList?.map((anime, index) => (
                             <div key={index}>
-                                <Card_Component className='anime-card' title={anime.title} otherTitle={anime.otherName} id={anime.id} SubOrDub={anime.subOrDub} image={anime.image} />
+                                <Card_Component className='anime-card' title={anime.title} id={anime.id} SubOrDub={anime.type} image={anime.image} />
                             </div>
                         )
                         )}

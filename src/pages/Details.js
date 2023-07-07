@@ -5,6 +5,7 @@ import MY_Navbar2 from '../components/Navbar_2';
 import Wavy from '../components/wavy_loader';
 
 const AnimeDetails = ({ Anime_ID }) => {
+
     const location = useLocation();
 
     const [EpLoaded, setEpLoaded] = useState(false);
@@ -12,95 +13,73 @@ const AnimeDetails = ({ Anime_ID }) => {
     const [animeList, setAnimeList] = useState({});
     const [active, setActive] = useState("");
 
-    const [image, setImage] = useState("");
-    const [title, setTitle] = useState("");
-    const [desc, setDesc] = useState("");
-    const [TotalEP, setTotalEP] = useState("");
-    const [OtherName, setOtherName] = useState("");
-    const [releaseDate, setReleaseDate] = useState("");
-    const [status, setStatus] = useState("");
-    const [type, setType] = useState("");
-    const [genres, setGenres] = useState("");
-
     const fetchInfo = async (query) => {
-        setEpLoaded(false);
-        const response = await fetch(`https://api.consumet.org/anime/gogoanime/info/${query}`);
-        const data = await response.json();
-        const animeList = data;
-        setAnimeList(animeList);
-        const image = animeList.image;
-        setImage(image);
-
-        const title = animeList.title;
-        setTitle(title);
-        const desc = animeList.description;
-        setDesc(desc);
-        const totalEps = animeList.totalEpisodes;
-        setTotalEP(totalEps);
-        const otherName = animeList.otherName;
-        setOtherName(otherName);
-        const status = animeList.status;
-        setStatus(status);
-        const type = animeList.type;
-        setType(type);
-        if (animeList.genres) {
-            const genres = animeList.genres.join(", ");
-            setGenres(genres);
-        } else {
-            setGenres("N/A")
+        try {
+            const response = await fetch(`https://api.enime.moe/anime/${query}`);
+            const data = await response.json();
+            const animeList = data;
+            setAnimeList(animeList);
+            setEpLoaded(true);
+        } catch (error) {
+            console.log(error);
         }
-        setEpLoaded(true);
     };
+
+    const isOnlyNumbers = (str) => {
+        const numberPattern = /^\d+$/;
+        return numberPattern.test(str);
+    };
+
 
     useEffect(() => {
         const Query = Anime_ID || new URLSearchParams(location.search).get("id");
         setQuery(Query);
         fetchInfo(Query);
+
     }, []);
-
-    const handleMouseEnter = () => {
-        setActive(true);
-    };
-
-    const handleMouseLeave = () => {
-        setActive(false);
-    };
 
     return (
         <div>
             <MY_Navbar2 />
-            <div className="w-10/12 m-5">
+            <div className='w-full'>
                 {!EpLoaded && (
 
                     <Wavy />
                 )}
                 {EpLoaded && (
-                    <div className="sm:flex md:flex lg:flex  xl:flex">
-                        <div className="infos text-left">
-                            <h3 className="text-teal-100 text-lg">{OtherName}</h3>
-                            <h1 className="text-teal-100 text-4xl">{title}</h1>
-                            <p className="text-left m-3">{type}</p>
-                            <div className="grid gap-4 grid-cols-1 m-3 md:grid-cols-1 lg:grid-cols-1">
+                    <div className="w-full sm:flex md:flex lg:flex filter-none">
+                        <div
+                            style={{
+                                backgroundImage: `url(${animeList.coverImage})`,
+                                backgroundRepeat: 'no-repeat',
+                            }}
+                            className="w-[60dvw] h-[100dvh] object-fill col-span-2"
+                        />
+                        <div className="ml-10 mt-5 infos text-left col-span-1 w-full">
+                            <h3 className="text-teal-100 text-lg">{animeList.title.romaji}</h3>
+                            <h1 className="text-teal-100 text-4xl">{animeList.title.english}</h1>
+                            <p className="text-left m-3">{animeList.format}</p>
+                            <div className="w-full grid gap-4 grid-cols-1 m-3 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 ">
 
                                 {/* <div className="rounded-lg overflow-hidden">
                                 <img className="w-5/12" src={image} alt={title} />
                             </div> */}
                                 <p
-                                    className={`w-8/12 text-left overflow-hidden md:text-clip ${active ? 'active' : ''
+                                    className={`w-10/12 left-0 text-left ${animeList.description && animeList.description.length > 320 ? "h-[50dvh]" : ""}  overflow-y-auto md:text-clip ${active ? 'active' : ''
                                         }`}
-                                >
-                                    {desc}
+
+                                    dangerouslySetInnerHTML={{ __html: animeList.description }} >
                                 </p>
                                 <p className="text-left">
                                     <b>Genres: </b>
-                                    {genres || "N/A"}
+                                    {animeList.genre.map((l) => l + " ") || "N/A"}
                                 </p>
                                 <p className="text-left">
                                     <b>Status: </b>
-                                    {status}
+                                    {animeList.status}
                                 </p>
                                 <p className="text-left">
-                                    <b>Total Episodes:</b> {TotalEP}
+                                    <b>Total Episodes:</b> {animeList.episodes.length}
                                 </p>
                                 <Link to={{
                                     pathname: '/watch',
@@ -111,9 +90,6 @@ const AnimeDetails = ({ Anime_ID }) => {
                                     </button>
                                 </Link>
                             </div>
-                        </div>
-                        <div className='object-contain w-[550px] sm:w-[500px] md:w-[750px] lg:w-[800px] xl:w-[1200px] '>
-                            <img src={image} className='rounded-lg drop-shadow-lg' />
                         </div>
                     </div>
                 )}

@@ -1,0 +1,364 @@
+{
+  "id": "clfrut730002wjslufntl9d76",
+  "slug": "oshi-no-ko",
+  "anilistId": 150672,
+  "coverImage": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx150672-2WWJVXIAOG11.png",
+  "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/150672-ISwoA0eS722H.jpg",
+  "status": "RELEASING",
+  "season": "SPRING",
+  "title": {
+    "native": "【推しの子】",
+    "romaji": "[Oshi no Ko]",
+    "english": "Oshi No Ko",
+    "userPreferred": "[Oshi no Ko]"
+  },
+  "mappings": {
+    "mal": 52034,
+    "anidb": 17449,
+    "kitsu": 46170,
+    "anilist": 150672,
+    "thetvdb": 421069,
+    "anisearch": 17452,
+    "livechart": 11247,
+    "notify.moe": "JBDkzdj7R",
+    "anime-planet": "oshi-no-ko"
+  },
+  "currentEpisode": 11,
+  "next": null,
+  "synonyms": [
+    "Favorite Girl",
+    "My Idol's Child",
+    "[Mein*Star]",
+    "เกิดใหม่เป็นลูกโอชิ",
+    "Anak Idola",
+    "【OSHI NO KO】",
+    "【推しの子】Mother and Children",
+    "[Oshi no Ko] Mother and Children",
+    "【MOJA GWIAZDA】",
+    "我推的孩子",
+    "【최애의 아이】"
+  ],
+  "countryOfOrigin": "JP",
+  "lastEpisodeUpdate": "2023-06-28T15:42:17.117Z",
+  "seasonInt": 232,
+  "description": "When a pregnant young starlet appears in Gorou Amemiya’s countryside medical clinic, the doctor takes it upon himself to safely (and secretly) deliver Ai Hoshino’s child so she can make a scandal-free return to the stage. But no good deed goes unpunished, and on the eve of her delivery, he finds himself slain at the hands of Ai’s deluded stalker — and subsequently reborn as Ai’s child, Aquamarine Hoshino! The glitz and glamor of showbiz hide the dark underbelly of the entertainment industry, threatening to dull the shine of his favorite star. Can he help his new mother rise to the top of the charts? And what will he do when unthinkable disaster strikes? <br>\n<br>\n(Source: HIDIVE)\n<br><br>\n\n<i>Note: Episode 1<b>【推しの子】Mother and Children</b> was pre-screened in advance in Japanese theaters on March 17, 2023. The regular TV broadcast began on April 12, 2023. The first episode has an extended runtime of ~82 minutes.</i>",
+  "duration": 24,
+  "averageScore": 87,
+  "popularity": 131919,
+  "color": "#ff35c9",
+  "year": 2023,
+  "createdAt": "2023-03-28T06:05:18.494Z",
+  "updatedAt": "2023-07-07T04:00:01.083Z",
+  "format": "TV",
+  "lastChecks": {
+    "clfrxh9h51slsluksocdfxs09": 1687967120541,
+    "clfrxh9le1sluluks7p0eduer": 1687967122150,
+    "clgr24zmt0000pk01851e2uem": 1682113622380
+  },
+  "genre": [
+    "Drama",
+    "Psychological",
+    "Supernatural",
+    "Mystery"
+  ],
+  "episodes": [
+    {
+      "id": "clgdsgwp332f6pk01bzrdk35h",
+      "number": 1,
+      "title": "Mother and Children",
+      "titleVariations": {
+        "native": "【Mother and Children】",
+        "english": "Mother and Children"
+      },
+      "description": "Stories are lies meant to entertain, and idols lie to fans eager to believe. This is Ai’s story. It is a lie, but it is also true.",
+      "image": "https://artworks.thetvdb.com/banners/v4/episode/9207267/screencap/64364be959dba.jpg",
+      "createdAt": "2023-04-12T14:30:41.799Z",
+      "airedAt": "2023-04-12T00:00:00.000Z",
+      "sources": [
+        {
+          "id": "clgduco6o0000wmpkeqqb4ihf",
+          "target": "/oshi-no-ko-episode-1"
+        },
+        {
+          "id": "clgn3ywwz0002zepkccgx00th",
+          "target": "/watch/my-star-18330?ep=100168"
+        }
+      ]
+    },
+    {
+      "id": "clgnrh8riimnzpk01gbn8wmg0",
+      "number": 2,
+      "title": "Third Option",
+      "titleVariations": {
+        "native": "【三つ目の選択肢】",
+        "english": "Third Option"
+      },
+      "description": "Ruby wants to be an idol for herself and for the little girl who died from cancer. The real world, however, doesn’t care about big dreams: something Aqua knows all too well.",
+      "image": "https://artworks.thetvdb.com/banners/v4/episode/9687591/screencap/643fd067d4e50.jpg",
+      "createdAt": "2023-04-19T14:00:39.582Z",
+      "airedAt": "2023-04-19T00:00:00.000Z",
+      "sources": [
+        {
+          "id": "clgr3lh81000t2gpke8dj78d5",
+          "target": "/oshi-no-ko-episode-2"
+        },
+        {
+          "id": "clgnv3ggy00084cpk2f76axz3",
+          "target": "/watch/my-star-18330?ep=100244"
+        }
+      ]
+    },
+    {
+      "id": "clgxrk6uu3gelpk011841hl0x",
+      "number": 3,
+      "title": "Manga-Based TV Drama",
+      "titleVariations": {
+        "native": "【漫画原作ドラマ】",
+        "english": "Manga-Based TV Drama"
+      },
+      "description": "Aqua agrees to Kana’s request, but not for the reason she wants. There’s a connection between Masaya Kaburagi and Ai, which leads Aqua to the set of a TV drama for answers.",
+      "image": "https://artworks.thetvdb.com/banners/v4/episode/9687592/screencap/6447a883da5c5.jpg",
+      "createdAt": "2023-04-26T14:00:38.838Z",
+      "airedAt": "2023-04-26T00:00:00.000Z",
+      "sources": [
+        {
+          "id": "clgxufuah0002ugpk7fj78hbe",
+          "target": "/oshi-no-ko-episode-3"
+        },
+        {
+          "id": "clgxv5lfi0003ugpkfd79h3yq",
+          "target": "/watch/my-star-18330?ep=100553"
+        }
+      ]
+    },
+    {
+      "id": "clh7rn71vbpf2pk01qn08hzvz",
+      "number": 4,
+      "title": "Actors",
+      "titleVariations": {
+        "native": "【役者】",
+        "english": "Actors"
+      },
+      "description": "Kana’s resolve remains strong despite her washed up reputation. Aqua sets the stage for her with a bold move that flips the script, which leads to opportunities for them both.",
+      "image": "https://artworks.thetvdb.com/banners/v4/episode/9687593/screencap/645188bf7be73.jpg",
+      "createdAt": "2023-05-03T14:00:40.819Z",
+      "airedAt": "2023-05-03T00:00:00.000Z",
+      "sources": [
+        {
+          "id": "clh7uiu8w0001ztpk9ign56vl",
+          "target": "/oshi-no-ko-episode-4"
+        },
+        {
+          "id": "clh7v8mor0002ztpk0g5fez3c",
+          "target": "/watch/my-star-18330?ep=100632"
+        }
+      ]
+    },
+    {
+      "id": "clhhrq62v939upk01lav9jg6f",
+      "number": 5,
+      "title": "Reality Dating Show",
+      "titleVariations": {
+        "native": "【恋愛リアリティショー】",
+        "english": "Reality Dating Show"
+      },
+      "description": "Despite different motivations, Aqua, Ruby and Kana’s key to success in the entertainment industry is the same; to achieve their goals, they need to play the game.",
+      "image": "https://artworks.thetvdb.com/banners/v4/episode/9687594/screencap/645a8d6d7410f.jpg",
+      "createdAt": "2023-05-10T14:00:41.287Z",
+      "airedAt": "2023-05-10T00:00:00.000Z",
+      "sources": [
+        {
+          "id": "clhhunr0s0000pvpkba01hweh",
+          "target": "/oshi-no-ko-episode-5"
+        },
+        {
+          "id": "clhhvdjzw0002pvpk5eqxgnb2",
+          "target": "/watch/my-star-18330?ep=101129"
+        }
+      ]
+    },
+    {
+      "id": "clhrrt4g4gkzdpk01sv15vp32",
+      "number": 6,
+      "title": "Egosurfing",
+      "titleVariations": {
+        "native": "【エゴサーチ】",
+        "english": "Egosurfing"
+      },
+      "description": "Remember what you said in righteous outrage online? There were consequences. You never saw them, but that didn’t make them any less real, nor hold you any less accountable.",
+      "image": "https://artworks.thetvdb.com/banners/v4/episode/9687595/screencap/6463cdec10d50.jpg",
+      "createdAt": "2023-05-17T14:00:40.898Z",
+      "airedAt": "2023-05-17T00:00:00.000Z",
+      "sources": [
+        {
+          "id": "clhruq1t000010fpkao3lg9dv",
+          "target": "/oshi-no-ko-episode-6"
+        },
+        {
+          "id": "clhrvft1m00020fpk3lh7fw5j",
+          "target": "/watch/my-star-18330?ep=101529"
+        }
+      ]
+    },
+    {
+      "id": "cli1rw1m8hl8upk01zvq4ct9x",
+      "number": 7,
+      "title": "Buzz",
+      "titleVariations": {
+        "native": "【バズ】",
+        "english": "Buzz"
+      },
+      "description": "Left reeling in the immediate aftermath, Akane’s costars unite in friendship and purpose: they will clear their friend’s name. They owe her nothing less.",
+      "image": "https://artworks.thetvdb.com/banners/v4/episode/9687596/screencap/646e38c4afe12.jpg",
+      "createdAt": "2023-05-24T14:00:38.960Z",
+      "airedAt": "2023-05-24T00:00:00.000Z",
+      "sources": [
+        {
+          "id": "cli1utym40000oipk4xxmg1v4",
+          "target": "/oshi-no-ko-episode-7"
+        },
+        {
+          "id": "cli1vjrnu0001sepkdzyw438o",
+          "target": "/watch/my-star-18330?ep=101590"
+        }
+      ]
+    },
+    {
+      "id": "clils1zob4dqupk01au9gelxg",
+      "number": 8,
+      "title": "First Time",
+      "titleVariations": {
+        "native": "【初めて】",
+        "english": "First Time"
+      },
+      "description": "Focused on revenge, Aqua underestimated Akane and gave the talented actress a way to win his heart. If love is a game, Akane is playing for keeps and Kana is falling behind.",
+      "image": "https://artworks.thetvdb.com/banners/v4/episode/9687597/screencap/647f758fb72f6.jpg",
+      "createdAt": "2023-06-07T14:00:39.896Z",
+      "airedAt": "2023-06-07T00:00:00.000Z",
+      "sources": [
+        {
+          "id": "cliluy8jf0000twpkb3i63gi3",
+          "target": "/oshi-no-ko-episode-8"
+        },
+        {
+          "id": "clilv3dl30000vspk77phbzeo",
+          "target": "/watch/my-star-18330?ep=101902"
+        }
+      ]
+    },
+    {
+      "id": "clivs505448jrpk01tqohpvc2",
+      "number": 9,
+      "title": "B Komachi",
+      "titleVariations": {
+        "native": "【B小町】",
+        "english": "B Komachi"
+      },
+      "description": "MEM-cho won’t let her second chance go to waste and uses her influence to help grow B Komachi’s brand. Meanwhile, Aqua’s investigation into Ai’s past bears fruit.",
+      "image": "https://artworks.thetvdb.com/banners/v4/episode/9687598/screencap/6489d8fbe89fc.jpg",
+      "createdAt": "2023-06-14T14:00:42.231Z",
+      "airedAt": "2023-06-14T00:00:00.000Z",
+      "sources": [
+        {
+          "id": "clivv3ntb0000vtpkf09k37bb",
+          "target": "/oshi-no-ko-episode-9"
+        },
+        {
+          "id": "clivvto5a0002zopk5b2ced5w",
+          "target": "/watch/my-star-18330?ep=102043"
+        }
+      ]
+    },
+    {
+      "id": "clj5s7ygu5dlhpk019rzgq8df",
+      "number": 10,
+      "title": "Pressure",
+      "titleVariations": {
+        "native": "【プレッシャー】",
+        "english": "Pressure"
+      },
+      "description": "B Komachi’s first performance approaches, but the group still needs practice while Kana refuses to be the center. Perhaps a certain expert choreographer could help them shine?",
+      "image": "https://artworks.thetvdb.com/banners/v4/episode/9687599/screencap/6491bf841035a.jpg",
+      "createdAt": "2023-06-21T14:00:41.790Z",
+      "airedAt": "2023-06-21T00:00:00.000Z",
+      "sources": [
+        {
+          "id": "clj5v39ic0000hepk2udealj1",
+          "target": "/oshi-no-ko-episode-10"
+        },
+        {
+          "id": "clj5vt0zi0008krpkb8j82xrs",
+          "target": "/watch/my-star-18330?ep=102157"
+        }
+      ]
+    },
+    {
+      "id": "cljfsau87249upk01t7qm4flv",
+      "number": 11,
+      "title": "Idol",
+      "titleVariations": {
+        "native": "【アイドル】",
+        "english": "Idol"
+      },
+      "description": "MEM-cho has fans. Ruby has looks. But Kana has…? She’ll need to find the answer before she can be anyone’s star. Later, a fresh opportunity sets Aqua on a new path to revenge.",
+      "image": "https://artworks.thetvdb.com/banners/v4/episode/9687600/screencap/649c4b08bcbe6.jpg",
+      "createdAt": "2023-06-28T14:00:38.021Z",
+      "airedAt": "2023-06-28T00:00:00.000Z",
+      "sources": [
+        {
+          "id": "cljfv7kxe00001ppkahhl6n74",
+          "target": "/oshi-no-ko-episode-11"
+        },
+        {
+          "id": "cljfvxkb500031ppkaaqccyxy",
+          "target": "/watch/my-star-18330?ep=102296"
+        }
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "type": "SEQUEL",
+      "animeId": "cljiixxjv008601pk1hq27juy",
+      "id": "cljiixxksay2mpk015d449ewa",
+      "anime": {
+        "id": "cljiixxjv008601pk1hq27juy",
+        "slug": "oshi-no-ko-2nd-season",
+        "anilistId": 166531,
+        "coverImage": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx166531-jaVlZXnFVIGp.jpg",
+        "bannerImage": null,
+        "status": "NOT_YET_RELEASED",
+        "season": "UNKNOWN",
+        "title": {
+          "native": "【推しの子】第2期",
+          "romaji": "[Oshi no Ko] 2nd Season",
+          "english": null,
+          "userPreferred": "[Oshi no Ko] 2nd Season"
+        },
+        "mappings": {
+          "anidb": 18086,
+          "kitsu": 47659,
+          "anilist": 166531
+        },
+        "currentEpisode": null,
+        "next": null,
+        "synonyms": [
+          "Oshi no Ko Season 2"
+        ],
+        "countryOfOrigin": "JP",
+        "lastEpisodeUpdate": null,
+        "seasonInt": null,
+        "description": "The second season of <i>[Oshi no Ko]</i>.",
+        "duration": null,
+        "averageScore": null,
+        "popularity": 15313,
+        "color": "#43aee4",
+        "year": null,
+        "createdAt": "2023-06-30T12:01:57.790Z",
+        "updatedAt": "2023-07-07T00:00:28.342Z",
+        "format": "TV",
+        "lastChecks": null
+      }
+    }
+  ]
+}

@@ -4,7 +4,6 @@ import './main.css';
 import App from './App';
 import Home from './pages/Home';
 import Movie from './pages/Movie';
-import Pop_anime from './pages/Pop_anime';
 import Top_anime from './pages/Top_anime';
 import Search from './pages/Search';
 import Watch from './pages/WatchAnime';
@@ -33,10 +32,6 @@ const router = createBrowserRouter([
   {
    path: "/movie",
    element: <Movie />,
-  },
-  {
-   path: "/popular",
-   element: <Pop_anime />,
   },
   {
    path: "/top_anime",

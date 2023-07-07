@@ -2,13 +2,15 @@ import React from 'react';
 import './button.css';
 
 
-function Episode_Button({ epi_Id }) {
-    const episodeId = epi_Id;
-    if (!isNaN(epi_Id)) {
+function Episode_Button({ epi_num}) {
+    const episodeId = epi_num;
+    if (!isNaN(epi_num)) {
         return (
             // <button class="button-ep" data-before="Lets Watch" data-after={episodeId}></button>
-            <button className='button-ep button-ep-1'>
-                {episodeId}
+            <button className={`button-ep button-ep-1 text-center`}>
+                <p className={"font-bold"}>
+                    {episodeId}
+                </p>
             </button>
 
         );

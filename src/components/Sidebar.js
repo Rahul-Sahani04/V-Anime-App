@@ -10,9 +10,10 @@ const Sidebar = () => {
 
     const fetchAnime = async (page_no) => {
         setIsLoading(true);
-        const response = await fetch(`https://api.consumet.org/anime/gogoanime/top-airing?page=${page_no}`);
+        const response = await fetch(`https://api.enime.moe/popular`);
         const data = await response.json();
-        setRecomList(data.results);
+        setRecomList(data.data);
+        console.log("R", data.data)
         setIsLoading(false);
     };
 
@@ -30,16 +31,16 @@ const Sidebar = () => {
                     </div>
                     <div className="flex-grow overflow-y-auto">
                         <ul className="px-4 py-2 space-y-2">
-                            {recomList?.map((recom, index) => (
-                                <div className='flex h-28 items-center'>
-                                    <img src={recom.image} className='w-[60px] h-[80px] rounded-lg' />
+                            {recomList.map((recom, index) => (
+                                <div className='flex h-28 items-center' key={index}>
+                                    <img src={recom.coverImage} className='w-[60px] h-[80px] rounded-lg object-cover ' />
                                     <Link to={{
 
                                         pathname: '/details',
-                                        search: `?id=${recom.id}`
+                                        search: `?id=${recom.slug}`
                                     }}>
                                         <li className="m-4 h-full text-gray-300 hover:text-lime-500 cursor-pointer overflow-hidden" key={recom.id}>
-                                            <p className='text-sm text-left overflow-hidden'>{recom.title}</p>
+                                            <p className='text-sm text-left overflow-hidden'>{recom.title.english}</p>
                                         </li>
                                     </Link>
                                     <hr className='text-gray-300' />
