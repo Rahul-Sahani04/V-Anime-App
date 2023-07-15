@@ -156,7 +156,7 @@ function Watch() {
                             </>
                         )}
                         {!dataLoaded && (
-                            <div className=''>
+                            <div className='m-auto'>
                                 <Wavy />
                             </div>
                         )}

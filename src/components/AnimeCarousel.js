@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-const AnimeCarousel = ({ slideInterval = 15000 }) => {
+const AnimeCarousel = ({ slideInterval = 7500 }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [recomList, setRecomList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -59,15 +59,17 @@ const AnimeCarousel = ({ slideInterval = 15000 }) => {
     }
 
 
+
+
     return (
         <div className="relative min-h-screen h-screen w-screen mt-10 xl:mt-0 ">
-            <div className="relative rounded-lg place-items-start w-screen" >
+            <div className="relative rounded-lg place-items-start w-screen transition-all duration-500 ease-in-out">
+
                 {recomList.map((anime, index) => (
                     <div
                         style={ImageBackground(anime.coverImage)}
                         key={index}
-                        className={`transition-all duration-1000 ease-in-out xl:mt-10  absolute w-full h-full transform ${index === currentSlide ? 'opacity-100 translate-x-0' : 'hidden -translate-x-full'
-                            }`
+                        className={`xl:mt-10 absolute w-full h-full transition-all duration-500 transform  ${index === currentSlide ? 'opacity-100 translate-x-0' : 'hidden -translate-x-full'}`
                         }>
                         {/* <img src={slide.image} alt={slide.title} className="w-1/6 h-auto object-cover" /> */}
                         <div className="absolute bottom-0 w-2/3 h-full p-4 bg-black bg-opacity-60">
@@ -90,22 +92,24 @@ const AnimeCarousel = ({ slideInterval = 15000 }) => {
                                     <p className='text-gray-300 text-left font-bold m-4' dangerouslySetInnerHTML={{ __html: anime.description }} key={anime.id} />
                                 </div>
                             </div>
-                            <div className="absolute mt-4 object-center justify-items-center bottom-4">
+                            <div className="absolute m-5 object-center justify-items-center bottom-5">
                                 <Link to={{
                                     pathname: '/details',
                                     search: `?id=${anime.slug}`
                                 }}>
-                                    <button className="self-center px-4 py-2 text-white bg-gray-500 rounded hover:bg-gray-600">
+                                    {/* <button className="self-center px-4 py-2 text-white bg-gray-500 rounded hover:bg-gray-600">
                                         DETAILS
-                                    </button>
+                                    </button> */}
+                                    <button className="btn outline ml-5 hover:z-30">Details</button>
                                 </Link>
                                 <Link to={{
                                     pathname: '/watch',
                                     search: `?query=${anime.slug}`
                                 }}>
-                                    <button className="self-center ml-3 px-4 py-2 mr-2 text-white bg-blue-500 rounded hover:bg-blue-600">
+                                    {/* <button className="self-center ml-3 px-4 py-2 mr-2 text-white bg-blue-500 rounded hover:bg-blue-600">
                                         WATCH NOW
-                                    </button>
+                                    </button> */}
+                                    <button className="btn fill ml-5 hover:z-30">Watch Now</button>
                                 </Link>
                             </div>
                         </div>
@@ -117,15 +121,15 @@ const AnimeCarousel = ({ slideInterval = 15000 }) => {
                 {recomList.map((_, index) => (
                     <button
                         key={index}
-                        className={` z-40 w-4 h-4 mx-1 rounded-full focus:outline-none ${index === currentSlide ? 'bg-blue-500' : 'bg-gray-300'
-                            }`}
+                        className={`z-40 w-4 h-4 mx-1 rounded-full focus:outline-none transition-all duration-300 ${index === currentSlide ? 'bg-blue-500' : 'bg-gray-300'}`}
                         onClick={() => setCurrentSlide(index)}
                     />
+
                 ))}
             </div>
             <div className='h-screen '>
                 <button
-                    className="absolute top-1/3 align-middle left-0 z-10 px-4 py-2 text-white bg-black bg-opacity-50 rounded-md focus:outline-none"
+                    className="absolute top-1/3 align-middle left-0 z-10 px-4 py-2 text-white bg-black bg-opacity-50 rounded-md focus:outline-none transition-all duration-300"
                     onClick={goToPrevSlide}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -135,7 +139,7 @@ const AnimeCarousel = ({ slideInterval = 15000 }) => {
                 </button>
 
                 <button
-                    className="absolute top-1/3 align-middle right-[11px] z-10 px-4 py-2 text-white bg-black bg-opacity-50 rounded-md focus:outline-none"
+                    className="absolute top-1/3 align-middle right-[11px] z-10 px-4 py-2 text-white bg-black bg-opacity-50 rounded-md focus:outline-none transition-all duration-300"
                     onClick={goToNextSlide}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
