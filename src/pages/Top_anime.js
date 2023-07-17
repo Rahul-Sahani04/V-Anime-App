@@ -15,7 +15,6 @@ function Top_Anime(props) {
         const response = await fetch(`https://api.enime.moe/popular?page=${page_no}`);
         const data = await response.json();
         setRecomList((prev) => [...prev, ...data.data]);
-        console.log(recomList)
         setIsLoading(false);
     };
 

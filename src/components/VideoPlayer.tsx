@@ -53,7 +53,6 @@ const useHls = (src: string, options: Options | null) => {
        the video. It takes in a `newQuality` parameter which is the new quality selected by the
        user. */
         onChange: (newQuality: number) => {
-          console.log("changes", newQuality);
           levels.forEach((level, levelIndex) => {
             if (level.height === newQuality) {
               hls.current.currentLevel = levelIndex;

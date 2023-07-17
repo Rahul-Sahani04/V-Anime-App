@@ -10,6 +10,8 @@ import { Next_Button, Prev_Button } from '../components/Next_Prev_Button';
 
 import PlyrComponent from '../components/VideoPlayer';
 
+import Error404 from '../components/error404';
+
 function Watch() {
     let epi_no = "";
     const navigate = useNavigate();
@@ -32,6 +34,8 @@ function Watch() {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [dataLoaded, setDataLoaded] = useState(false);
     const [EpLoaded, setEpLoaded] = useState(false);
+
+    const [Error, setError] = useState(false);
 
     const [page, setPage] = useState(1);
     const episodesPerPage = 28;
@@ -78,11 +82,19 @@ function Watch() {
             const Titles = animeList.title;
             setTitles(Titles);
         }
-        fetchM3U8(animeList.episodes[0].id);
-        setTotalEP(animeList.episodes);
-        setEpLoaded(true)
-        setDescription(animeList.description);
-        setDataLoaded(true);
+        if (animeList.episodes === undefined || animeList.episodes.length === 0 || animeList.episodes === null ) {
+            setEpLoaded(true)
+            setDataLoaded(true);
+            setDescription(animeList.description);
+            setError(true)
+        }
+        else{
+            setEpLoaded(true)
+            fetchM3U8(animeList.episodes[0].id);
+            setTotalEP(animeList.episodes);
+            setDescription(animeList.description);
+            setDataLoaded(true);
+        }
     }
     const fetchM3U8 = async (id) => {
         const data = await fetch(`https://api.consumet.org/anime/enime/watch?episodeId=${id}`)  // Zoro
@@ -150,7 +162,7 @@ function Watch() {
 
                     </div>
                     <div className='w-fit sm:w-fit md:w-fit lg:w-[500px] xl:w-[700px] xl:col-span-2 lg:col-span-1 col-span-1 object-contain justify-center'>
-                        {dataLoaded && (
+                        {dataLoaded && animeList.episodes.length > 0 && (
                             <>
                                 <PlyrComponent QualityData={WatchUrl} />
                             </>
@@ -160,12 +172,20 @@ function Watch() {
                                 <Wavy />
                             </div>
                         )}
+
+                        {Error && (
+                            <div className='m-auto'>
+                                <Error404 />
+                            </div>
+                        )}
                     </div>
                     <div className='w-fit xl:w-8/12 lg:w-6/12 justify-items-end bottom-0  xl:-right-20 lg:relative lg:-right-36'>
                         <div >
                             <img src={animeList.coverImage} className='' />
                         </div>
-                        <p className={`w-fit text-left col-span-1 ${!IsMore ? "h-24" : "flex"} overflow-hidden  mt-2`}>
+                        <p className={`w-fit text-left col-span-1 ${!IsMore ? "h-24" : "flex"} overflow-hidden  mt-2`}
+                        
+                        >
                             {Description}
                         </p>
                         {Description && Description.length >= 125 && (

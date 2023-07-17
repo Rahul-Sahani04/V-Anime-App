@@ -13,7 +13,6 @@ const Sidebar = () => {
         const response = await fetch(`https://api.enime.moe/popular`);
         const data = await response.json();
         setRecomList(data.data);
-        console.log("R", data.data)
         setIsLoading(false);
     };
 
