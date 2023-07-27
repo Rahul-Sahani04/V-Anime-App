@@ -12,9 +12,10 @@ const AnimeCarousel = ({ slideInterval = 7500 }) => {
         try {
             setIsLoading(true);
             setIsLoaded(false);
-            const response = await axios.get('https://api.enime.moe/popular');
-            const data = response.data.data;
-            setRecomList(data);
+            const response = await axios.get(`https://api.consumet.org/meta/anilist/popular?page=1&perPage=10`);
+            const data = response.data.results;
+            const recomList = data;
+            setRecomList(recomList);
             setIsLoading(false);
             setIsLoaded(true);
         } catch (error) {
@@ -67,7 +68,7 @@ const AnimeCarousel = ({ slideInterval = 7500 }) => {
 
                 {recomList.map((anime, index) => (
                     <div
-                        style={ImageBackground(anime.coverImage)}
+                        style={ImageBackground(anime.image)}
                         key={index}
                         className={`xl:mt-10 absolute w-full h-full transition-all duration-500 transform  ${index === currentSlide ? 'opacity-100 translate-x-0' : 'hidden -translate-x-full'}`
                         }>
@@ -81,12 +82,12 @@ const AnimeCarousel = ({ slideInterval = 7500 }) => {
                                     {anime.title_english} <br />
                                     {/* Studios: <a className='hover:text-lime-500' href={anime.url} target='_blank' rel="noreferrer">{anime.studios[0].name}</a> */}
                                 </p>
-                                <p className="text-gray-300 text-left m-4"> {anime.format}<br />{anime.genre.map((l) => l + " ")}</p>
+                                <p className="text-gray-300 text-left m-4"> {anime.format}<br />{anime.genres.map((l) => l + " ")}</p>
                                 <p className='text-gray-300 text-left font-bold m-4'>
                                     <b>Status:</b> {anime.status} <br />
-                                    <b>Episodes:</b> {anime.currentEpisode} <br />
+                                    <b>Episodes:</b> {anime.totalEpisodes} <br />
                                     <b>Duration:</b> {anime.duration} <br />
-                                    <b>Popularity:</b> {anime.popularity}
+                                    {/* <b>Popularity:</b> {anime.popularity} */}
                                 </p>
                                 <div className='h-[25dvh] overflow-y-auto'>
                                     <p className='text-gray-300 text-left font-bold m-4' dangerouslySetInnerHTML={{ __html: anime.description }} key={anime.id} />
@@ -95,7 +96,7 @@ const AnimeCarousel = ({ slideInterval = 7500 }) => {
                             <div className="absolute m-5 object-center justify-items-center bottom-5">
                                 <Link to={{
                                     pathname: '/details',
-                                    search: `?id=${anime.slug}`
+                                    search: `?id=${anime.id}`
                                 }}>
                                     {/* <button className="self-center px-4 py-2 text-white bg-gray-500 rounded hover:bg-gray-600">
                                         DETAILS
@@ -104,7 +105,7 @@ const AnimeCarousel = ({ slideInterval = 7500 }) => {
                                 </Link>
                                 <Link to={{
                                     pathname: '/watch',
-                                    search: `?query=${anime.slug}`
+                                    search: `?query=${anime.id}`
                                 }}>
                                     {/* <button className="self-center ml-3 px-4 py-2 mr-2 text-white bg-blue-500 rounded hover:bg-blue-600">
                                         WATCH NOW

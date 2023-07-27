@@ -14,7 +14,7 @@ const Card = ({ title, otherTitle, id, SubOrDub, image, href_q, theme_mode }) =>
         >
         </div>
         {
-          title ? <h4 className='m-2 font-semibold font-sans text-base overflow-hidden h-6'>{title}</h4> : <h4 className='font-semibold font-sans text-base overflow-hidden'>{otherTitle}</h4>
+          title ? <h4 className='m-2 font-semibold font-sans text-base overflow-hidden h-14'>{title}</h4> : <h4 className='font-semibold font-sans text-base overflow-hidden'>{otherTitle}</h4>
         }
 
         {SubOrDub ? "" :

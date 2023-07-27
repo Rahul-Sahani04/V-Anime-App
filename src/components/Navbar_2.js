@@ -66,9 +66,9 @@ function MY_Navbar2(props) {
           <li className='header-li'>
             <Link className={`header-link-animation`} to="/home">Home</Link>
           </li>
-          <li className='header-li'>
+          {/* <li className='header-li'>
             <Link className={`header-link-animation`} to="/movie">Movie</Link>
-          </li>
+          </li> */}
           <li className='header-li'>
             <Link className={`header-link-animation`} to="/top_anime">Top Anime</Link>
           </li>
@@ -95,9 +95,9 @@ function MY_Navbar2(props) {
               <li className=''>
                 <Link className={`m-2 hover:text-lime-500  text-slate-200`} to="/home">Home</Link>
               </li>
-              <li className='font-poppins font-medium cursor-pointer text-[16px] "text-dimWhite" "mb-4"'>
+              {/* <li className='font-poppins font-medium cursor-pointer text-[16px] "text-dimWhite" "mb-4"'>
                 <Link className={`m-2 hover:text-lime-500  text-slate-200`} to="/movie">Movie</Link>
-              </li>
+              </li> */}
               <li className='font-poppins font-medium cursor-pointer text-[16px] "text-dimWhite" "mb-4"'>
                 <Link className={`m-2 hover:text-lime-500  text-slate-200`} to="/top_anime">Top Anime</Link>
               </li>

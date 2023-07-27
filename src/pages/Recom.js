@@ -10,20 +10,20 @@ function Recom(props) {
 
   const [tempDetails, setTempDetails] = useState([])
 
-  const fetchRecom = async (page_no) => {
+  const fetchRecom = async (page_no, perPage) => {
     setIsLoading(true);
-    const response = await fetch(`https://api.enime.moe/recent?page=${page_no}`);
+    const response = await fetch(`https://api.consumet.org/meta/anilist/recent-episodes?page=${page_no}&perPage=${perPage}`);
     const data = await response.json();
-    setRecomList((prev) => [...prev, ...data.data]);
+    setRecomList((prev) => [...prev, ...data.results]);
     setIsLoading(false);
   };
 
-  const fetchDetails = async (id) => {
-    const response = await fetch(`https://api.enime.moe/anime/${id}`);
-    const data = await response.json();
-    const tempDetails = data;
-    setTempDetails(tempDetails);
-  }
+  // const fetchDetails = async (id) => {
+  //   const response = await fetch(`https://api.enime.moe/anime/${id}`);
+  //   const data = await response.json();
+  //   const tempDetails = data;
+  //   setTempDetails(tempDetails);
+  // }
 
   const handleScroll = () => {
     const windowHeight = window.innerHeight;
@@ -37,7 +37,7 @@ function Recom(props) {
   };
 
   useEffect(() => {
-    fetchRecom(page);
+    fetchRecom(page, 12);
     window.addEventListener('scroll', handleScroll);
 
     return () => {
@@ -60,10 +60,9 @@ function Recom(props) {
 
             <Card_Component
               className={'anime-card mt-10'}
-              id={anime.anime.slug ? anime.anime.slug : anime.anime.id}
-              SubOrDub={anime.title ? anime.title : null}
-              title={anime.anime.slug.split("-").join(" ").toUpperCase()}
-              image={anime.anime.coverImage ? anime.anime.coverImage : anime.anime.bannerImage ? anime.anime.bannerImage : anime.image ? anime.image : "../img/blank.png"}
+              id={anime.id}
+              title={anime.title.english ? anime.title.english : anime.title.userPreferred}
+              image={anime.image}
             />
           </div>
         ))}

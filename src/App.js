@@ -15,8 +15,8 @@ function App() {
       <div className="content-image">
         <div className="header-links">
           <Link className="header-items hover:scale-110 transition-all duration-300 ease-in-out" to="/home">Home</Link>
-          <Link className="header-items hover:scale-110 transition-all duration-300 ease-in-out" to="/movie">Movie</Link>
-          <Link className="header-items hover:scale-110 transition-all duration-300 ease-in-out" to="/popular">Popular</Link>
+          {/* <Link className="header-items hover:scale-110 transition-all duration-300 ease-in-out" to="/movie">Movie</Link> */}
+          {/* <Link className="header-items hover:scale-110 transition-all duration-300 ease-in-out" to="/popular">Popular</Link> */}
           <Link className="header-items hover:scale-110 transition-all duration-300 ease-in-out" to="/top_anime">Top Anime</Link>
         </div>
         <div className='w-2/6 object-contain flex items-center bg-slate-800 rounded-full overflow-hidden px-2 py-1 justify-end transition-all duration-300 ease-in-out shadow-lg'>

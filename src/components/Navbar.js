@@ -7,7 +7,7 @@ function MY_Navbar() {
     <div className="w-full flex py-6 justify-between items-center navbar">
     <div className="">
       <Link className="header-items" to="/home">Home</Link>
-      <Link className="header-items" to="/movie">Movie</Link>
+      {/* <Link className="header-items" to="/movie">Movie</Link> */}
       <Link className="header-items" to="/popular">Popular</Link>
       <Link className="header-items" to="/top_anime">Top Anime</Link>
       <Link className="header-items" to="/watch">Watch Here</Link>

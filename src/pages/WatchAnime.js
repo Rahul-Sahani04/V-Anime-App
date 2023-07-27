@@ -11,6 +11,7 @@ import { Next_Button, Prev_Button } from '../components/Next_Prev_Button';
 import PlyrComponent from '../components/VideoPlayer';
 
 import Error404 from '../components/error404';
+import Custom_Footer from '../components/footer';
 
 function Watch() {
     let epi_no = "";
@@ -67,7 +68,7 @@ function Watch() {
 
     const fetchAnimeInfo = async (id) => {
         setDataLoaded(false);
-        const response = await fetch(`https://api.enime.moe/anime/${id}`)  // Zoro
+        const response = await fetch(`https://api.consumet.org/meta/anilist/info/${id}`)  // Zoro
         const data = await response.json()
         const animeList = data;
         setAnimeList(animeList);
@@ -82,22 +83,23 @@ function Watch() {
             const Titles = animeList.title;
             setTitles(Titles);
         }
-        if (animeList.episodes === undefined || animeList.episodes.length === 0 || animeList.episodes === null ) {
+        if (animeList.episodes === undefined || animeList.episodes.length === 0 || animeList.episodes === null) {
             setEpLoaded(true)
             setDataLoaded(true);
             setDescription(animeList.description);
             setError(true)
         }
-        else{
+        else {
             setEpLoaded(true)
-            fetchM3U8(animeList.episodes[0].id);
-            setTotalEP(animeList.episodes);
-            setDescription(animeList.description);
+            const TotalEP = animeList.episodes.reverse();
+            setTotalEP(TotalEP);
+            fetchM3U8(TotalEP[0].id);
+            setDescription(animeList.description ? animeList.description : "No description available");
             setDataLoaded(true);
         }
     }
     const fetchM3U8 = async (id) => {
-        const data = await fetch(`https://api.consumet.org/anime/enime/watch?episodeId=${id}`)  // Zoro
+        const data = await fetch(`https://api.consumet.org/meta/anilist/watch/${id}`)  // Zoro
         const anime_link = await data.json();
         const WatchUrl = anime_link.sources[anime_link.sources.length - 1].url;
         setWatchUrl(WatchUrl);
@@ -162,7 +164,7 @@ function Watch() {
 
                     </div>
                     <div className='w-fit sm:w-fit md:w-fit lg:w-[500px] xl:w-[700px] xl:col-span-2 lg:col-span-1 col-span-1 object-contain justify-center'>
-                        {dataLoaded && animeList.episodes.length > 0 && (
+                        {dataLoaded && (
                             <>
                                 <PlyrComponent QualityData={WatchUrl} />
                             </>
@@ -181,22 +183,22 @@ function Watch() {
                     </div>
                     <div className='w-fit xl:w-8/12 lg:w-6/12 justify-items-end bottom-0  xl:-right-20 lg:relative lg:-right-36'>
                         <div >
-                            <img src={animeList.coverImage} className='' />
+                            <img src={animeList.image} className='' />
                         </div>
                         <p className={`w-fit text-left col-span-1 ${!IsMore ? "h-24" : "flex"} overflow-hidden  mt-2`}
-                        
+
                         >
                             {Description}
                         </p>
                         {Description && Description.length >= 125 && (
                             <div className='cursor-pointer font-sans font-bold' onClick={() => { setIsMore(!IsMore) }}>
-                                    {!IsMore ? "+ Show More" : "- Show Less"}
+                                {!IsMore ? "+ Show More" : "- Show Less"}
                             </div>
                         )}
                     </div>
                 </div>
             </div>
-
+            <Custom_Footer />
         </div >
     );
 }

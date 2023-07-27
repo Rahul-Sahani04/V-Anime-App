@@ -5,6 +5,7 @@ import ThemeToggleButton from '../components/toggleTheme';
 import MY_Navbar2 from '../components/Navbar_2';
 import Recom from './Recom';
 import AnimeCarousel from '../components/AnimeCarousel';
+import Custom_Footer from '../components/footer';
 
 function Home() {
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -28,6 +29,7 @@ function Home() {
                 <br />
                 <Recom />
             </div>
+            <Custom_Footer />
         </div>
     );
 }
