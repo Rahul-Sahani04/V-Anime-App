@@ -6,6 +6,9 @@ import Wavy from '../components/wavy_loader';
 import Sidebar from '../components/Sidebar';
 import Custom_Footer from '../components/footer';
 function Top_Anime(props) {
+
+    const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+    
     const [recomList, setRecomList] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
@@ -14,7 +17,7 @@ function Top_Anime(props) {
     const fetchAnime = async (page_no) => {
         setIsLoading(true);
         if (page_no < 8) {
-            const response = await fetch(`https://api.consumet.org/meta/anilist/trending?page=${page_no}&perPage=12`);
+            const response = await fetch(`${API_ENDPOINT}/meta/anilist/trending?page=${page_no}&perPage=12`);
             const data = await response.json();
             setRecomList((prev) => [...prev, ...data.results]);
             page_no += 1;

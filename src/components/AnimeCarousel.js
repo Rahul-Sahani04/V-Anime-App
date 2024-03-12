@@ -7,12 +7,15 @@ const AnimeCarousel = ({ slideInterval = 7500 }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [Anime_ID, setAnimeId] = useState("");
+    const DEV_MODE = process.env.REACT_APP_DEV_MODE;
+
+    const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
     const fetchData = async () => {
         try {
             setIsLoading(true);
             setIsLoaded(false);
-            const response = await axios.get(`https://api.consumet.org/meta/anilist/popular?page=1&perPage=10`);
+            const response = await axios.get(`${API_ENDPOINT}/meta/anilist/popular?page=1&perPage=10`);
             const data = response.data.results;
             const recomList = data;
             setRecomList(recomList);

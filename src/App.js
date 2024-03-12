@@ -6,17 +6,24 @@ import "./components/Navbar.css";
 import TrendingAnimeComponent from './components/TrendingAnimeApi';
 import { inject } from '@vercel/analytics';
 
+import { Navigate } from 'react-router-dom'
+
 
 function App() {
   inject();
   const [Query, setQuery] = useState('');
+  // const nav = Navigate();
+
+  useEffect(() => {
+    // nav to /home
+    window.location.href += "home"
+  }, []);
   return (
     <div className='h-full w-full'>
-      <div className="content-image">
+      {/* <div className="content-image">
         <div className="header-links">
           <Link className="header-items hover:scale-110 transition-all duration-300 ease-in-out" to="/home">Home</Link>
-          {/* <Link className="header-items hover:scale-110 transition-all duration-300 ease-in-out" to="/movie">Movie</Link> */}
-          {/* <Link className="header-items hover:scale-110 transition-all duration-300 ease-in-out" to="/popular">Popular</Link> */}
+
           <Link className="header-items hover:scale-110 transition-all duration-300 ease-in-out" to="/top_anime">Top Anime</Link>
         </div>
         <div className='w-2/6 object-contain flex items-center bg-slate-800 rounded-full overflow-hidden px-2 py-1 justify-end transition-all duration-300 ease-in-out shadow-lg'>
@@ -26,12 +33,8 @@ function App() {
           </Link>
         </div>
 
-        {/* <div className="xhashtag">
-            <span class="title">Top search:</span>
-            <a href="/search?keyword=One%20Piece" className="item">One Piece</a>
-          </div> */}
-        {/* <TrendingAnimeComponent /> */}
-      </div>
+  
+      </div> */}
     </div>
   );
 }

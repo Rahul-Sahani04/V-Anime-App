@@ -14,7 +14,7 @@ function Movie(props) {
 
     const fetchAnime = async (page_no) => {
         setIsLoading(true);
-        const response = await fetch(`https://api.consumet.org/anime/gogoanime/movie?page=${page_no}`);
+        const response = await fetch(`${API_ENDPOINT}/anime/gogoanime/movie?page=${page_no}`);
         const data = await response.json();
         setHasNextPage(data.hasNextPage);
         setRecomList((prev) => [...prev, ...data.results]);

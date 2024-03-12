@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 function Custom_Footer() {
 
     return (
-        <footer class="bg-gray-900">
+        <footer class="bg-[#1f1f1f]">
             <div class="max-w-screen-xl px-4 pt-16 pb-6 mx-auto sm:px-6 lg:px-8 lg:pt-12">
                 <div class="grid grid-cols-1 gap-8 ">
                     <div>

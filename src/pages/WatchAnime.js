@@ -14,6 +14,8 @@ import Error404 from '../components/error404';
 import Custom_Footer from '../components/footer';
 
 function Watch() {
+    const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+    
     let epi_no = "";
     const navigate = useNavigate();
     const location = useLocation();
@@ -68,7 +70,7 @@ function Watch() {
 
     const fetchAnimeInfo = async (id) => {
         setDataLoaded(false);
-        const response = await fetch(`https://api.consumet.org/meta/anilist/info/${id}`)  // Zoro
+        const response = await fetch(`${API_ENDPOINT}/meta/anilist/info/${id}`)  // Zoro
         const data = await response.json()
         const animeList = data;
         setAnimeList(animeList);
@@ -99,7 +101,7 @@ function Watch() {
         }
     }
     const fetchM3U8 = async (id) => {
-        const data = await fetch(`https://api.consumet.org/meta/anilist/watch/${id}`)  // Zoro
+        const data = await fetch(`${API_ENDPOINT}/meta/anilist/watch/${id}`)  // Zoro
         const anime_link = await data.json();
         const WatchUrl = anime_link.sources[anime_link.sources.length - 1].url;
         setWatchUrl(WatchUrl);

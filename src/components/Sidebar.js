@@ -8,9 +8,11 @@ const Sidebar = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
 
+    const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
     const fetchAnime = async (page_no) => {
         setIsLoading(true);
-        const response = await fetch(`https://api.consumet.org/meta/anilist/popular?page=${page_no}`);
+        const response = await fetch(`${API_ENDPOINT}/meta/anilist/popular?page=${page_no}`);
         const data = await response.json();
         setRecomList(data.results);
         setIsLoading(false);

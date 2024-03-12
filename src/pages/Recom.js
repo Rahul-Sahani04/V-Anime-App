@@ -4,6 +4,8 @@ import Card_Component from '../components/card';
 import Wavy from '../components/wavy_loader';
 
 function Recom(props) {
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+  
   const [recomList, setRecomList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
@@ -12,7 +14,7 @@ function Recom(props) {
 
   const fetchRecom = async (page_no, perPage) => {
     setIsLoading(true);
-    const response = await fetch(`https://api.consumet.org/meta/anilist/recent-episodes?page=${page_no}&perPage=${perPage}`);
+    const response = await fetch(`${API_ENDPOINT}/meta/anilist/recent-episodes?page=${page_no}&perPage=${perPage}`);
     const data = await response.json();
     setRecomList((prev) => [...prev, ...data.results]);
     setIsLoading(false);
