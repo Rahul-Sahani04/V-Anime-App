@@ -189,89 +189,89 @@ const AnimeDetails = ({ Anime_ID }) => {
 
 export default AnimeDetails;
 
-function name(params) {
-  return (
-    <div>
-      <div className="w-full sm:flex md:flex lg:flex filter-none m-4">
-        <div
-          style={{
-            backgroundImage: `url(${animeList.image})`,
-            backgroundRepeat: "no-repeat",
-          }}
-          className="w-[60dvw] h-[100dvh] object-fill col-span-2"
-        />
-        <div className="m-0 lg:m-10 xl:ml-10 mt-5 infos text-left col-span-1 w-full">
-          {animeList.title && (
-            <div>
-              <h3 className="text-teal-100 text-lg">
-                {animeList.title.romaji ?? ""}
-              </h3>
-              <h1 className="text-teal-100 text-4xl">
-                {animeList.title.english ?? ""}
-              </h1>
-            </div>
-          )}
+// function name(params) {
+//   return (
+//     <div>
+//       <div className="w-full sm:flex md:flex lg:flex filter-none m-4">
+//         <div
+//           style={{
+//             backgroundImage: `url(${animeList.image})`,
+//             backgroundRepeat: "no-repeat",
+//           }}
+//           className="w-[60dvw] h-[100dvh] object-fill col-span-2"
+//         />
+//         <div className="m-0 lg:m-10 xl:ml-10 mt-5 infos text-left col-span-1 w-full">
+//           {animeList.title && (
+//             <div>
+//               <h3 className="text-teal-100 text-lg">
+//                 {animeList.title.romaji ?? ""}
+//               </h3>
+//               <h1 className="text-teal-100 text-4xl">
+//                 {animeList.title.english ?? ""}
+//               </h1>
+//             </div>
+//           )}
 
-          <p className="text-left m-3">{animeList.format}</p>
-          <div className="w-full grid gap-4 grid-cols-1 m-3 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 ">
-            {/* <div className="rounded-lg overflow-hidden">
-                                <img className="w-5/12" src={image} alt={title} />
-                            </div> */}
-            <p
-              className={`w-10/12 left-0 text-left ${
-                animeList.description && animeList.description.length > 320
-                  ? "h-fit"
-                  : ""
-              }  overflow-y-auto md:text-clip ${active ? "active" : ""}`}
-              dangerouslySetInnerHTML={{ __html: animeList.description }}
-            ></p>
-            {animeList.trailer && (
-              <p className="text-left">
-                <b>Trailer: </b>
-                <a
-                  href={`https://www.youtube.com/watch?v=${animeList.trailer.id}`}
-                >
-                  Watch Here
-                </a>
-              </p>
-            )}
-            <p className="text-left">
-              <b>Genres: </b>
-              {animeList.genres.map((l) => l + " ") || "N/A"}
-            </p>
-            <p className="text-left">
-              <b>Status: </b>
-              {animeList.status}
-            </p>
-            <p className="text-left">
-              <b>Sub Or Dub: </b>
-              {animeList.subOrDub}
-            </p>
-            <p className="text-left">
-              <b>Total Episodes:</b> {animeList.totalEpisodes}
-            </p>
-            {animeList.totalEpisodes !== animeList.currentEpisode && (
-              <p className="text-left">
-                <b>Current Episodes:</b> {animeList.currentEpisode}
-              </p>
-            )}
-            <div style={{
-                margin: "25px"
-            }}>
-            <Link
-              to={{
-                pathname: "/watch",
-                search: `?query=${animeList.id}`,
-              }}
-            >
-              <button className="px-2 py-1  text-white bg-blue-500 rounded hover:bg-blue-600 ">
-                WATCH NOW
-              </button>
-            </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+//           <p className="text-left m-3">{animeList.format}</p>
+//           <div className="w-full grid gap-4 grid-cols-1 m-3 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 ">
+//             {/* <div className="rounded-lg overflow-hidden">
+//                                 <img className="w-5/12" src={image} alt={title} />
+//                             </div> */}
+//             <p
+//               className={`w-10/12 left-0 text-left ${
+//                 animeList.description && animeList.description.length > 320
+//                   ? "h-fit"
+//                   : ""
+//               }  overflow-y-auto md:text-clip ${active ? "active" : ""}`}
+//               dangerouslySetInnerHTML={{ __html: animeList.description }}
+//             ></p>
+//             {animeList.trailer && (
+//               <p className="text-left">
+//                 <b>Trailer: </b>
+//                 <a
+//                   href={`https://www.youtube.com/watch?v=${animeList.trailer.id}`}
+//                 >
+//                   Watch Here
+//                 </a>
+//               </p>
+//             )}
+//             <p className="text-left">
+//               <b>Genres: </b>
+//               {animeList.genres.map((l) => l + " ") || "N/A"}
+//             </p>
+//             <p className="text-left">
+//               <b>Status: </b>
+//               {animeList.status}
+//             </p>
+//             <p className="text-left">
+//               <b>Sub Or Dub: </b>
+//               {animeList.subOrDub}
+//             </p>
+//             <p className="text-left">
+//               <b>Total Episodes:</b> {animeList.totalEpisodes}
+//             </p>
+//             {animeList.totalEpisodes !== animeList.currentEpisode && (
+//               <p className="text-left">
+//                 <b>Current Episodes:</b> {animeList.currentEpisode}
+//               </p>
+//             )}
+//             <div style={{
+//                 margin: "25px"
+//             }}>
+//             <Link
+//               to={{
+//                 pathname: "/watch",
+//                 search: `?query=${animeList.id}`,
+//               }}
+//             >
+//               <button className="px-2 py-1  text-white bg-blue-500 rounded hover:bg-blue-600 ">
+//                 WATCH NOW
+//               </button>
+//             </Link>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
