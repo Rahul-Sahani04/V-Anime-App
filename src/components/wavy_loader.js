@@ -6,7 +6,7 @@ function Wavy() {
         <div className='w-full'>
 
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-                <div class="spinner"></div>
+                <div className="spinner"></div>
             </div>
         </div>
     );

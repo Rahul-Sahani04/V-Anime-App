@@ -19,8 +19,15 @@ const Card_Component = ({
   href_q,
   theme_mode,
 }) => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen((cur) => !cur);
+
   return (
-    <Card className="relative col-span-12 sm:col-span-4 h-[250px] w-3/4">
+    <Card
+      onMouseOver={handleOpen}
+      onMouseOut={handleOpen}
+      className="relative col-span-12 sm:col-span-4 h-[250px] w-3/4"
+    >
       <Link
         to={{
           pathname: "/details",
@@ -46,9 +53,9 @@ const Card_Component = ({
           </svg>
         </div>
       </Link>
-      <CardHeader className="absolute z-10 top-1 flex-col !items-start">
-        <p className="w-[110%] absolute -left-2 py-2 font-extrabold text-base text-center backdrop-blur-lg  uppercase">
-          {title}
+      <CardHeader className="absolute z-10 top-1 flex-col !items-start w-[100%] ">
+        <p className="w-[100%] absolute -left-0 py-2 font-extrabold text-base text-center backdrop-blur-lg  uppercase">
+          {title.length > 20 ? title.slice(0, 20) : title}
         </p>
         <h4 className="text-white  font-bold text-large">{SubOrDub}</h4>
       </CardHeader>
@@ -63,54 +70,3 @@ const Card_Component = ({
 };
 
 export default Card_Component;
-
-// function name(params) {
-//   return (
-//     <div className="transition-all duration-300 ease-in-out card-container hover:scale-105">
-//       <div className="wrapper">
-//         <div
-//           style={{
-//             backgroundImage: `url(${image})`,
-//           }}
-//           className="banner-image object-fill"
-//         ></div>
-//         {title ? (
-//           <h4 className="m-2 font-semibold font-sans text-base overflow-hidden h-14">
-//             {title}
-//           </h4>
-//         ) : (
-//           <h4 className="font-semibold font-sans text-base overflow-hidden">
-//             {otherTitle}
-//           </h4>
-//         )}
-
-//         {SubOrDub ? (
-//           ""
-//         ) : (
-//           <p className="mr-5 font-sans relative flex">{SubOrDub}</p>
-//         )}
-//       </div>
-//       <div className="button-wrapper justify-between">
-//         <Link
-//           to={{
-//             pathname: "/details",
-//             search: `?id=${id}`,
-//           }}
-//           className={"main-card"}
-//         >
-//           <button className="btn outline mr-1 hover:z-30">DETAILS</button>
-//         </Link>
-
-//         <Link
-//           to={{
-//             pathname: "/watch",
-//             search: `?query=${id}`,
-//           }}
-//           className={"main-card"}
-//         >
-//           <button className="btn fill ml-1 hover:z-30">Watch Now</button>
-//         </Link>
-//       </div>
-//     </div>
-//   );
-// }

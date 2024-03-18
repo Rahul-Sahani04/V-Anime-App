@@ -6,7 +6,7 @@ function Episode_Button({ epi_num}) {
     const episodeId = epi_num;
     if (!isNaN(epi_num)) {
         return (
-            // <button class="button-ep" data-before="Lets Watch" data-after={episodeId}></button>
+            // <button className="button-ep" data-before="Lets Watch" data-after={episodeId}></button>
             <button className={`button-ep button-ep-1 text-center`}>
                 <p className={"font-bold"}>
                     {episodeId}

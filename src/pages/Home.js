@@ -8,6 +8,8 @@ import AnimeCarousel from "../components/AnimeCarousel";
 import Custom_Footer from "../components/footer";
 import { HeroParallax } from "../components/ui/hero-parallax";
 
+import 'react-loading-skeleton/dist/skeleton.css'
+
 function Home() {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 

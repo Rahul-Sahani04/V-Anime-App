@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Wavy from './wavy_loader';
 import { Link } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
 
 const Sidebar = () => {
     const [recomList, setRecomList] = useState([]);
@@ -25,7 +26,9 @@ const Sidebar = () => {
 
     return (
         <div className="rounded-xl lg:flex flex-col bg-gray-900 text-white w-96">
-            {isLoading ? <Wavy /> : (
+            {isLoading ? 
+            <Skeleton width={"100%"} height={"100%"} />
+             : (
                 <>
                     <div className="p-4 ">
                         <p className="text-2xl font-bold items-center">Most Popular</p>

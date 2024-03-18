@@ -80,7 +80,7 @@ const CustomPlyrInstance = React.forwardRef<
     ...useHls(hlsSource, options),
     source,
   }) as React.MutableRefObject<HTMLVideoElement>;
-  return <video ref={raptorRef} className="plyr-react plyr" />;
+  return <video  ref={raptorRef} className="plyr-react plyr" />;
 });
 
 /**  The `PlyrComponent` is a functional component that renders a video player using the Plyr library and
@@ -92,7 +92,7 @@ const PlyrComponent = ({ QualityData }: { QualityData: string }) => {
   var QualityData = QualityData;
 
   return (
-    <div className="wrapper">
+    <div className="w-full h-full z-20 flex justify-center align-center rounded-lg">
       {/* <div>{QualityData}</div> */}
       {supported ? (
         /** `<CustomPlyrInstance>` is a custom React component that renders a video player using the
@@ -107,10 +107,9 @@ const PlyrComponent = ({ QualityData }: { QualityData: string }) => {
       ) : (
         "HLS is not supported in your browser"
       )}
-      <div className='Download-Link '>
-        {/* <button type="button" className="transition-all duration-300 ease-in- text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" onClick={() => navigate(DownloadLink)}>Download</button> */}
+      {/* <div className='Download-Link '>
         <button type="button" className="m-4 transition-all duration-300 ease-in- text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" >Download</button>
-      </div>
+      </div> */}
     </div>
   );
 };

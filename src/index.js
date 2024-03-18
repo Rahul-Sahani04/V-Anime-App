@@ -18,16 +18,15 @@ import Random_image from "./pages/RandomImage";
 
 
 function ErrorBoundary({ error }) {
-  const navigate = useNavigate();
 
   return (
     <div className="h-full w-full relative top-1/2 left-1/2 transform -translate-x-1/2 translate-y-3/4">
-      <div class="text-center">
-        <h1 class="mb-4 text-6xl font-semibold text-red-500">404</h1>
-        <p class="mb-4 text-lg text-gray-600">Oops! Looks like you're lost.</p>
-        <div class="animate-bounce">
+      <div className="text-center">
+        <h1 className="mb-4 text-6xl font-semibold text-red-500">404</h1>
+        <p className="mb-4 text-lg text-gray-600">Oops! Looks like you're lost.</p>
+        <div className="animate-bounce">
           <svg
-            class="mx-auto h-16 w-16 text-red-500"
+            className="mx-auto h-16 w-16 text-red-500"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -40,9 +39,9 @@ function ErrorBoundary({ error }) {
             ></path>
           </svg>
         </div>
-        <p class="mt-4 text-gray-600 text-base ">
+        <p className="mt-4 text-gray-600 text-base ">
           Let's get you back{" "}
-          <a href="/" class="text-blue-500">
+          <a href="/" className="text-blue-500">
             home
           </a>
           .

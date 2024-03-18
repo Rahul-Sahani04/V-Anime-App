@@ -136,7 +136,7 @@ const AnimeCarousel = ({ slideInterval = 7500 }) => {
                     className="absolute top-1/3 align-middle left-0 z-10 px-4 py-2 text-white bg-black bg-opacity-50 rounded-md focus:outline-none transition-all duration-300"
                     onClick={goToPrevSlide}
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
                     </svg>
 
@@ -146,7 +146,7 @@ const AnimeCarousel = ({ slideInterval = 7500 }) => {
                     className="absolute top-1/3 align-middle right-[11px] z-10 px-4 py-2 text-white bg-black bg-opacity-50 rounded-md focus:outline-none transition-all duration-300"
                     onClick={goToNextSlide}
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
                     </svg>
 
