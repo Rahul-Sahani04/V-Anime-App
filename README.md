@@ -5,10 +5,11 @@ Welcome to V-Anime, your ultimate destination for streaming anime content. Wheth
 <br/>
 <br/>
 <p align="left">
-  <img src="https://i.pinimg.com/originals/97/6c/c4/976cc4fc1d6d88da0d724ee205d0b2d1.gif" width="100%" height="200px" alt="Image" style="border-radius: '50%'; border: '2px solid gold';">
+  <img src="https://i.pinimg.com/originals/97/6c/c4/976cc4fc1d6d88da0d724ee205d0b2d1.gif" width="100%"  alt="Image" style="border-radius: '50%'; border: '2px solid gold';">
 </p>
 
 <br/>
+
 ## Features
 
 - **Extensive Library**: Access thousands of anime titles across various genres, including action, romance, fantasy, sci-fi, and more.
