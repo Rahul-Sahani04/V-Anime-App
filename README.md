@@ -2,12 +2,13 @@
 # V-Anime
 
 Welcome to V-Anime, your ultimate destination for streaming anime content. Whether you're a seasoned otaku or just starting to explore the world of anime, V-Anime has something for everyone. With a vast collection of anime series, movies, and OVA's, you'll never run out of exciting content to watch.
-
+<br/>
+<br/>
 <p align="left">
-  <img src="https://i.pinimg.com/originals/93/e8/5e/93e85e47b068cb322280710ca9221df6.gif" alt="Image" style="border-radius: '50%'; border: '2px solid gold';">
+  <img src="https://i.pinimg.com/originals/93/e8/5e/93e85e47b068cb322280710ca9221df6.gif" width="100%" alt="Image" style="border-radius: '50%'; border: '2px solid gold';">
 </p>
 
-
+<br/>
 ## Features
 
 - **Extensive Library**: Access thousands of anime titles across various genres, including action, romance, fantasy, sci-fi, and more.
