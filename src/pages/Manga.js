@@ -58,7 +58,7 @@ function Movie(props) {
                 {isLoading ? <Wavy /> : (
                     <div className="col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5" key={"D-ID"} >
                         {recomList.map((recom, index) => (
-                            <div className='card-here' key={"ID" + index} >
+                            <div className='card-here flex justify-center' key={"ID" + index} >
                                 <Card_Component theme_mode={props.theme} className={'anime-card'} id={recom.id} title={recom.title} image={recom.image} SubOrDub={recom.subOrDub} />
                             </div>
                         ))}

@@ -18,9 +18,9 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
-const CustomSlider1 = ({ EpList, fetchM3U8, currentEp }) => {
+const CustomSlider1 = ({ EpList, fetchM3U8, currentEp, query }) => {
   const [swiper, setSwiper] = useState(null);
-
+  console.log(EpList)
   // SwiperCore.use([Navigation, Pagination, A11y]);
 
   const handleLinkClick = (episodeId) => {
@@ -42,20 +42,20 @@ const CustomSlider1 = ({ EpList, fetchM3U8, currentEp }) => {
           clickable: true,
         }}
         modules={[Mousewheel, Pagination, Navigation, Scrollbar, A11y]}
-        className="mySwiper absolute left-[10%] h-[50%] w-3/4 m-5 place-self-end"
+        className="mySwiper xl:absolute xl:flex xl:flex-row !flex-col left-[10%] h-[50%] w-3/4 m-5 place-self-end"
         allowTouchMove="true"
         lazyPreloadPrevNext={2}
       >
         {EpList.map((item) => (
             <SwiperSlide
               key={item.id}
-              className="!flex justify-center items-center"
+              className="!flex justify-center items-center lg:ml-8 md:ml-8"
             >
           <Link
             className="link"
             to={{
               pathname: "/watch",
-              search: `?ep=${item.id}`,
+              search: `?query=${query}&ep=${item.id}`,
             }}
             onClick={() => handleLinkClick(item.id)}
             key={item.id}

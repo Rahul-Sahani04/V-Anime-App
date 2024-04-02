@@ -12,6 +12,8 @@ import "./Details.css";
 const AnimeDetails = ({ Anime_ID }) => {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
+  const [isVisibleIndex, setIsVisibleIndex] = useState(0);
+
   const location = useLocation();
 
   const [EpLoaded, setEpLoaded] = useState(false);
@@ -97,7 +99,7 @@ const AnimeDetails = ({ Anime_ID }) => {
     <div>
       <MY_Navbar2 />
       <div className="w-full overflow-hidden">
-        <div className="w-screen h-screen relative">
+        <div className="w-screen h-[120vh] relative">
           {!MainEpLoaded ? (
             <Skeleton
               baseColor="#2b2b2b"
@@ -217,6 +219,9 @@ const AnimeDetails = ({ Anime_ID }) => {
                 {animeList.recommendations.slice(0, 12)?.map((anime, index) => (
                   <div key={index} className="flex justify-center">
                     <Card_Component
+                      onMouseOver={() => setIsVisibleIndex(index)} 
+                      onMouseOut={() => setIsVisibleIndex(null)}
+                      index={index}
                       className="anime-card"
                       title={
                         anime.title.english

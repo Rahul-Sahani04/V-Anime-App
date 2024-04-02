@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Navbar,
-  MobileNav,
   Typography,
   Button,
   IconButton,
+  Collapse,
 } from "@material-tailwind/react";
 import "./Navbar2.css";
 
@@ -141,7 +141,7 @@ const MY_Navbar2 = () => {
             </IconButton>
           </div>
         </div>
-        <MobileNav open={openNav}>
+        <Collapse open={openNav}>
           {navList}
           <div className="flex items-center gap-x-1">
             <Button fullWidth variant="text" size="sm" onClick={ToggleSearch}>
@@ -151,7 +151,7 @@ const MY_Navbar2 = () => {
               <span>Sign in</span>
             </Button>
           </div>
-        </MobileNav>
+        </Collapse>
       </Navbar>
       {isSearchActive && (
         <div className=' object-contain flex items-center bg-slate-800 rounded-lg overflow-hidden px-2 py-1 justify-end transition-all duration-300 ease-in-out shadow-lg'>

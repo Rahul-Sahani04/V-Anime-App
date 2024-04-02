@@ -50,7 +50,6 @@ function Watch() {
     const response = await fetch(`${API_ENDPOINT}/meta/anilist/info/${id}`); // Zoro
     const data = await response.json();
     const animeList = data;
-    console.log("ANIME: ", data);
     setAnimeList(animeList);
     if (typeof animeList.title === "object") {
       const Titles = animeList.title["english"];
@@ -114,7 +113,7 @@ function Watch() {
       <div>
         <h1 className="xl:text-2xl m-5"> {Titles}</h1>
 
-        <div className="relative w-full h-[100vh] sm:w-fit md:w-fit lg:w-[500px] xl:w-full xl:col-span-2 lg:col-span-1 col-span-1 object-contain flex justify-center">
+        <div className="relative w-full h-[100vh] sm:w-fit md:w-fit lg:w-full xl:w-full xl:col-span-2 lg:col-span-1 col-span-1 object-contain flex justify-center">
 
 
           {dataLoaded && (
@@ -138,7 +137,7 @@ function Watch() {
           )}
         </div>
         <div className="relative">
-          <h2 className="absolute text-4xl md:text-6xl font-bold text-white m-14 w-1/4">
+          <h2 className="xl:absolute text-4xl md:text-6xl font-bold text-white m-14 w-1/4">
             Watch <br /> Next
             <div className="m-4 absolute left-6">
               <svg
@@ -189,8 +188,14 @@ function Watch() {
 
           {/* Pass selected range and fetch function to CustomSlider1 */}
           <div className="relative">
-            {dataLoaded ? (
+            {dataLoaded ? TotalEP.length == 0 ? (
               <CustomSlider1
+                query={Query}
+                EpList={[{airDate:  null, description : null, id : animeList.id, image : animeList.image, imageHash : "hash", number :  1, title : "Movie 1"}]}
+                fetchM3U8={fetchM3U8}
+              />) : (
+              <CustomSlider1
+                query={Query}
                 EpList={sliceObject(
                   TotalEP,
                   parseInt(selectedRange.split("-")[0]), // Subtract 1 to convert episode numbers to array indices
@@ -261,7 +266,7 @@ function Watch() {
             )}
           </div>
           <p
-            className={`w-fit text-left col-span-1 ${
+            className={`w-fit text-left text-white col-span-1 ${
               !IsMore ? "h-[100%]" : "flex"
             } overflow-hidden  mt-8 m-6`}
           >

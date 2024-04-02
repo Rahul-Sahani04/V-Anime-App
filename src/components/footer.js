@@ -19,7 +19,7 @@ function Custom_Footer() {
                             V-Anime - The best site to watch anime online for Free
                             Do you know that according to Google, the monthly search volume for anime related topics is up to over 1 Billion times? Anime is famous worldwide and it is no wonder we've seen a sharp rise in the number of free anime streaming sites.
 
-                            Just like free online movie streaming sites, anime watching sites are not created equally, some are better than the rest, so we've decided to build AniWatch.to to be one of the best free anime streaming site for all anime fans on the world.
+                            Just like free online movie streaming sites, anime watching sites are not created equally, some are better than the rest, so we've decided to build V-Anime.com to be one of the best free anime streaming site for all anime fans on the world.
                         </p>
 
                         <ul className="flex justify-center gap-6 mt-8 md:gap-8 sm:justify-start">

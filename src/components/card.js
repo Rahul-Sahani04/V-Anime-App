@@ -1,32 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import './card.css'
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Image,
-  Button,
-} from "@nextui-org/react";
+import "./card.css";
+import { Card, CardHeader } from "@nextui-org/react";
 
-const Card_Component = ({
-  title,
-  otherTitle,
-  id,
-  SubOrDub,
-  image,
-  href_q,
-  theme_mode,
-}) => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen((cur) => !cur);
+const Card_Component = ({ title, SubOrDub, type, year, id, image,  onMouseOver, onMouseOut, index}) => {
 
   return (
     <Card
-      onMouseOver={handleOpen}
-      onMouseOut={handleOpen}
-      className="relative col-span-12 sm:col-span-4 h-[250px] w-3/4"
+      className="relative col-span-12 sm:col-span-4 h-[300px] w-8/12 bg-transparent my-card-container"
+      onMouseOver={() => onMouseOver(index)} // Track the hovered card index
+      onMouseOut={() => onMouseOut(null)}
     >
       <Link
         to={{
@@ -35,11 +18,11 @@ const Card_Component = ({
         }}
         className={"main-card"}
       >
-        <div className="w-full h-full absolute flex justify-center items-center z-10 backdrop-blur-sm opacity-0 hover:opacity-80 hover:text-2xl transition-all delay-100">
+        <div className="w-full h-3/4 absolute flex justify-center items-center z-10 bg-transparent backdrop-blur-sm opacity-0 hover:opacity-80 hover:text-2xl transition-all delay-100">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
-            fill="#000000"
+            fill="#000"
             height="30px"
             width="30px"
             version="1.1"
@@ -53,18 +36,21 @@ const Card_Component = ({
           </svg>
         </div>
       </Link>
-      <CardHeader className="absolute z-10 top-1 flex-col !items-start w-[100%] ">
-        <p className="w-[100%] absolute -left-0 py-2 font-extrabold text-base text-center backdrop-blur-lg  uppercase">
-          {title.length > 20 ? title.slice(0, 20) : title}
-        </p>
-        <h4 className="text-white  font-bold text-large">{SubOrDub}</h4>
-      </CardHeader>
       <img
         removeWrapper
         alt="Card background"
-        className="z-0 w-full h-full object-cover background-image: linear-gradient(to bottom right, from white, to #000000)"
+        className="z-0 w-full h-3/4 object-cover"
         src={image}
       />
+      <CardHeader className="relative z-10 top-1 flex-col !items-start w-[100%] ">
+        <p className="w-[100%] absolute -left-0 py-2 font-extrabold text-base text-center backdrop-blur-lg uppercase text-white overflow-clip h-[110%]">
+          {title.length > 20 ? title.slice(0, 20) : title}
+        </p>
+        <p className="w-[100%] absolute -left-0 top-10  flex justify-around py-2 font-light text-base text-center uppercase text-white">
+          <p>{type} </p>
+          <p>{year}</p>
+        </p>
+      </CardHeader>
     </Card>
   );
 };
