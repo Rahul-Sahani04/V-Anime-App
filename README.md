@@ -3,6 +3,11 @@
 
 Welcome to V-Anime, your ultimate destination for streaming anime content. Whether you're a seasoned otaku or just starting to explore the world of anime, V-Anime has something for everyone. With a vast collection of anime series, movies, and OVA's, you'll never run out of exciting content to watch.
 
+<p align="left">
+  <img src="https://i.pinimg.com/originals/93/e8/5e/93e85e47b068cb322280710ca9221df6.gif" alt="Image" style="border-radius: '50%'; border: '2px solid gold';">
+</p>
+
+
 ## Features
 
 - **Extensive Library**: Access thousands of anime titles across various genres, including action, romance, fantasy, sci-fi, and more.
@@ -45,5 +50,9 @@ A special shoutout to [vishvara-sharda](https://github.com/vishvara-sharda) for 
   <img src="https://avatars.githubusercontent.com/u/142617173?v=4" alt="Image" width="75" height="75" style="border-radius: '50%'; border: '2px solid gold';">
 </p>
 
-
-Thank you for choosing V-Anime. Happy streaming! 🎉
+<br/>
+Thank you for choosing V-Anime. Happy streaming! 🎉 <br />
+Share With your friends.
+<p align="left">
+  <img src="https://i.pinimg.com/originals/05/48/dd/0548dd4afa665874c0c568fe5c189bda.gif" alt="Image" width="75" height="75" style="border-radius: '50%'; border: '2px solid gold';">
+</p>
