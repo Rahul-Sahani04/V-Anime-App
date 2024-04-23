@@ -48,10 +48,11 @@ Before using V-Anime, please review our [Privacy Policy](https://www.v-anime.com
 ## Acknowledgments
 
 A special shoutout to [vishvara-sharda](https://github.com/vishvara-sharda) for the fantastic idea behind this project!
+<a href="https://github.com/vishvara-sharda">
 <p align="left">
   <img src="https://avatars.githubusercontent.com/u/142617173?v=4" alt="Image" width="75" height="75" style="border-radius: '50%'; border: '2px solid gold';">
 </p>
-
+</a>
 <br/>
 Thank you for choosing V-Anime. Happy streaming! 🎉 <br />
 Share With your friends.
