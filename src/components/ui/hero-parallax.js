@@ -139,7 +139,7 @@ export const Header = () => {
             className="input"
             type="text"
             required=""
-            placeholder="Search Product"
+            placeholder="Search"
             id="search"
             onChange={handleInputChange} // Call handleInputChange on input change
             onKeyPress={handleKeyPress} // Call handleKeyPress on key press

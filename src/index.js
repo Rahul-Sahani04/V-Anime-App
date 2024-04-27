@@ -3,11 +3,13 @@ import ReactDOM from "react-dom/client";
 import "./main.css";
 import App from "./App";
 import Home from "./pages/Home";
-import Movie from "./pages/Movie";
+// import Movie from "./pages/Movie";
 import Top_anime from "./pages/Top_anime";
 import Search from "./pages/Search";
 import Watch from "./pages/WatchAnime";
 import AnimeDetails from "./pages/Details";
+
+import ChatHome from "./components/ChatComponent/ChatHome";
 
 import {
   createBrowserRouter,
@@ -15,7 +17,25 @@ import {
   useNavigate,
 } from "react-router-dom";
 import Random_image from "./pages/RandomImage";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditions from "./pages/Terms_Conditions";
 
+import socketIO from "socket.io-client"
+import WatchTogether from "./pages/WatchTogether";
+import { SignupFormDemo } from "./pages/SignUp";
+import { LoginFormDemo } from "./pages/LogIn";
+import ProfilePage from "./pages/ProfilePage";
+
+let socketId = localStorage.getItem("socketId");
+
+if (!socketId) {
+  socketId = Math.random().toString(36).substring(8);
+  localStorage.setItem("socketId", socketId);
+}
+
+const socket = socketIO.connect("http://localhost:4000", {
+  query: { socketId },
+});
 
 function ErrorBoundary({ error }) {
 
@@ -58,6 +78,14 @@ const router = createBrowserRouter([
     errorElement: <ErrorBoundary />,
   },
   {
+    path: "/signUp",
+    element: <SignupFormDemo />,
+  },
+  {
+    path: "/login",
+    element: <LoginFormDemo />,
+  },
+  {
     path: "/home",
     element: <Home />,
   },
@@ -88,6 +116,26 @@ const router = createBrowserRouter([
   {
     path: "/random_img",
     element: <Random_image />,
+  },
+  {
+    path: "/terms",
+    element: <TermsAndConditions />,
+  },
+  {
+    path: "/privacy",
+    element: <PrivacyPolicy />,
+  },
+  {
+    path: "/user",
+    element: <ProfilePage />,
+  },
+  {
+    path: "/watchHome",
+    element: <ChatHome socket={socket} />,
+  },
+  {
+    path: "/watchtogether",
+    element: <WatchTogether  socket={socket} />,
   },
 ]);
 

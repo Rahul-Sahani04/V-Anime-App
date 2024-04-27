@@ -86,11 +86,8 @@ const CustomPlyrInstance = React.forwardRef<
 /**  The `PlyrComponent` is a functional component that renders a video player using the Plyr library and
 supports HLS video streaming. If it is supported, it renders the `CustomPlyrInstance` component passing in the `ref`,
 `source`, `options`, and `hlsSource` props. If HLS is not supported, it renders a message saying so. */
-const PlyrComponent = ({ QualityData }: { QualityData: string }) => {
-  const ref = React.useRef<APITypes>(null);
+const PlyrComponent = ({ QualityData, playerRef }: { QualityData: string, playerRef: React.RefObject<APITypes> }) => {
   const supported = Hls.isSupported();
-  var QualityData = QualityData;
-
   return (
     <div className="w-full h-full z-20 flex justify-center align-center rounded-lg">
       {/* <div>{QualityData}</div> */}
@@ -98,7 +95,7 @@ const PlyrComponent = ({ QualityData }: { QualityData: string }) => {
         /** `<CustomPlyrInstance>` is a custom React component that renders a video player using the
         Plyr library and supports HLS video streaming. It takes in several props: */
         <CustomPlyrInstance
-          ref={ref}
+          ref={playerRef}
           source={videoSource}
           options={defaultOptions}
           hlsSource={QualityData}
@@ -108,7 +105,7 @@ const PlyrComponent = ({ QualityData }: { QualityData: string }) => {
         "HLS is not supported in your browser"
       )}
       {/* <div className='Download-Link '>
-        <button type="button" className="m-4 transition-all duration-300 ease-in- text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" >Download</button>
+        <button type="button" className="m-4 transition-all duration-300 ease-in-  text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" >Download</button>
       </div> */}
     </div>
   );

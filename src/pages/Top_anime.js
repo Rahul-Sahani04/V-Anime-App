@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../main.css";
 import Card_Component from "../components/card";
-import MY_Navbar2 from "../components/Navbar_2";
-import Wavy from "../components/wavy_loader";
+import MyNavbar from "../components/Navbar/Navbar_2";
+import Wavy from "../components/Loader/wavy_loader";
 import Sidebar from "../components/Sidebar";
-import Custom_Footer from "../components/footer";
+import CustomFooter from "../components/footer";
+import "../components/card.css";
 function Top_Anime(props) {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
@@ -33,29 +34,34 @@ function Top_Anime(props) {
 
   return (
     <div className="app">
-      <MY_Navbar2 />
+      <MyNavbar />
 
       <div className="flex flex-grow lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-between">
         {isLoading ? (
           <Wavy />
         ) : (
           <div
-            className="w-full py-6 px-6 col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5"
+            className="w-full py-6 px-6 col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-14 myCustomCardContainer"
             key={"D-ID"}
           >
-            {recomList.map((recom, index) => (
+            {recomList.map((anime, index) => (
               <div className="card-here flex justify-center" key={"ID" + index}>
                 <Card_Component
-                  onMouseOver={() => setIsVisibleIndex(index)}
-                  onMouseOut={() => setIsVisibleIndex(null)}
+                  index={index}
                   className={"anime-card"}
-                  id={recom.id}
                   title={
-                    recom.title.english
-                      ? recom.title.english
-                      : recom.title.userPreferred
+                    anime.title.english
+                      ? anime.title.english
+                      : anime.title.userPreferred
                   }
-                  image={recom.image}
+                  id={anime.id}
+                  image={anime.image}
+                  type={anime.type}
+                  year={anime.releaseDate}
+                  status={anime.status}
+                  TotalEp={anime.totalEpisodes}
+                  genre={anime.genres}
+                  color={anime.color}
                 />
               </div>
             ))}
@@ -65,7 +71,7 @@ function Top_Anime(props) {
           <Sidebar />
         </div>
       </div>
-      <Custom_Footer />
+      <CustomFooter />
     </div>
   );
   // }

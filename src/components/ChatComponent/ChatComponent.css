@@ -1,0 +1,139 @@
+.chat-container {
+    width: 300px;
+    height: 100vh;
+    background-color: #343541;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+
+  }
+  
+  .chat-nav-bar {
+    width: 100%;
+    height: 40px;
+    background-color: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .chat-nav-bar a {
+    color: #6B6C7B;
+    white-space: nowrap;
+    margin-left: 10px;
+    user-select: none;
+  }
+  
+  .chat-close {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .chat-line {
+    position: absolute;
+    width: 20px;
+    height: 3px;
+    background-color: #6B6C7B;
+    border-radius: 30px;
+  }
+  
+  .chat-line.one {
+    transform: rotate(45deg)
+  }
+  
+  .chat-line.two {
+    transform: rotate(135deg)
+  }
+  
+  .chat-messages-area {
+    background-color: #343541;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+  }
+  
+  .chat-sender-area {
+    background-color: #343541;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    border-radius: 8px;
+  }
+  
+  .chat-message {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    color: whitesmoke;
+    font-family: sans-serif;
+  }
+  
+  .chat-message.one,
+  .chat-message.three,
+  .chat-message.five {
+    background-color: #2E2F3A;
+  }
+  
+  .chat-message.two,
+  .chat-message.four,
+  .chat-message.six {
+    background-color: #343541;
+  }
+  
+  .chat-send-img {
+    width: 30px;
+  }
+  
+  .chat-send-input {
+    outline: none;
+    display: flex;
+    border: none;
+    background: none;
+    height: 40px;
+    width: 230px;
+    border-radius: 7px;
+    background: none;
+    color: white;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-left: 5px;
+  }
+  
+  .chat-send-input::placeholder {
+    color: #828E9E;
+  }
+  
+  .chat-input-place {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+    margin-left: 10px;
+    align-items: center;
+    background-color: #40414F;
+    border-radius: 7px;
+    height: 40px;
+    width: 280px;
+    gap: 5px;
+    border: 1px solid #2E2F3A;
+  }
+  
+  .chat-send {
+    width: 30px;
+    height: 30px;
+    background-color: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .chat-send-icon {
+    width: 17px;
+  }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Wavy from './wavy_loader';
+import Wavy from './Loader/wavy_loader';
 import { Link } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 

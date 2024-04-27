@@ -1,0 +1,41 @@
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15%;
+  padding: 1.2vh;
+  width: fit-content;
+}
+
+
+.header-links {
+  font-size: 20px;
+  align-items: center;
+}
+
+  
+.header-items {
+  position: static;
+  top: -1px;
+  display: block;
+  padding-left: 10px;
+  color: #ffffff;
+  text-decoration: none;
+  width: max-content;
+}
+
+.header-items:hover {
+  color: #e8f06d;
+  /* text-shadow: #1e1e1e 3px 3px 3px; */
+  transition: ease-in-out 0.25s;
+}
+
+
+.logo{
+  display: flex;
+  width: 70px;
+  height: 70px;
+  background-image: url("../../img/V-anime-new-logo.jpeg");
+  background-size: cover; 
+  border-radius: 15%;
+}

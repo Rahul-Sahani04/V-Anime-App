@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-function Custom_Footer() {
+function CustomFooter() {
 
     return (
         <footer className="bg-[#1f1f1f]">
@@ -20,6 +20,9 @@ function Custom_Footer() {
                             Do you know that according to Google, the monthly search volume for anime related topics is up to over 1 Billion times? Anime is famous worldwide and it is no wonder we've seen a sharp rise in the number of free anime streaming sites.
 
                             Just like free online movie streaming sites, anime watching sites are not created equally, some are better than the rest, so we've decided to build V-Anime.com to be one of the best free anime streaming site for all anime fans on the world.
+                        </p>
+                        <p className="mx-auto mt-6 leading-relaxed text-center text-gray-400  sm:mx-0 sm:text-left">
+                        V-Anime does not store any files on our server, we only linked to the media which is hosted on 3rd party services.
                         </p>
 
                         <ul className="flex justify-center gap-6 mt-8 md:gap-8 sm:justify-start">
@@ -121,7 +124,7 @@ function Custom_Footer() {
                 <div className="pt-6 mt-12 border-t border-gray-800">
                     <div className="text-center sm:flex sm:justify-between sm:text-left">
                         <p className="mt-4 text-sm text-gray-500 sm:order-first sm:mt-0">
-                            &copy; 2023 V-Anime
+                            &copy; 2024 V-Anime All rights reserved.
                         </p>
                     </div>
                 </div>
@@ -130,4 +133,4 @@ function Custom_Footer() {
     );
 }
 
-export default Custom_Footer;
+export default CustomFooter;

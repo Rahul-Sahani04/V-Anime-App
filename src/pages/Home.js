@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../main.css";
-import ThemeToggleButton from "../components/toggleTheme";
-import MY_Navbar2 from "../components/Navbar_2";
+// import ThemeToggleButton from "../components/toggleTheme";
+import MyNavbar from "../components/Navbar/Navbar_2";
 import Recom from "./Recom";
 import AnimeCarousel from "../components/AnimeCarousel";
-import Custom_Footer from "../components/footer";
+import CustomFooter from "../components/footer";
 import { HeroParallax } from "../components/ui/hero-parallax";
 
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -18,12 +18,17 @@ function Home() {
 
   const fetchAnime = async () => {
     setIsLoading(true);
-    const response = await fetch(
-      `${API_ENDPOINT}/meta/anilist/trending?page=1&perPage=10`
-    );
-    const data = await response.json();
-    setProducts(data.results);
-    console.log(data.results);
+    try{
+
+      const response = await fetch(
+        `${API_ENDPOINT}/meta/anilist/trending?page=1&perPage=10`
+      );
+      const data = await response.json();
+      setProducts(data.results);
+      console.log(data.results);
+    } catch(error){
+      console.error("An error occured: ", error)
+    }
     setIsLoading(false);
   };
   useEffect(() => {
@@ -33,9 +38,9 @@ function Home() {
 
   return (
     <div>
-      <MY_Navbar2 />
+      <MyNavbar />
       <HeroParallax products={products} />
-      <Custom_Footer />
+      <CustomFooter />
     </div>
   );
 }

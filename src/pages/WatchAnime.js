@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "../main.css";
-import MY_Navbar2 from "../components/Navbar_2";
+import MyNavbar from "../components/Navbar/Navbar_2";
 
 import "./WatchAnime.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 import PlyrComponent from "../components/VideoPlayer";
 
 import Error404 from "../components/error404";
-import Custom_Footer from "../components/footer";
+import CustomFooter from "../components/footer";
 import CustomSlider1 from "../components/CustomSlider";
 
 import Skeleton from "react-loading-skeleton";
@@ -44,7 +44,6 @@ function Watch() {
     setSelectedRange(event.target.value); // Update selected range
   };
 
-
   const fetchAnimeInfo = async (id) => {
     setDataLoaded(false);
     const response = await fetch(`${API_ENDPOINT}/meta/anilist/info/${id}`); // Zoro
@@ -61,11 +60,7 @@ function Watch() {
       const Titles = animeList.title;
       setTitles(Titles);
     }
-    if (
-      animeList.episodes === undefined ||
-      animeList.episodes.length === 0 ||
-      animeList.episodes === null
-    ) {
+    if (animeList.episodes === undefined || animeList.episodes.length === 0) {
       setEpLoaded(true);
       setDataLoaded(true);
       setDescription(animeList.description);
@@ -76,7 +71,7 @@ function Watch() {
       console.log("EP: ", TotalEP);
       setTotalEP(TotalEP);
       fetchM3U8(TotalEP[0].id);
-      setCurrentEp(1)
+      setCurrentEp(1);
       setDescription(
         animeList.description
           ? animeList.description
@@ -109,13 +104,11 @@ function Watch() {
 
   return (
     <div className={`app`}>
-      <MY_Navbar2 />
+      <MyNavbar />
       <div>
         <h1 className="xl:text-2xl m-5"> {Titles}</h1>
 
         <div className="relative w-full h-[100vh] sm:w-fit md:w-fit lg:w-full xl:w-full xl:col-span-2 lg:col-span-1 col-span-1 object-contain flex justify-center">
-
-
           {dataLoaded && (
             <>
               <PlyrComponent QualityData={WatchUrl} />
@@ -123,11 +116,16 @@ function Watch() {
           )}
           {!dataLoaded && (
             <Skeleton
-            style={{
-              width: "100%",
-              height: "100%"
-            }}
-             className="absolute  z-50" height={"100vh"} width={"100vw"} baseColor="#2b2b2b" highlightColor="#000" />
+              style={{
+                width: "100%",
+                height: "100%",
+              }}
+              className="absolute  z-50"
+              height={"100vh"}
+              width={"100vw"}
+              baseColor="#2b2b2b"
+              highlightColor="#000"
+            />
           )}
 
           {Error && (
@@ -137,6 +135,64 @@ function Watch() {
           )}
         </div>
         <div className="relative">
+          {/* Select Bar for choosing episode range */}
+          <form className="max-w-full mx-auto flex justify-around">
+            <label htmlFor="episode_range_select" className="sr-only">
+              Select episode range
+            </label>
+            <select
+              id="episode_range_select"
+              className="block py-2.5 px-0 w-1/3 text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+              onChange={handleRangeChange}
+            >
+              {/* Map the episodes in parts of 10 */}
+              {TotalEP.map((_, index) =>
+                index % 10 === 0 ? (
+                  <option
+                    key={index}
+                    value={`${index}-${Math.min(
+                      index + 9,
+                      TotalEP.length - 1
+                    )}`}
+                  >
+                    {`${index + 1}-${Math.min(index + 10, TotalEP.length)}`}
+                  </option>
+                ) : null
+              )}
+            </select>
+            <div
+              id="WatchTogetherButton "
+              className="flex justify-center items-center"
+            >
+              <Link
+                to={{
+                  pathname: "/watchtogether",
+                  search: `?query=${Query}&create=true&roomId=${Math.random()
+                    .toString(36)
+                    .substring(2, 8)}`,
+                }}
+              >
+                <button class="wt_cta">
+                  <span class="hover-underline-animation"> Watch Together</span>
+                  {/* <svg
+                id="arrow-horizontal"
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="10"
+                viewBox="0 0 46 16"
+              >
+                <path
+                  id="Path_10"
+                  data-name="Path 10"
+                  d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+                  transform="translate(30)"
+                ></path>
+              </svg> */}
+                </button>
+              </Link>
+            </div>
+          </form>
+
           <h2 className="xl:absolute text-4xl md:text-6xl font-bold text-white m-14 w-1/4">
             Watch <br /> Next
             <div className="m-4 absolute left-6">
@@ -159,50 +215,36 @@ function Watch() {
             </div>
           </h2>
 
-          {/* Select Bar for choosing episode range */}
-          <form className="max-w-sm mx-auto">
-            <label htmlFor="episode_range_select" className="sr-only">
-              Select episode range
-            </label>
-            <select
-              id="episode_range_select"
-              className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
-              onChange={handleRangeChange}
-            >
-              {/* Map the episodes in parts of 10 */}
-              {TotalEP.map((_, index) =>
-                index % 10 === 0 ? (
-                  <option
-                    key={index}
-                    value={`${index}-${Math.min(
-                      index + 9,
-                      TotalEP.length - 1
-                    )}`}
-                  >
-                    {`${index + 1}-${Math.min(index + 10, TotalEP.length)}`}
-                  </option>
-                ) : null
-              )}
-            </select>
-          </form>
-
           {/* Pass selected range and fetch function to CustomSlider1 */}
-          <div className="relative">
-            {dataLoaded ? TotalEP.length == 0 ? (
-              <CustomSlider1
-                query={Query}
-                EpList={[{airDate:  null, description : null, id : animeList.id, image : animeList.image, imageHash : "hash", number :  1, title : "Movie 1"}]}
-                fetchM3U8={fetchM3U8}
-              />) : (
-              <CustomSlider1
-                query={Query}
-                EpList={sliceObject(
-                  TotalEP,
-                  parseInt(selectedRange.split("-")[0]), // Subtract 1 to convert episode numbers to array indices
-                  parseInt(selectedRange.split("-")[1]) + 1
-                )}
-                fetchM3U8={fetchM3U8}
-              />
+          <div className="relative ">
+            {dataLoaded ? (
+              TotalEP.length == 0 ? (
+                <CustomSlider1
+                  query={Query}
+                  EpList={[
+                    {
+                      airDate: null,
+                      description: null,
+                      id: animeList.id,
+                      image: animeList.image,
+                      imageHash: "hash",
+                      number: 1,
+                      title: "Movie 1",
+                    },
+                  ]}
+                  fetchM3U8={fetchM3U8}
+                />
+              ) : (
+                <CustomSlider1
+                  query={Query}
+                  EpList={sliceObject(
+                    TotalEP,
+                    parseInt(selectedRange.split("-")[0]), // Subtract 1 to convert episode numbers to array indices
+                    parseInt(selectedRange.split("-")[1]) + 1
+                  )}
+                  fetchM3U8={fetchM3U8}
+                />
+              )
             ) : (
               <div className="relative w-3/4 m-4 justify-between flex flex-row -right-[30%]">
                 <Skeleton
@@ -245,7 +287,7 @@ function Watch() {
           </div>
         </div>
         <div className="relative w-fit xl:w-8/12 lg:w-6/12 justify-items-end bottom-0  xl:-right-20 lg:relative lg:-right-36 flex flex-row">
-        {/* <div 
+          {/* <div 
         className="w-screen h-full absolute z-0 left-0 bg-no-repeat bg-center bg-cover"
         style={{
           backgroundImage: "url(" + animeList.cover +" ) ",
@@ -261,7 +303,7 @@ function Watch() {
                 height={"420px"}
                 className="absolute"
                 baseColor="#2b2b2b"
-                  highlightColor="#000"
+                highlightColor="#000"
               />
             )}
           </div>
@@ -278,7 +320,7 @@ function Watch() {
                 height={"20%"}
                 count={5}
                 baseColor="#2b2b2b"
-                  highlightColor="#000"
+                highlightColor="#000"
                 className="m-1 p-1"
               />
             )}
@@ -295,7 +337,7 @@ function Watch() {
           )} */}
         </div>
       </div>
-      <Custom_Footer />
+      <CustomFooter />
     </div>
   );
 }

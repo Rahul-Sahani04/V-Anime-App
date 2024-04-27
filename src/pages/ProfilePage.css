@@ -1,0 +1,246 @@
+#main-wrapper {
+    margin-bottom: 70px;
+    min-height: calc(100vh - 350px);
+}
+
+.profile-header {
+    padding: 40px 0 0;
+    margin-top: -30px;
+    margin-bottom: 40px;
+    background: rgba(255,255,255,.1)!important;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    clear: both;
+}
+
+.profile-header-cover {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    filter: blur(20px);
+    opacity: .3;
+    background-size: cover;
+    background-position: center center;
+}
+
+
+
+.profile-header .container {
+    z-index: 3;
+    position: relative;
+}
+
+.ph-title {
+    font-size: 30px;
+    line-height: 1.4em;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.ph-tabs .pre-tabs {
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+.pre-tabs {
+    border: none;
+}
+.nav-tabs {
+    border-bottom: 1px solid #dee2e6;
+}
+.nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.ph-tabs .pre-tabs .nav-item {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+.pre-tabs .nav-item {
+    font-size: 16px;
+    font-weight: 400;
+    margin-right: 10px;
+}
+.nav-tabs .nav-item {
+    margin-bottom: -1px;
+}
+
+.pre-tabs .nav-item .nav-link.active {
+    color: #ffbade;
+    border-color: #ffbade;
+}
+
+.pre-tabs .nav-item .nav-link {
+    padding: 15px 10px;
+    line-height: 1.2em;
+    font-size: 14px;
+    color: #ddd;
+    background: 0 0!important;
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid transparent;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #495057;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+.nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+.block_area, .film-poster, .nav-item, .nav-item>a, .search-content input.search-input {
+    position: relative;
+}
+.nav-link {
+    display: block;
+    padding: 0.5rem 1rem;
+}
+
+.profile-box-account {
+    max-width: 600px;
+    margin: 0 auto 20px;
+}
+.h2-heading {
+    font-size: 2em!important;
+    margin-bottom: 0;
+}
+
+@media screen and (min-width: 1200px){
+.makeup .block_area-content {
+    padding-right: 190px;
+    position: relative;
+}
+}
+
+@media screen and (min-width: 1200px){
+.makeup .block_area-content:before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 160px;
+    background: #333546;
+    background: linear-gradient(180deg,#333546 0,rgba(51,53,70,0) 100%);
+}}
+
+.profile-box-account .block_area-content {
+    padding: 30px;
+    background: rgba(255,255,255,.05);
+}
+
+@media screen and (min-width: 1200px)
+{
+    .makeup .show-profile-avatar {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}}
+
+.profile-box-account .profile-avatar {
+    overflow: visible;
+    cursor: pointer;
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.profile-box-account .profile-avatar .pa-edit {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 50%;
+    z-index: 9;
+    background: #fff;
+    color: #111;
+}
+
+.profile-box-account .profile-avatar img {
+    border-radius: 50%;
+}
+.profile-avatar img {
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.preform .form-group {
+    margin-bottom: 20px;
+}
+.form-group {
+    margin-bottom: 1rem;
+}
+.preform .prelabel {
+    font-size: 11px;
+    text-transform: uppercase;
+    opacity: .5;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+.preform .form-control {
+    font-size: 13px;
+    border-radius: 6px;
+    border: none!important;
+    padding: 0.7rem 1.2rem;
+    height: auto;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.preform .d-verify {
+    margin: 1rem 0;
+    font-size: 13px;
+    font-weight: 500;
+}
+.preform .d-verify.is-yes .span-v {
+    color: #ffbade;
+    border: 1px solid #ffbade;
+    padding: 0.3rem 0.8rem;
+    border-radius: 2rem;
+    font-size: 12px;
+}
+.clearfix::after {
+    display: block;
+    clear: both;
+    content: "";
+}

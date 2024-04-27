@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
 import './main.css';
 import './components/card.css';
-import "./components/Navbar.css";
-import TrendingAnimeComponent from './components/TrendingAnimeApi';
+import "./components/Navbar/Navbar.css";
 import { inject } from '@vercel/analytics';
 
 import { Navigate } from 'react-router-dom'

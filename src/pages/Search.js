@@ -3,15 +3,16 @@ import React, { useState, useEffect } from "react";
 import "../main.css";
 import "../components/card.css";
 import Card_Component from "../components/card";
-import MY_Navbar2 from "../components/Navbar_2";
+import MyNavbar from "../components/Navbar/Navbar_2";
 // import ThemeToggleButton from '../components/toggleTheme';
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Wavy from "../components/wavy_loader";
+import Wavy from "../components/Loader/wavy_loader";
 // import AnimeDetails from './Details';
 import Sidebar from "../components/Sidebar";
-import Custom_Footer from "../components/footer";
+import CustomFooter from "../components/footer";
 
 const Search = ({ query_y }) => {
+  
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
   const [Query, setQuery] = useState("");
@@ -46,7 +47,7 @@ const Search = ({ query_y }) => {
     setQuery(temp);
     const Query = query;
     setQuery(Query);
-    // setDataLoaded(true);
+    setDataLoaded(true);
   };
 
   const fetchManga = async (query, page) => {
@@ -82,7 +83,7 @@ const Search = ({ query_y }) => {
     if (Query) {
       setQuery(Query);
       fetchAnime(Query, page);
-      fetchManga(Query, page);
+      // fetchManga(Query, page);
     } else {
       navigate("/home");
     }
@@ -90,64 +91,16 @@ const Search = ({ query_y }) => {
 
   return (
     <div className={` app ${isDarkMode ? "light-theme" : "dark-theme"} z-10`}>
-      <MY_Navbar2 />
+      <MyNavbar />
       <div className="flex flex-grow lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-between">
         {dataLoaded ? (
           <div
-            className="w-full py-6 px-6 col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-14"
+            className="w-full py-6 px-6 col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-14 myCustomCardContainer"
             key={"D-ID"}
           >
             {animeList?.map((anime, index) => (
-              <div
-                className="card-here relative flex justify-center w-full h-full"
-                key={index}
-              >
-                <div
-                  className="card-dialog-box"
-                  style={{
-                    visibility: isVisibleIndex === index ? "visible" : "hidden",
-                  }}
-                  onMouseOver={() => setIsVisibleIndex(index)} // Track the hovered card index
-                  onMouseOut={() => setIsVisibleIndex(null)}
-                >
-                  <div className="text-white h-full w-full">
-                    <h4 className="text-center text-large font-extrabold">
-                      {anime.title.english
-                        ? anime.title.english
-                        : anime.title.userPreferred}
-                    </h4>
-                    <hr />
-                    <div className="m-1 flex justify-evenly">
-                      <div>{anime.rating}</div>
-                      <div>
-                        {anime.currentEpisodeCount} / {anime.totalEpisodes}{" "}
-                      </div>
-                      <div>{anime.type}</div>
-                    </div>
-                    <div className="m-2 text-left font-medium">
-                      {/* {anime.description.length > 30
-                        ? anime.description.slice(0, 100)
-                        : description}{" "} */}
-                      ...
-                    </div>
-                    <div className="m-2 ">
-                      <p className="font-extralight">
-                        <span className="text-gray-400">Genres:</span>{" "}
-                        {anime.genres.slice(0, 3).join(",")}..
-                      </p>
-                      <p className="font-extralight">
-                        <span className="text-gray-400">Rating:</span> {anime.rating}
-                      </p>
-                      <p className="font-extralight">
-                        <span className="text-gray-400">Aired:</span> {anime.releaseDate}
-                      </p>
-                    </div>
-                  </div>
-                </div>
                 <Card_Component
-                  onMouseOver={() => setIsVisibleIndex(index)} // Track the hovered card index
-                  onMouseOut={() => setIsVisibleIndex(null)}
-                  index={index}
+                 index={index}
                   className={"anime-card"}
                   title={
                     anime.title.english
@@ -158,25 +111,27 @@ const Search = ({ query_y }) => {
                   image={anime.image}
                   type={anime.type}
                   year={anime.releaseDate}
+                  status={anime.status}
+                  TotalEp={anime.totalEpisodes}
+                  genre={anime.genres}
+                  color={anime.color}
                 />
-              </div>
             ))}
 
             {mangaList?.map((anime, index) => (
               <div
-                className="card-here relative flex justify-center w-full h-full"
                 key={animeList.length + index}
               >
 
                 <Card_Component
-                  onMouseOver={() => setIsVisibleIndex(index)} // Track the hovered card index
-                  onMouseOut={() => setIsVisibleIndex(null)}
                   index={index}
                   className={"anime-card"}
                   title={anime.title}
                   id={anime.id}
                   image={anime.image}
                   type={anime.type}
+                  genre={anime.genres}
+                  manga
                 />
               </div>
             ))}
@@ -188,7 +143,7 @@ const Search = ({ query_y }) => {
           <Sidebar />
         </div>
       </div>
-      <Custom_Footer />
+      <CustomFooter />
     </div>
   );
 };

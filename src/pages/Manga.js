@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../main.css';
 import Card_Component from '../components/card';
-import MY_Navbar2 from '../components/Navbar_2';
+import MyNavbar from '../components/Navbar_2';
 import Wavy from '../components/wavy_loader';
 import Sidebar from '../components/Sidebar';
 
@@ -52,7 +52,7 @@ function Movie(props) {
 
     return (
         <div className='app'>
-            <MY_Navbar2 />
+            <MyNavbar />
 
             <div className='flex flex-grow lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-between'>
                 {isLoading ? <Wavy /> : (

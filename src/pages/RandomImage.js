@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './image.css';
 import '../main.css';
-import MY_Navbar2 from '../components/Navbar_2';
-import Wavy from '../components/wavy_loader';
+import MyNavbar from '../components/Navbar/Navbar_2';
+import Wavy from '../components/Loader/wavy_loader';
 
 function Random_image() {
     const list = ["waifu", "neko", "shinobu", "megumin", "bully", "cuddle", "cry",
@@ -28,7 +28,7 @@ function Random_image() {
 
     return (
         <div className='app w-full'>
-            <MY_Navbar2 />
+            <MyNavbar />
             <div className='butt '>
                 <input value={"Generate More"} type={'button'} onClick={() => fetchImages()} className="btn fill" />
             </div>

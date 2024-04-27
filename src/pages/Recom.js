@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../main.css';
 import Card_Component from '../components/card';
-import Wavy from '../components/wavy_loader';
+import Wavy from '../components/Loader/wavy_loader';
 
 function Recom(props) {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
@@ -61,10 +61,21 @@ function Recom(props) {
           <div key={'ID' + index}>
 
             <Card_Component
-              className={'anime-card mt-10'}
-              id={anime.id}
-              title={anime.title.english ? anime.title.english : anime.title.userPreferred}
-              image={anime.image}
+                                index={index}
+                  className={"anime-card"}
+                  title={
+                    anime.title.english
+                      ? anime.title.english
+                      : anime.title.userPreferred
+                  }
+                  id={anime.id}
+                  image={anime.image}
+                  type={anime.type}
+                  year={anime.releaseDate}
+                  status={anime.status}
+                  TotalEp={anime.totalEpisodes}
+                  genre={anime.genres}
+                  color={anime.color}
             />
           </div>
         ))}
