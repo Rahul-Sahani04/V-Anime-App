@@ -1,21 +1,94 @@
-import "./ProfilePage.css"
+import axios from "axios";
+import "./ProfilePage.css";
+import { useEffect, useState } from "react";
 import { GrFormEdit } from "react-icons/gr";
+
 const ProfilePage = () => {
+  const token = localStorage.getItem("token");
+
+  // User Data State
+  const [userData, setUserData] = useState();
+
+  // Check if current User Token is valid
+  async function isTokenValid() {
+    try {
+      console.clear();
+      console.log("Token", token);
+      const res = await axios.post(
+        "http://localhost:4000/user/is-token-valid",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log(res.data);
+      return await res.data;
+    } catch (error) {
+      console.error(error.response.data);
+      // Redirect to login
+      // window.location.href = "/login";
+    }
+  }
+
+  async function fetchUserInfo(id) {
+    console.log("ID", id);
+    axios
+      .get("http://localhost:4000/user/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setUserData(res.data.user);
+      })
+      .catch((error) => {
+        console.error(error.response.data);
+      });
+  }
+
+  useEffect(() => {
+    // Check if token is valid
+
+    if (!token) {
+      // Redirect to login
+      window.location.href = "/login";
+      return null;
+    }
+    const respData = isTokenValid();
+    respData
+      .then((data) => {
+        // console.log("Data", data);
+        if (data.verified) {
+          // console.log("Verified", data);
+          fetchUserInfo(data.id);
+        }
+      })
+      .catch((error) => {
+        console.log("Error", error);
+      });
+  }, []);
+
   return (
     <div
-      id="main-wrapper"
-      className="layout-page layout-profile"
+      id="main-wrapper bg-black"
+      className="layout-page layout-profile bg-black text-white"
       bis_skin_checked="1"
     >
       <div className="profile-header" bis_skin_checked="1">
         <div
           className="profile-header-cover"
-          style={{backgroundImage: "url(https://cdn.noitatnemucod.net/avatar/100x100/one_piece/user-06.jpeg);"}}
+          style={{
+            backgroundImage:
+              "url(https://cdn.noitatnemucod.net/avatar/100x100/one_piece/user-06.jpeg);",
+          }}
           bis_skin_checked="1"
         ></div>
         <div className="" bis_skin_checked="1">
           <div className="ph-title" bis_skin_checked="1">
-            Hi, SheMadeMeAPoetry
+            Hi, {userData?.name}
           </div>
           <div className="ph-tabs" bis_skin_checked="1">
             <div className="bah-tabs" bis_skin_checked="1">
@@ -67,7 +140,7 @@ const ProfilePage = () => {
             </h2>
             <div className="block_area-content" bis_skin_checked="1">
               <div
-                className="show-profile-avatar text-center mb-3"
+                className="show-profile-avatar text-center mb-3 relative"
                 bis_skin_checked="1"
               >
                 <div
@@ -76,8 +149,11 @@ const ProfilePage = () => {
                   data-target="#modalavatars"
                   bis_skin_checked="1"
                 >
-                  <div className="pa-edit flex justify-center items-center" bis_skin_checked="1">
-                    <GrFormEdit  className="w-5/6 h-5/6"/>
+                  <div
+                    className="pa-edit flex justify-center items-center absolute bottom-0 right-[7px] bg-white rounded-full shadow-md cursor-pointer hover:scale-110 hover:-rotate-45 transition-all delay-100"
+                    bis_skin_checked="1"
+                  >
+                    <GrFormEdit className="w-5/6 h-5/6 " />
                   </div>
                   <img
                     id="preview-avatar"
@@ -87,7 +163,7 @@ const ProfilePage = () => {
               </div>
               <form className="preform" method="post" id="profile-form">
                 <input type="hidden" name="avatar_id" value="13" />
-                <div className="row" bis_skin_checked="1">
+                <div className="row w-2/3" bis_skin_checked="1">
                   <div
                     className="col-xl-12 col-lg-12 col-md-12"
                     bis_skin_checked="1"
@@ -101,12 +177,16 @@ const ProfilePage = () => {
                         name="email"
                         className="form-control"
                         id="pro5-email"
-                        value="devilken43@gmail.com"
+                        value={userData?.email}
+                        required=""
                       />
 
-                      <div className="d-block d-verify is-yes" bis_skin_checked="1">
+                      <div
+                        className="d-block d-verify is-yes w-1/4 text-center"
+                        bis_skin_checked="1"
+                      >
                         <div className="span-v" bis_skin_checked="1">
-                          <i className="fas fa-user-check mr-2"></i>Verified
+                          <i className="fas fa-user-check "></i>Verified
                         </div>
                       </div>
                     </div>
@@ -125,7 +205,7 @@ const ProfilePage = () => {
                         id="pro5-name"
                         name="name"
                         required=""
-                        value="SheMadeMeAPoetry"
+                        value={userData?.name}
                       />
                     </div>
                   </div>
@@ -205,11 +285,13 @@ const ProfilePage = () => {
                   >
                     <div className="form-group" bis_skin_checked="1">
                       <div className="mt-4" bis_skin_checked="1"></div>
-                      <button className="btn btn-block btn-primary">Save</button>
+                      <button className="btn btn-block btn-primary">
+                        Save
+                      </button>
                       <div
                         className="loading-relative"
                         id="profile-loading"
-                        style={{display: "none"}}
+                        style={{ display: "none" }}
                         bis_skin_checked="1"
                       >
                         <div className="loading" bis_skin_checked="1">
@@ -230,6 +312,5 @@ const ProfilePage = () => {
     </div>
   );
 };
-
 
 export default ProfilePage;

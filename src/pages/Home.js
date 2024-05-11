@@ -39,7 +39,9 @@ function Home() {
   return (
     <div>
       <MyNavbar />
-      <HeroParallax products={products} />
+      {products && (
+        <HeroParallax products={products} />
+      )}
       <CustomFooter />
     </div>
   );

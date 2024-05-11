@@ -125,7 +125,7 @@ const AnimeDetails = ({ Anime_ID }) => {
   }
 
   return (
-    <div>
+    <div className="bg-black">
       <MyNavbar />
       <div className="w-full overflow-hidden">
         <div className="w-screen h-[1500px] relative">
@@ -182,7 +182,8 @@ const AnimeDetails = ({ Anime_ID }) => {
             <div className="relative w-11/12 h-full mt-10 ">
               <div
                 id="Title"
-                className="relative text-6xl underline underline-offset-8 text-white left-[30%] z-30 font-serif mt-4"
+                className="relative text-6xl underline underline-offset-8 text-white left-[30%] z-30 font-serif mt-4 w-[65%]"
+                style={{ textShadow: "2px 2px 4px #000", lineHeight: "1.2"}}
               >
                 {MainEpLoaded ? (
                   !isManga ? (

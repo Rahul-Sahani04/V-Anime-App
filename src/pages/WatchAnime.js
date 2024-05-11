@@ -103,7 +103,7 @@ function Watch() {
   }, []);
 
   return (
-    <div className={`app`}>
+    <div className={`app bg-black`}>
       <MyNavbar />
       <div>
         <h1 className="xl:text-2xl m-5"> {Titles}</h1>
