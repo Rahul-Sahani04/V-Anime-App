@@ -20,7 +20,7 @@ function TermsAndConditions() {
           className="mb-[1em] text-[14px] leading-6 px-4"
           style={{ fontWeight: 300 }}
         >
-          By accessing this Website, accessible from https://hianime.to, you are
+          By accessing this Website, accessible from https://V-Anime.to, you are
           agreeing to be bound by these Website Terms and Conditions of Use and
           agree that you are responsible for the agreement with any applicable
           local laws. If you disagree with any of these terms, you are

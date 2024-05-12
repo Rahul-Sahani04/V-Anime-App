@@ -44,9 +44,9 @@ Here are some screenshots of the V-Anime app:
 2. **Sign Up or Log In**: Create an account or log in with your existing credentials to start exploring our extensive anime library. - (In Working) 
 3. **Browse and Watch**: Browse through our vast collection of anime titles, or use our search and recommendation features to find something to watch.
 4. **Enjoy Streaming**: Sit back, relax, and enjoy streaming your favorite anime content in high definition.
-5. **Updates:** We updates new titles as well as fulfill the requests on a daily basis so be warned, you will never run out of what to watch on HiAnime.
+5. **Updates:** We updates new titles as well as fulfill the requests on a daily basis so be warned, you will never run out of what to watch on V-Anime.
 6. **User interface:** Our UI and UX makes it easy for anyone, no matter how old you are, how long have you been on the Internet. Literally, you can figure out how to navigate our site after a quick look. If you want to watch a specific title, search for it via the search box. If you want to look for suggestions, you can use the site's categories or simply scroll down for new releases.
-7. **Device compatibility:** HiAnime works alright on both your mobile and desktop. However, we'd recommend you use your desktop for a smoother streaming experienc
+7. **Device compatibility:** V-Anime works alright on both your mobile and desktop. However, we'd recommend you use your desktop for a smoother streaming experienc
 
 ## Feedback
 
