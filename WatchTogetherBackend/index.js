@@ -29,7 +29,7 @@ app.use(cors());
 
 // Connect to the database
 const URI = process.env.MONGODB_URI;
-mongoose
+await mongoose
     .connect(URI, {
         useCreateIndex: true,
         useNewUrlParser: true,
@@ -167,6 +167,7 @@ app.get("/api", (req, res) => {
 
 
 // Port
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000;
+const PORT = 4000;
 
 httpServer.listen(PORT, () => console.log(`Sever running on port: ${PORT}`));

@@ -21,6 +21,7 @@
     "plyr-react": "^5.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
     "react-icons": "^4.8.0",
     "react-loading-skeleton": "^3.4.0",
     "react-router-dom": "^6.8.1",
@@ -36,7 +37,10 @@
     "start": "react-scripts start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start:frontend": "react-scripts start",
+    "start:backend": "nodemon WatchTogetherBackend/index.js",
+    "both": "concurrently \"npm run start:frontend\" \"npm run start:backend\""
   },
   "eslintConfig": {
     "extends": [
@@ -65,6 +69,7 @@
   "author": "Rahul Sahani",
   "license": "ISC",
   "devDependencies": {
+    "concurrently": "^8.2.2",
     "tailwindcss": "^3.3.2"
   }
 }

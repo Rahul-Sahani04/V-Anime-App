@@ -40,7 +40,7 @@ const socket = socketIO.connect("http://localhost:4000", {
 function ErrorBoundary({ error }) {
 
   return (
-    <div className="h-full w-full relative top-1/2 left-1/2 transform -translate-x-1/2 translate-y-3/4">
+    <div className="h-screen w-screen absolute z-50 top-0 left-0 bg-black flex justify-center items-center">
       <div className="text-center">
         <h1 className="mb-4 text-6xl font-semibold text-red-500">404</h1>
         <p className="mb-4 text-lg text-gray-600">Oops! Looks like you're lost.</p>
@@ -78,7 +78,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorBoundary />,
   },
   {
-    path: "/signUp",
+    path: "/register",
     element: <SignupFormDemo />,
   },
   {

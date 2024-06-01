@@ -89,6 +89,10 @@ const Search = ({ query_y }) => {
     }
   }, []);
 
+  useEffect(() => {
+    // document.title = "Search" + Query && Query;
+ }, []);
+
   return (
     <div className={` app ${isDarkMode ? "light-theme" : "dark-theme"} z-10`}>
       <MyNavbar />

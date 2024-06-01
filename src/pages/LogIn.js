@@ -4,23 +4,58 @@ import { Input } from "../components/ui/input";
 import cn from "../utils/cn";
 import axios from "axios"; // Import Axios for making HTTP requests
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export function LoginFormDemo() {
   const API_URL = "http://localhost:4000";
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
+    name: "",
     email: "",
     password: "",
   });
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      formData.name = formData.firstName + " " + formData.lastName;
       // Make a POST request to the signup endpoint
-      const response = await axios.post(API_URL + "/api/login", formData);
+      const response = await axios.post(API_URL + "/user/login", formData);
       console.log(response.data); // Log the response from the server
-      localStorage.setItem("token", response.data.token); 
+      localStorage.setItem("token", response.data.token);
+      if (response.data.user) {
+        navigate("/user");
+      }
+    } catch (error) {
+      console.error(error.response.data); // Log any errors
+    }
+  };
+
+  const UserPreviousLogin = async () => {
+    try {
+      // Make a POST request to the signup endpoint
+      await axios
+        .post(API_URL + "/user/is-token-valid",{}, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+          console.clear();
+          console.log("Data: ", res);
+          if (res.data) {
+            navigate("/user");
+          }
+        })
+        .catch((error) => {
+          console.error("errors: ", error);
+          // if (error.response.status === 401) {
+          //   localStorage.removeItem("token");
+          // }
+        });
     } catch (error) {
       console.error(error.response.data); // Log any errors
     }
@@ -34,21 +69,16 @@ export function LoginFormDemo() {
   };
 
   useEffect(() => {
-    if(localStorage.getItem("token")){
-
-      try {
-        const res = axios.get(API_URL + "/api/protected", {
-          headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem("token"),
-            'Content-Type': 'application/json'
-          },
-        });
-        console.log(res.data);
-        
-      } catch (error) {
-        console.error(error);
-      }
+    if (localStorage.getItem("token")) {
+      console.log("Token is: ", localStorage.getItem("token"));
+      UserPreviousLogin();
     }
+
+    console.log("Data");
+  }, []);
+
+  useEffect(() => {
+    // document.title = "LogIn";
   }, []);
   return (
     <div className="h-screen flex  items-center justify-center">
@@ -67,28 +97,6 @@ export function LoginFormDemo() {
           {/* Handle submit function */}
           {/* Button and Gradient */}
 
-          <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
-            <LabelInputContainer>
-              <Label htmlFor="firstName">First name</Label>
-              <Input
-                id="firstName"
-                placeholder="Tyler"
-                type="text"
-                value={formData.firstName}
-                onChange={handleChange}
-              />
-            </LabelInputContainer>
-            <LabelInputContainer>
-              <Label htmlFor="lastName">Last name</Label>
-              <Input
-                id="lastName"
-                placeholder="Durden"
-                type="text"
-                value={formData.lastName}
-                onChange={handleChange}
-              />
-            </LabelInputContainer>
-          </div>
           <LabelInputContainer className="mb-4">
             <Label htmlFor="email">Email Address</Label>
             <Input
@@ -119,7 +127,10 @@ export function LoginFormDemo() {
           </button>
         </form>
         <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-          Don't have a account? <Link to={"/signUp"}><span className="text-blue-400">Sign Up Here</span></Link>
+          Don't have a account?{" "}
+          <Link to={"/register"}>
+            <span className="text-blue-400">Sign Up Here</span>
+          </Link>
         </p>
       </div>
     </div>

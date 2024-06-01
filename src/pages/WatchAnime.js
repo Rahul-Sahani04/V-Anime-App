@@ -13,6 +13,8 @@ import CustomSlider1 from "../components/CustomSlider";
 
 import Skeleton from "react-loading-skeleton";
 
+import axios from "axios";
+
 function Watch() {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
@@ -100,6 +102,45 @@ function Watch() {
     } else {
       fetchAnimeInfo(Query);
     }
+  }, []);
+
+  // Function: If user is logged in, add current anime to user's watch history
+  async function addToWatchHistory() {
+    if (localStorage.getItem("token")) {
+      const token = localStorage.getItem("token");
+      const user = JSON.parse(atob(token.split(".")[1]));
+      const userId = user.id;
+      const animeId = animeList.id;
+      const response = await axios.post(
+        `${API_ENDPOINT}/user/add-video-to-watchlist`,
+        {
+          user: userId,
+          animeId: animeId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response.data);
+    }
+  }
+
+
+
+  useEffect(() => {
+    if (dataLoaded) {
+      addToWatchHistory();
+    }
+  }, [dataLoaded]);
+  
+
+  useEffect(() => {
+    // document.title =
+      // "Watch - "  + animeList.title.english
+      //   ? animeList.title.english
+      //   : animeList.title.native;
   }, []);
 
   return (

@@ -16,6 +16,10 @@ function App() {
     // nav to /home
     window.location.href += "home"
   }, []);
+
+  useEffect(() => {
+    // document.title = "Home"
+ }, []);
   return (
     <div className='h-full w-full'>
       {/* <div className="content-image">

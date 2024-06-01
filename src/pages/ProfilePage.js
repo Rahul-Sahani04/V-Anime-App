@@ -2,6 +2,8 @@ import axios from "axios";
 import "./ProfilePage.css";
 import { useEffect, useState } from "react";
 import { GrFormEdit } from "react-icons/gr";
+import { FaKey } from "react-icons/fa6";
+
 
 const ProfilePage = () => {
   const token = localStorage.getItem("token");
@@ -9,10 +11,28 @@ const ProfilePage = () => {
   // User Data State
   const [userData, setUserData] = useState();
 
+  const [showPasswordChangeField, setShowPasswordChangeField] = useState(false);
+
+  // Create a new useState to save updated User Data for updating the User Data in the UI and to update the User Data in the Backend as well.
+  const [updatedUserData, setUpdatedUserData] = useState({
+    name: "",
+    email: "",
+    date: "",
+    current_password: "",
+    new_password: "",
+    confirm_new_password: "",
+  });
+
+  const [UserJoinDate, setDate] = useState({
+    year: "",
+    month: "",
+    day: "",
+  });
+
+
   // Check if current User Token is valid
   async function isTokenValid() {
     try {
-      console.clear();
       console.log("Token", token);
       const res = await axios.post(
         "http://localhost:4000/user/is-token-valid",
@@ -25,7 +45,10 @@ const ProfilePage = () => {
       );
 
       console.log(res.data);
-      return await res.data;
+
+      console.log("Verified", res.data);
+      fetchUserInfo(res.data.id);
+      return;
     } catch (error) {
       console.error(error.response.data);
       // Redirect to login
@@ -43,6 +66,12 @@ const ProfilePage = () => {
       })
       .then((res) => {
         setUserData(res.data.user);
+        setUpdatedUserData({
+          name: res.data.user?.name,
+          email: res.data.user?.email,
+          date: res.data.user?.date,
+        });
+        console.log("User Data", res.data.user);
       })
       .catch((error) => {
         console.error(error.response.data);
@@ -50,25 +79,28 @@ const ProfilePage = () => {
   }
 
   useEffect(() => {
+    
     // Check if token is valid
+    console.clear();
 
     if (!token) {
       // Redirect to login
       window.location.href = "/login";
+      console.log("No Token");
       return null;
     }
-    const respData = isTokenValid();
-    respData
-      .then((data) => {
-        // console.log("Data", data);
-        if (data.verified) {
-          // console.log("Verified", data);
-          fetchUserInfo(data.id);
-        }
-      })
-      .catch((error) => {
-        console.log("Error", error);
-      });
+    isTokenValid();
+    console.log("User Data", userData);
+
+
+
+    const date = new Date(userData?.date);
+
+    setDate({
+      year: date.getFullYear(),
+      month: date.getMonth() + 1,
+      day: date.getDate(),
+    });
   }, []);
 
   return (
@@ -129,16 +161,21 @@ const ProfilePage = () => {
           <div className="clearfix" bis_skin_checked="1"></div>
         </div>
       </div>
-      <div className="profile-content" bis_skin_checked="1">
-        <div className="" bis_skin_checked="1">
+      <div
+        className={`profile-content ${
+          showPasswordChangeField ? "h-[1000px]" : "h-[880px]"
+        }  `}
+        bis_skin_checked="1"
+      >
+        <div className="h-full" bis_skin_checked="1">
           <div
-            className="profile-box profile-box-account makeup"
+            className="profile-box profile-box-account makeup h-full"
             bis_skin_checked="1"
           >
             <h2 className="h2-heading mb-4">
               <i className="fas fa-user mr-3"></i>Edit Profile
             </h2>
-            <div className="block_area-content" bis_skin_checked="1">
+            <div className="block_area-content h-fit" bis_skin_checked="1">
               <div
                 className="show-profile-avatar text-center mb-3 relative"
                 bis_skin_checked="1"
@@ -177,16 +214,23 @@ const ProfilePage = () => {
                         name="email"
                         className="form-control"
                         id="pro5-email"
-                        value={userData?.email}
+                        value={updatedUserData?.email}
+                        onChange={(e) => {
+                          setUpdatedUserData({
+                            ...updatedUserData,
+                            email: e.target.value,
+                          });
+                        }}
                         required=""
                       />
 
                       <div
-                        className="d-block d-verify is-yes w-1/4 text-center"
+                        className="d-block d-verify is-yes w-2/6 text-center cursor-pointer"
                         bis_skin_checked="1"
                       >
                         <div className="span-v" bis_skin_checked="1">
-                          <i className="fas fa-user-check "></i>Verified
+                          <i className="fas fa-user-check "></i>
+                          {userData?.verified ? "Verified" : "Not Verified"}
                         </div>
                       </div>
                     </div>
@@ -205,7 +249,7 @@ const ProfilePage = () => {
                         id="pro5-name"
                         name="name"
                         required=""
-                        value={userData?.name}
+                        value={updatedUserData?.name}
                       />
                     </div>
                   </div>
@@ -222,7 +266,9 @@ const ProfilePage = () => {
                         className="form-control"
                         disabled=""
                         id="pro5-join"
-                        value="2023-08-06"
+                        value={updatedUserData?.date.slice(0, 10)}
+                        
+                        readOnly
                       />
                     </div>
                   </div>
@@ -230,18 +276,28 @@ const ProfilePage = () => {
                     className="col-xl-12 col-lg-12 col-md-12"
                     bis_skin_checked="1"
                   >
-                    <div className="block" bis_skin_checked="1">
-                      <a
-                        className="btn btn-sm btn-clear"
+                    <div
+                      className="block cursor-pointer "
+                      bis_skin_checked="1"
+                      onClick={() =>
+                        setShowPasswordChangeField(!showPasswordChangeField)
+                      }
+                    >
+                      <p
+                        className="transition-all ease-in-out delay-150 cursor-pointer btn btn-sm btn-clear w-3/5 border-2 border-[#FBB7DB] rounded-full p-1 hover:bg-[#FBB7DB] text-white flex justify-evenly items-center"
                         data-toggle="collapse"
                         href="#show-changepass"
                       >
-                        <i className="fas fa-key mr-2"></i>Change password
-                      </a>
+                        <FaKey /> Change password
+                      </p>
                     </div>
                     <div
                       id="show-changepass"
-                      className="collapse mt-3"
+                      className={`transition-all ease-in-out delay-150 mt-3 ${
+                        showPasswordChangeField
+                          ? "visible h-full"
+                          : "collapse h-0"
+                      }`}
                       bis_skin_checked="1"
                     >
                       <div className="form-group" bis_skin_checked="1">
@@ -253,6 +309,12 @@ const ProfilePage = () => {
                           className="form-control"
                           id="pro5-currentpass"
                           name="current_password"
+                          onChange={(e) => {
+                            setUpdatedUserData({
+                              ...updatedUserData,
+                              current_password: e.target.value,
+                            });
+                          }}
                         />
                       </div>
                       <div className="form-group" bis_skin_checked="1">
@@ -264,6 +326,12 @@ const ProfilePage = () => {
                           className="form-control"
                           id="pro5-pass"
                           name="new_password"
+                          onChange={(e) => {
+                            setUpdatedUserData({
+                              ...updatedUserData,
+                              new_password: e.target.value,
+                            });
+                          }}
                         />
                       </div>
                       <div className="form-group" bis_skin_checked="1">
@@ -275,7 +343,14 @@ const ProfilePage = () => {
                           className="form-control"
                           id="pro5-confirm"
                           name="confirm_new_password"
-                        />
+                          onChange={(e) => {
+                            setUpdatedUserData({
+                              ...updatedUserData,
+                              confirm_new_password: e.target.value,
+                            });
+                          }}                        
+
+                          />
                       </div>
                     </div>
                   </div>
@@ -285,7 +360,7 @@ const ProfilePage = () => {
                   >
                     <div className="form-group" bis_skin_checked="1">
                       <div className="mt-4" bis_skin_checked="1"></div>
-                      <button className="btn btn-block btn-primary">
+                      <button className="btn btn-block btn-primary" >
                         Save
                       </button>
                       <div

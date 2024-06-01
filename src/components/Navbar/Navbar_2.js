@@ -97,6 +97,7 @@ const MyNavbar = () => {
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
+            <Link to="/login">
               <Button
                 variant="text"
                 size="sm"
@@ -104,6 +105,8 @@ const MyNavbar = () => {
               >
                 <span>Log In</span>
               </Button>
+              </Link>
+              <Link to="/register">
               <Button
                 variant="gradient"
                 size="sm"
@@ -111,6 +114,7 @@ const MyNavbar = () => {
               >
                 <span>Sign in</span>
               </Button>
+              </Link>
             </div>
             <IconButton
               variant="text"

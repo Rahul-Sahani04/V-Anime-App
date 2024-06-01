@@ -124,6 +124,13 @@ const AnimeDetails = ({ Anime_ID }) => {
     );
   }
 
+  // useEffect(() => {
+  //   // document.title =
+  //     "Details - "  + animeList.title ? animeList.title.english
+  //       ? animeList.title.english
+  //       : animeList.title.native : "";
+  // }, []);
+
   return (
     <div className="bg-black">
       <MyNavbar />
@@ -139,8 +146,9 @@ const AnimeDetails = ({ Anime_ID }) => {
             <div
               id="CoverImage"
               style={{
-                backgroundImage:
-                  `url(" ${isManga ? animeList.image : animeList.cover} ")`,
+                backgroundImage: `url(" ${
+                  isManga ? animeList.image : animeList.cover
+                } ")`,
                 backgroundRepeat: "no-repeat",
               }}
               className="bg-center bg-cover w-screen h-[400px] z-0"
@@ -173,17 +181,14 @@ const AnimeDetails = ({ Anime_ID }) => {
                 backgroundImage: "url(" + animeList.image + ")",
               }}
               className="w-[250px] h-[350px] bg-center bg-cover absolute top-[5%] left-[5%] z-20 rounded-[10px]"
-            >
-
-              
-            </div>
+            ></div>
           )}
           <div className="flex justify-end z-50 items-stretch">
             <div className="relative w-11/12 h-full mt-10 ">
               <div
                 id="Title"
                 className="relative text-6xl underline underline-offset-8 text-white left-[30%] z-30 font-serif mt-4 w-[65%]"
-                style={{ textShadow: "2px 2px 4px #000", lineHeight: "1.2"}}
+                style={{ textShadow: "2px 2px 4px #000", lineHeight: "1.2" }}
               >
                 {MainEpLoaded ? (
                   !isManga ? (

@@ -30,8 +30,9 @@ export const validateLoginForm = (formInfo) => {
 // Register form validation
 export const validateRegisterForm = async (formInfo) => {
     const { name, email, password, confirmPassword } = formInfo;
-
+    console.log(name, email, password, confirmPassword)
     // Check if there is any missing field
+    // if (!name || !email || !password || !confirmPassword) {
     if (!name || !email || !password || !confirmPassword) {
         message = "All fields are required.";
         return false;

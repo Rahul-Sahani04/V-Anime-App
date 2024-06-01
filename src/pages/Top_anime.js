@@ -32,6 +32,10 @@ function Top_Anime(props) {
     fetchAnime(page);
   }, []);
 
+  useEffect(() => {
+    // document.title = "Top Anime";
+ }, []);
+
   return (
     <div className="app">
       <MyNavbar />
