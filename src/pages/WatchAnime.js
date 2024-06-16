@@ -46,7 +46,7 @@ function Watch() {
     setSelectedRange(event.target.value); // Update selected range
   };
 
-  const fetchAnimeInfo = async (id) => {
+  const fetchAnimeInfo = async (id, epInUrl) => {
     setDataLoaded(false);
     const response = await fetch(`${API_ENDPOINT}/meta/anilist/info/${id}`); // Zoro
     const data = await response.json();
@@ -70,9 +70,12 @@ function Watch() {
     } else {
       setEpLoaded(true);
       const TotalEP = animeList.episodes;
-      console.log("EP: ", TotalEP);
+      console.log(TotalEP);
       setTotalEP(TotalEP);
-      fetchM3U8(TotalEP[0].id);
+      if (!epInUrl) {
+        fetchM3U8(TotalEP[0].id);
+        // window.location.search = `?query=${id}&ep=${TotalEP[0].id}`;
+      }
       setCurrentEp(1);
       setDescription(
         animeList.description
@@ -96,34 +99,44 @@ function Watch() {
 
   useEffect(() => {
     const Query = new URLSearchParams(location.search).get("query");
+    const episode = new URLSearchParams(location.search).get("ep") || false;
+
     setQuery(Query);
+
+    if (episode) {
+      fetchM3U8(episode);
+    }
     if (Query === undefined || Query === null || Query === "") {
       navigate("/home");
     } else {
-      fetchAnimeInfo(Query);
+      fetchAnimeInfo(Query, episode);
     }
   }, []);
 
   // Function: If user is logged in, add current anime to user's watch history
   async function addToWatchHistory() {
-    if (localStorage.getItem("token")) {
-      const token = localStorage.getItem("token");
-      const user = JSON.parse(atob(token.split(".")[1]));
-      const userId = user.id;
-      const animeId = animeList.id;
-      const response = await axios.post(
-        `${API_ENDPOINT}/user/add-video-to-watchlist`,
-        {
-          user: userId,
-          animeId: animeId,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
+    try{
+      if (localStorage.getItem("token")) {
+        const token = localStorage.getItem("token");
+        const user = JSON.parse(atob(token.split(".")[1]));
+        const userId = user.id;
+        const animeId = animeList.id;
+        const response = await axios.post(
+          `${API_ENDPOINT}/user/add-video-to-watchlist`,
+          {
+            user: userId,
+            animeId: animeId,
           },
-        }
-      );
-      console.log(response.data);
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 
