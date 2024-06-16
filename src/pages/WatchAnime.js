@@ -70,7 +70,6 @@ function Watch() {
     } else {
       setEpLoaded(true);
       const TotalEP = animeList.episodes;
-      console.log(TotalEP);
       setTotalEP(TotalEP);
       if (!epInUrl) {
         fetchM3U8(TotalEP[0].id);
@@ -89,7 +88,6 @@ function Watch() {
     setCurrentEp(id.split("-").pop());
     const data = await fetch(`${API_ENDPOINT}/meta/anilist/watch/${id}`); // Zoro
     const anime_link = await data.json();
-    console.log("Anime: ", anime_link);
     const WatchUrl = anime_link.sources[anime_link.sources.length - 1].url;
     setWatchUrl(WatchUrl);
   };
@@ -136,7 +134,7 @@ function Watch() {
             },
           }
         );
-        console.log(response.data);
+        // console.log(response.data);
       }
     } catch (error) {
       console.error(error);

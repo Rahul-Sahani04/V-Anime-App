@@ -20,7 +20,7 @@ import "swiper/css/scrollbar";
 
 const CustomSlider1 = ({ EpList, fetchM3U8, currentEp, query }) => {
   const [swiper, setSwiper] = useState(null);
-  console.log(EpList);
+  // console.log(EpList);
   // SwiperCore.use([Navigation, Pagination, A11y]);
 
   const handleLinkClick = (episodeId) => {
