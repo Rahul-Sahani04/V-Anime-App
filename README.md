@@ -62,7 +62,7 @@ Stay updated with the latest news, announcements, and content additions by follo
 
 ## Privacy Policy & Terms of Service
 
-Before using V-Anime, please review our [Privacy Policy](https://www.v-anime.com/privacy) and [Terms of Service](https://www.v-anime.com/terms) to understand how we collect, use, and protect your personal information.
+Before using V-Anime, please review our [Privacy Policy](https://v-anime.vercel.app/privacy) and [Terms of Service](https://v-anime.vercel.app/terms) to understand how we collect, use, and protect your personal information.
 
 ## Acknowledgments
 
