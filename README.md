@@ -18,6 +18,7 @@ Welcome to V-Anime, your ultimate destination for streaming anime content. Wheth
 - **Multiple Devices**: Enjoy V-Anime on your smartphone, tablet, laptop, or smart TV, and seamlessly switch between devices without losing your progress.
 - **User-Friendly Interface**: Navigate through our app effortlessly with a clean and intuitive interface designed for anime enthusiasts of all levels.
 - **Customizable Profiles**: Create multiple profiles for different users within your household, each with their own watch history and preferences.
+- **Multiplayer Watching**: Host watch parties with friends and family by synchronizing your viewing sessions and chatting in real-time.
 
 ## Screenshots
 
