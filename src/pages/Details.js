@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar/Navbar_2";
 import { HeroBanner } from "../components/hero-banner";
 import { ContentRow } from "../components/content-row";
 import { ContentCard } from "../components/content-card";
+import CustomFooter from "../components/footer";
 
 export default function AnimeDetails({ Anime_ID }) {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
@@ -116,6 +117,7 @@ export default function AnimeDetails({ Anime_ID }) {
           )}
         </div>
       </div>
+      <CustomFooter />
     </div>
   );
 }
