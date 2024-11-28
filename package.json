@@ -17,6 +17,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@vercel/analytics": "^1.0.1",
     "axios": "^1.4.0",
+    "caniuse-lite": "^1.0.30001684",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.11.7",
