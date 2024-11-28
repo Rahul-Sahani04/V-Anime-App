@@ -1,179 +1,209 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import {
-  Navbar,
-  Typography,
-  Button,
-  IconButton,
-  Collapse,
-} from "@material-tailwind/react";
-import "./Navbar2.css";
 
-const MyNavbar = () => {
-  const [openNav, setOpenNav] = useState(false);
-  const [Query, setQuery] = useState('');
-  const [isSearchActive, setSearchActive] = useState(false);
+import React, { useState, useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import SearchBar from "../ui/SearchBar"
 
-  const ToggleAll = () => {
-    setOpenNav(!openNav);
-    setSearchActive(false);
-  }
-
-  const ToggleSearch = () => {
-    setSearchActive(!isSearchActive);
-    setOpenNav(false);
-  }
+export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [openNav, setOpenNav] = useState(false)
+  const [query, setQuery] = useState("")
+  const [isSearchActive, setSearchActive] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
-    // Your logic to set Query from location.search
-  }, []);
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+    }
 
-  const navList = (
-    <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <Link to="/home" className="flex items-center">
-          Home
-        </Link>
-      </Typography>
-      {/* <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <Link to="/search" className="flex items-center">
-          Search
-        </Link>
-      </Typography> */}
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <Link to="/top_anime" className="flex items-center">
-          Top Anime
-        </Link>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <Link to="/watchHome" className="flex items-center">
-          WatchTogether
-        </Link>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <Link to="/random_img" className="flex items-center">
-          Random Image
-        </Link>
-      </Typography>
-    </ul>
-  );
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const toggleNav = () => {
+    setOpenNav(!openNav)
+    setSearchActive(false)
+  }
+
+  const toggleSearch = () => {
+    setSearchActive(!isSearchActive)
+    setOpenNav(false)
+  }
 
   return (
-    <div className='w-full sticky'>
-      <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4 bg-zinc-950">
-        <div className="flex items-center justify-between text-blue-gray-900">
-          <Typography
-            as={Link}
-            to="/home"
-            className="mr-4 cursor-pointer py-1.5 font-medium"
+    <nav className={`fixed top-0 z-[999] w-full transition-colors duration-300 ${isScrolled ? 'bg-black' : 'bg-gradient-to-b from-black/80 to-transparent'}`}>
+      <div className="max-w-[2000px] mx-auto">
+        <div className="flex items-center px-4 py-2 lg:px-8">
+          {/* Logo */}
+          <Link 
+            to="/home" 
+            className="text-red-600 text-2xl font-bold mr-8 flex-shrink-0"
           >
             V-Anime
-          </Typography>
-          <div className="flex items-center gap-4">
-            <div className="mr-4 hidden lg:block">{navList}</div>
-            <div className="flex items-center gap-x-1">
-            <Link to="/login">
-              <Button
-                variant="text"
-                size="sm"
-                className="hidden text-white lg:inline-block"
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-6">
+            <Link to="/home" className="text-white hover:text-gray-300 text-sm">
+              Home
+            </Link>
+            <Link to="/top_anime" className="text-white hover:text-gray-300 text-sm">
+              Top Anime
+            </Link>
+            {/* <Link to="/watchHome" className="text-white hover:text-gray-300 text-sm">
+              WatchTogether
+            </Link> */}
+            <Link to="https://github.com/Rahul-Sahani04/V-Anime-App" className="text-white hover:text-gray-300 text-sm"
+              target="_blank" rel="noreferrer"
+            >
+              GitHub
+            </Link>
+            {/* <Link to="/random" className="text-white hover:text-gray-300 text-sm">
+              Random Anime
+            </Link> */}
+          </div>
+
+          {/* Search and Account Section */}
+          <div className="ml-auto flex items-center gap-4">
+            <div className="relative">
+              <SearchBar 
+                search={query} 
+                setSearch={setQuery}
+                className={`
+                  transition-all duration-300 
+                  ${isSearchActive 
+                    ? 'w-64 opacity-100' 
+                    : 'w-0 opacity-0 lg:w-64 lg:opacity-100'
+                  }
+                `}
+              />
+              <button 
+                onClick={toggleSearch}
+                className="lg:hidden text-white p-2"
               >
-                <span>Log In</span>
-              </Button>
+                <svg 
+                  className="w-6 h-6" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" 
+                  />
+                </svg>
+              </button>
+            </div>
+
+            {/* Auth Buttons */}
+            <div className="hidden lg:flex items-center gap-2">
+              <Link
+                to="/login"
+                className="px-4 py-1 text-white hover:bg-white/10 rounded-md transition-colors"
+              >
+                Log In
               </Link>
-              <Link to="/register">
-              <Button
-                variant="gradient"
-                size="sm"
-                className="hidden lg:inline-block"
+              <Link
+                to="/register"
+                className="px-4 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
               >
-                <span>Sign in</span>
-              </Button>
+                Sign Up
               </Link>
             </div>
-            <IconButton
-              variant="text"
-              className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
-              ripple={false}
-              onClick={ToggleAll}
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={toggleNav}
+              className="lg:hidden text-white p-2"
             >
               {openNav ? (
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-6 h-6"
                   fill="none"
-                  className="h-6 w-6"
-                  viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={2}
+                  viewBox="0 0 24 24"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
+                    strokeWidth={2}
                     d="M6 18L18 6M6 6l12 12"
                   />
                 </svg>
               ) : (
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
+                  className="w-6 h-6"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth={2}
+                  viewBox="0 0 24 24"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
+                    strokeWidth={2}
                     d="M4 6h16M4 12h16M4 18h16"
                   />
                 </svg>
               )}
-            </IconButton>
+            </button>
           </div>
         </div>
-        <Collapse open={openNav}>
-          {navList}
-          <div className="flex items-center gap-x-1">
-            <Button fullWidth variant="text" size="sm" onClick={ToggleSearch}>
-              <span>Log In</span>
-            </Button>
-            <Button fullWidth variant="gradient" size="sm" onClick={ToggleSearch}>
-              <span>Sign in</span>
-            </Button>
+
+        {/* Mobile Menu */}
+        <div
+          className={`
+            lg:hidden bg-black transition-all duration-300 overflow-hidden
+            ${openNav ? 'max-h-96' : 'max-h-0'}
+          `}
+        >
+          <div className="px-4 py-2 space-y-2">
+            <Link 
+              to="/home"
+              className="block text-white hover:text-gray-300 py-2"
+            >
+              Home
+            </Link>
+            <Link 
+              to="/top_anime"
+              className="block text-white hover:text-gray-300 py-2"
+            >
+              Top Anime
+            </Link>
+            <Link 
+              to="/watchHome"
+              className="block text-white hover:text-gray-300 py-2"
+            >
+              WatchTogether
+            </Link>
+            <Link 
+              to="/random_img"
+              className="block text-white hover:text-gray-300 py-2"
+            >
+              Random Image
+            </Link>
+            <div className="pt-2 space-y-2">
+              <button
+                onClick={() => navigate('/login')}
+                className="w-full px-4 py-2 text-white hover:bg-white/10 rounded-md transition-colors"
+              >
+                Log In
+              </button>
+              <button
+                onClick={() => navigate('/register')}
+                className="w-full px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+              >
+                Sign Up
+              </button>
+            </div>
           </div>
-        </Collapse>
-      </Navbar>
-      {isSearchActive && (
-        <div className=' object-contain flex items-center bg-slate-800 rounded-lg overflow-hidden px-2 py-1 justify-end transition-all duration-300 ease-in-out shadow-lg'>
-          {/* Your search input and button */}
         </div>
-      )}
-    </div>
-  );
+      </div>
+    </nav>
+  )
 }
 
-export default MyNavbar;

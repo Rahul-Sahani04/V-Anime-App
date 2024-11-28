@@ -4,6 +4,8 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import io from "socket.io-client";
 import ChatComponent from "../components/ChatComponent/ChatComponent";
 import PlyrComponent from "../components/VideoPlayer";
+import toast from "react-hot-toast";
+import Navbar from "../components/Navbar/Navbar_2";
 
 const WatchTogether = ({ socket }) => {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
@@ -21,77 +23,121 @@ const WatchTogether = ({ socket }) => {
 
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const [Query, setQuery] = useState("");
   const [animeList, setAnimeList] = useState({});
   const [WatchUrl, setWatchUrl] = useState("");
   const [currentEp, setCurrentEp] = useState(0);
-
-  const [Titles, setTitles] = useState([]);
-
-  const [TotalEP, setTotalEP] = useState([]);
-  const [EP, setEP] = useState(1);
-
-  const [Description, setDescription] = useState("");
-
+  const [totalEP, setTotalEP] = useState([]);
+  const [description, setDescription] = useState("");
   const [dataLoaded, setDataLoaded] = useState(false);
-  const [EpLoaded, setEpLoaded] = useState(false);
+  const [epLoaded, setEpLoaded] = useState(false);
+  const [error, setError] = useState(false);
+  const [servers, setServers] = useState([]);
+  const [streamingLinks, setStreamingLinks] = useState([]);
 
-  const [Error, setError] = useState(false);
+  const [moreInfo, setMoreInfo] = useState({});
 
-  const [selectedRange, setSelectedRange] = useState("0-10"); // State for selected range
 
-  const handleRangeChange = (event) => {
-    setSelectedRange(event.target.value); // Update selected range
+  const handleServerSelection = async (server, category) => {
+    const sources = await fetchEpisodeSources(
+      currentEp,
+      server.serverName,
+      category
+    );
+    console.log("Sources: ", sources.sources[0].url);
+    setStreamingLinks(sources.sources[0].url);
+    setWatchUrl(sources.sources[0].url);
   };
 
-  const fetchAnimeInfo = async (id) => {
+  const fetchAnimeInfo = async (id, epInUrl) => {
     setDataLoaded(false);
-    const response = await fetch(`${API_ENDPOINT}/meta/anilist/info/${id}`); // Zoro
-    const data = await response.json();
-    const animeList = data;
-    setAnimeList(animeList);
-    if (typeof animeList.title === "object") {
-      const Titles = animeList.title["english"];
-      setTitles(Titles);
-    } else if (typeof animeList.title === "array") {
-      const Titles = animeList.title[0];
-      setTitles(Titles);
-    } else {
-      const Titles = animeList.title;
-      setTitles(Titles);
-    }
-    if (animeList.episodes === undefined || animeList.episodes.length === 0) {
+    try {
+      const response = await fetch(`${API_ENDPOINT}/api/v2/hianime/anime/${id}`);
+      const data = await response.json();
+      setAnimeList(data.data.anime);
+
+      const ep_response = await fetch(`${API_ENDPOINT}/api/v2/hianime/anime/${id}/episodes`);
+      const ep_data = await ep_response.json();
+      setTotalEP(ep_data.data.episodes);
+      
+      const moreInfo = await getAdditionData(data.data.anime.info.malId);
+      setMoreInfo(moreInfo);
+
+
+      setCurrentEp(epInUrl ? epInUrl : ep_data.data.episodes[0].episodeId);
+      setDescription(data.data.anime.description || "No description available");
       setEpLoaded(true);
       setDataLoaded(true);
-      setDescription(animeList.description);
+    } catch (error) {
       setError(true);
-    } else {
-      setEpLoaded(true);
-      const TotalEP = animeList.episodes;
-      console.log("EP: ", TotalEP);
-      setTotalEP(TotalEP);
-      fetchM3U8(TotalEP[0].id);
-      setCurrentEp(1);
-      setDescription(
-        animeList.description
-          ? animeList.description
-          : "No description available"
-      );
-      setDataLoaded(true);
     }
-  };
-  const fetchM3U8 = async (id) => {
-    const data = await fetch(`${API_ENDPOINT}/meta/anilist/watch/${id}`); // Zoro
-    const anime_link = await data.json();
-    const WatchUrl = anime_link.sources[anime_link.sources.length - 1].url;
-    setWatchUrl(WatchUrl);
-    console.log(WatchUrl);
   };
 
-  function sliceObject(obj, start, end) {
-    const slicedEntries = Object.entries(obj).slice(start, end);
-    return Object.values(Object.fromEntries(slicedEntries));
-  }
+  const fetchEpisodeServers = async (animeEpisodeId) => {
+    try {
+      const response = await fetch(
+        `${API_ENDPOINT}/api/v2/hianime/episode/servers?animeEpisodeId=${animeEpisodeId}`
+      );
+      const data = await response.json();
+      console.log("Servers: ", data.data);
+      return data.data;
+    } catch (error) {
+      setError(true);
+    }
+  };
+
+  const fetchEpisodeSources = async (animeEpisodeId, server, category) => {
+    try {
+      const response = await fetch(
+        `${API_ENDPOINT}/api/v2/hianime/episode/sources?animeEpisodeId=${animeEpisodeId}&server=${server}&category=${category}`
+      );
+      const data = await response.json();
+      return data.data;
+    } catch (error) {
+      setError(true);
+    }
+  };
+
+  useEffect(() => {
+    const query = new URLSearchParams(location.search).get("query");
+    const episode = new URLSearchParams(location.search).get("epId") || false;
+
+    if (episode) {
+      setCurrentEp(episode);
+    }
+
+    if (!query) {
+      // navigate("/home");
+      toast.error("No anime found");
+    } else {
+      fetchAnimeInfo(query, episode);
+    }
+  }, [location.search]);
+
+  useEffect(() => {
+    if (currentEp) {
+      fetchEpisodeServers(currentEp).then(setServers);
+    }
+  }, [currentEp]);
+
+  useEffect(() => {
+    console.log("Servers: ", servers);
+    if (servers && servers.sub ) {
+      handleServerSelection(servers.sub[0], "sub");
+    } else if (servers && servers.dub) {
+      handleServerSelection(servers.dub[0], "dub");
+    }
+  }, [servers]);
+
+  const getAdditionData = async (malId) => {
+    try {
+      const result = await fetch(`https://api.jikan.moe/v4/anime/${malId}`);
+      const data = await result.json();
+      console.log(data.data);
+      return data.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
   
   useEffect(() => {
     if (videoRef.current && videoRef.current.plyr) {
@@ -123,16 +169,6 @@ const WatchTogether = ({ socket }) => {
       videoRef.current.plyr.pause();
     }
   }
-
-  useEffect(() => {
-    const Query = new URLSearchParams(location.search).get("query");
-    setQuery(Query);
-    if (Query === undefined || Query === null || Query === "") {
-      navigate("/home");
-    } else {
-      fetchAnimeInfo(Query);
-    }
-  }, []);
 
   // ! Watch Together Code AHEAD
 
@@ -284,14 +320,18 @@ const WatchTogether = ({ socket }) => {
 
       // Clean up the interval to avoid memory leaks
       return () => clearInterval(interval);
+    } else {
+      console.log("Not the host");
     }
   }, [host]); // Only run the effect when host status changes
 
   
 
   return (
-    <div className="flex justify-evenly">
-      <div id="VideoContainer" className="w-5/6 ">
+    <>
+    <Navbar />
+    <div className="flex justify-evenly pt-16">
+      <div id="VideoContainer" className="w-5/6 border  border-gray-600 rounded-xl">
         <PlyrComponent
           className=""
           playerRef={videoRef}
@@ -301,6 +341,7 @@ const WatchTogether = ({ socket }) => {
       </div>
       <ChatComponent socket={socket} />
     </div>
+    </>
   );
 };
 

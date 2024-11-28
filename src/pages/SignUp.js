@@ -7,6 +7,7 @@ import axios from "axios"; // Import Axios for making HTTP requests
 import { Link, useNavigate } from "react-router-dom";
 
 import toast, { Toaster } from "react-hot-toast";
+import Navbar from "../components/Navbar/Navbar_2";
 
 export function SignupFormDemo() {
   const navigate = useNavigate();
@@ -64,7 +65,15 @@ export function SignupFormDemo() {
   // align-items: center;
 
   return (
-    <div className="h-screen flex  items-center justify-center">
+    <div className="h-screen flex  items-center justify-center"
+    style={{
+      backgroundImage: "url('/Assets/Background.jpeg')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    }}
+    >
+    <Navbar />
       <Toaster />
       <div className="max-w-md w-screen  mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input  bg-white dark:bg-black">
         <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">

@@ -33,7 +33,7 @@ if (!socketId) {
   localStorage.setItem("socketId", socketId);
 }
 
-const socket = socketIO.connect("http://localhost:4000", {
+const socket = socketIO.connect("http://localhost:8000", {
   query: { socketId },
 });
 

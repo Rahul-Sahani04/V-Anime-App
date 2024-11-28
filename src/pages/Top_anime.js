@@ -18,23 +18,24 @@ function Top_Anime(props) {
   const fetchAnime = async (page_no) => {
     setIsLoading(true);
     const response = await fetch(
-      `${API_ENDPOINT}/meta/anilist/trending?page=${page_no}&perPage=12`
+      `${API_ENDPOINT}/api/v2/hianime/home`
     );
     const data = await response.json();
-    console.log(data);
-    setRecomList((prev) => [...prev, ...data.results]);
+    console.log(data.data.topAiringAnimes);
+    const recomList = data.data.topAiringAnimes;
+    setRecomList(recomList);
     setIsLoading(false);
   };
 
 
 
   useEffect(() => {
-    fetchAnime(page);
+    fetchAnime();
   }, []);
 
-  useEffect(() => {
+//   useEffect(() => {
     // document.title = "Top Anime";
- }, []);
+//  }, []);
 
   return (
     <div className="app">
@@ -48,32 +49,28 @@ function Top_Anime(props) {
             className="w-full py-6 px-6 col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-14 myCustomCardContainer"
             key={"D-ID"}
           >
-            {recomList.map((anime, index) => (
+            {recomList.length !== 0 && recomList.map((anime, index) => (
               <div className="card-here flex justify-center" key={"ID" + index}>
                 <Card_Component
                   index={index}
                   className={"anime-card"}
-                  title={
-                    anime.title.english
-                      ? anime.title.english
-                      : anime.title.userPreferred
-                  }
+                  title={anime.name}
                   id={anime.id}
-                  image={anime.image}
+                  image={anime.poster}
                   type={anime.type}
-                  year={anime.releaseDate}
-                  status={anime.status}
-                  TotalEp={anime.totalEpisodes}
-                  genre={anime.genres}
-                  color={anime.color}
+                  // year={anime.releaseDate}
+                  // status={anime.status}
+                  // TotalEp={anime.totalEpisodes}
+                  // genre={anime.genres}
+                  // color={anime.color}
                 />
               </div>
             ))}
           </div>
         )}
-        <div className=" justify-end right-0 hidden lg:block xl:block laptop:w-1/2">
+        {/* <div className=" justify-end right-0 hidden lg:block xl:block laptop:w-1/2">
           <Sidebar />
-        </div>
+        </div> */}
       </div>
       <CustomFooter />
     </div>

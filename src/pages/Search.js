@@ -37,34 +37,17 @@ const Search = ({ query_y }) => {
     let formattedQuery = query.replace(/\s+/g, "%20").toLowerCase();
 
     const response = await fetch(
-      `${API_ENDPOINT}/meta/anilist/${formattedQuery}?page=${page}`
+      `${API_ENDPOINT}/api/v2/hianime/search?q=${formattedQuery}`
     );
     const data = await response.json();
-    const animeList = data.results;
+
+    const animeList = data.data.animes;
     console.log(animeList);
 
     setAnimeList(animeList);
     setQuery(temp);
     const Query = query;
     setQuery(Query);
-    setDataLoaded(true);
-  };
-
-  const fetchManga = async (query, page) => {
-    setDataLoaded(false);
-    let formattedQuery = query.replace(/\s+/g, "%20").toLowerCase();
-
-    const response = await fetch(
-      `${API_ENDPOINT}/manga/managreader/${formattedQuery}?perPage=5`
-    );
-    const data = await response.json();
-    const mangaList = data.results;
-    console.log(mangaList);
-
-    setMangaList(mangaList);
-    setMangaQuery(temp);
-    const Query = query;
-    setMangaQuery(Query);
     setDataLoaded(true);
   };
 
@@ -87,65 +70,53 @@ const Search = ({ query_y }) => {
     } else {
       navigate("/home");
     }
-  }, []);
+  }, [location.search]);
 
-  useEffect(() => {
-    // document.title = "Search" + Query && Query;
- }, []);
+
 
   return (
     <div className={` app ${isDarkMode ? "light-theme" : "dark-theme"} z-10`}>
       <MyNavbar />
+      <div className="pt-20 mx-8 ">
+          <h2 className="text-2xl font-bold flex items-center gap-2 text-white">
+            <span className="w-1 h-6 bg-red-500 rounded-full" />
+            Search Results: {Query}
+          </h2>
+        </div>
       <div className="flex flex-grow lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-between">
+
         {dataLoaded ? (
           <div
-            className="w-full py-6 px-6 col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-14 myCustomCardContainer"
+            className="min-h-[60vh] w-full py-6 px-6 col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-14 myCustomCardContainer"
             key={"D-ID"}
           >
-            {animeList?.map((anime, index) => (
+            {animeList.length !== 0 ? animeList?.map((anime, index) => (
                 <Card_Component
                  index={index}
                   className={"anime-card"}
-                  title={
-                    anime.title.english
-                      ? anime.title.english
-                      : anime.title.userPreferred
-                  }
+                  title={anime.name}
                   id={anime.id}
-                  image={anime.image}
+                  image={anime.poster}
                   type={anime.type}
-                  year={anime.releaseDate}
-                  status={anime.status}
-                  TotalEp={anime.totalEpisodes}
-                  genre={anime.genres}
-                  color={anime.color}
+                  // year={anime.releaseDate}
+                  // status={anime.status}
+                  // TotalEp={anime.totalEpisodes}
+                  // genre={anime.genres}
+                  // color={anime.color}
                 />
-            ))}
-
-            {mangaList?.map((anime, index) => (
-              <div
-                key={animeList.length + index}
-              >
-
-                <Card_Component
-                  index={index}
-                  className={"anime-card"}
-                  title={anime.title}
-                  id={anime.id}
-                  image={anime.image}
-                  type={anime.type}
-                  genre={anime.genres}
-                  manga
-                />
+            )) : (
+              <div className="flex justify-center">
+                <h1 className="text-white text-2xl">No results found</h1>
               </div>
-            ))}
+            )
+            }
           </div>
         ) : (
           <Wavy />
         )}
-        <div className=" justify-end right-0 hidden lg:block xl:block laptop:w-1/2">
+        {/* <div className=" justify-end right-0 hidden lg:block xl:block laptop:w-1/2">
           <Sidebar />
-        </div>
+        </div> */}
       </div>
       <CustomFooter />
     </div>

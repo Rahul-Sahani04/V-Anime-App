@@ -67,11 +67,7 @@ export const HeroParallax = ({ products }) => {
             <ProductCard
               product={product}
               translate={translateX}
-              key={
-                product.title.english
-                  ? product.title.english
-                  : product.title.native
-              }
+              key={product.id}
             />
           ))}
         </motion.div>
@@ -80,11 +76,7 @@ export const HeroParallax = ({ products }) => {
             <ProductCard
               product={product}
               translate={translateXReverse}
-              key={
-                product.title.english
-                  ? product.title.english
-                  : product.title.native
-              }
+              key={product.id}
             />
           ))}
         </motion.div>
@@ -93,11 +85,7 @@ export const HeroParallax = ({ products }) => {
             <ProductCard
               product={product}
               translate={translateX}
-              key={
-                product.title.english
-                  ? product.title.english
-                  : product.title.native
-              }
+              key={product.id}
             />
           ))}
         </motion.div>
@@ -171,7 +159,7 @@ export const ProductCard = ({ product, translate }) => {
       whileHover={{
         y: -20,
       }}
-      key={product.title}
+      key={product.name}
       className="group/product h-96 w-[30rem] relative flex-shrink-0"
     >
       <Link
@@ -182,18 +170,16 @@ export const ProductCard = ({ product, translate }) => {
         className="block group-hover/product:shadow-2xl "
       >
         <img
-          src={product.image}
+          src={product.poster}
           height="600"
           width="600"
           className="object-cover object-left-top absolute h-full w-full inset-0"
-          alt={product.title}
+          alt={product.name}
         />
       </Link>
       <div className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-80 bg-black pointer-events-none"></div>
       <h2 className="absolute bottom-4 left-4 opacity-0 group-hover/product:opacity-100 text-white">
-        <>
-          {product.title.english ? product.title.english : product.title.native}
-        </>
+        <>{product.name}</>
       </h2>
     </motion.div>
   );

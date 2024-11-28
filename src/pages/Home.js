@@ -21,11 +21,11 @@ function Home() {
     try{
 
       const response = await fetch(
-        `${API_ENDPOINT}/meta/anilist/trending?page=1&perPage=10`
+        `${API_ENDPOINT}/api/v2/hianime/home`
       );
       const data = await response.json();
-      setProducts(data.results);
-      console.log(data.results);
+      setProducts(data.data.spotlightAnimes);
+      console.log(data.data.spotlightAnimes);
     } catch(error){
       console.error("An error occured: ", error)
     }

@@ -5,6 +5,7 @@ import cn from "../utils/cn";
 import axios from "axios"; // Import Axios for making HTTP requests
 
 import { Link, useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar/Navbar_2";
 export function LoginFormDemo() {
   const API_URL = "http://localhost:4000";
   const [formData, setFormData] = useState({
@@ -81,7 +82,15 @@ export function LoginFormDemo() {
     // document.title = "LogIn";
   }, []);
   return (
-    <div className="h-screen flex  items-center justify-center">
+    <div className="h-screen flex  items-center justify-center"
+        style={{
+      backgroundImage: "url('/Assets/Background.jpeg')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    }}
+    >
+    <Navbar />
       <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
         <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
           Welcome to V-Anime

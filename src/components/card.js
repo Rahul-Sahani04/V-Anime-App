@@ -12,14 +12,12 @@ const Card_Component = ({
   status,
   TotalEp,
   genre,
-  manga,
-  color
 }) => {
   return (
     <Link
       to={{
         pathname: "/details",
-        search: `?id=${id}${manga ? "&manga=true" : ""}`,
+        search: `?id=${id}`,
       }}
       className={"main-card"}
     >
@@ -27,7 +25,7 @@ const Card_Component = ({
         <div class="imgBx">
           <img src={image} />
         </div>
-        <div class="content" style={{backgroundColor: color &&  color + "40"}}>
+        <div class="content" style={{backgroundColor: "rgb(0 0 0 / 30%)"}}>
           <div class="contentBx">
             <h3>
               {title}
@@ -46,7 +44,7 @@ const Card_Component = ({
           <ul class="sci">
             <li style={{ "--i": 1 }}>{type ? type : genre && genre[0]}</li>
             <li style={{ "--i": 2 }}>{status ? status : genre?.[1]}</li>
-            <li style={{ "--i": 3 }}>{TotalEp ? TotalEp : genre?.[2]}</li>
+            <li style={{ "--i": 3 }}>{TotalEp && TotalEp?.dub ? TotalEp.sub + " Sub | " + TotalEp.dub + " Dub" : TotalEp?.sub ? TotalEp.sub + " Sub" : TotalEp?.dub ? TotalEp.dub + " Dub" : ""} </li>
           </ul>
         </div>
       </div>
