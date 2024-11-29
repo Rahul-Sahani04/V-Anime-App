@@ -25,7 +25,7 @@ export default function StreamingInterface({anime_id, seasonG='Season 1', episod
 
   return (
     <div className="max-h-[80vh] text-white p-6">
-        <div className="flex gap-4 items-center space-y-4">
+        <div className="flex gap-4 items-baseline space-y-4 mb-4">
           <div className="w-48">
             <Dropdown
               value={season}
@@ -33,7 +33,7 @@ export default function StreamingInterface({anime_id, seasonG='Season 1', episod
               options={['Season 1', 'Season 2', 'Season 3']}
             />
           </div>
-          <div className="flex-1">
+          <div className=" flex-1">
             <SearchInput
               value={search}
               onChange={setSearch}
