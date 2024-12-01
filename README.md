@@ -30,13 +30,13 @@ Here are some screenshots of the V-Anime app:
   <img src="ProjectImages/V-Anime-Home.png" alt="Screenshot 1" width="100%" />
   
   ### Search
-  <img src="ProjectImages/V-Anime-Search.png" alt="Screenshot 2" width="100%" />
+  <img src="ProjectImages/Search.png" alt="Screenshot 2" width="100%" />
 
   ### Details
-  <img src="ProjectImages/V-Anime-Details.png" alt="Screenshot 3" width="100%" />
+  <img src="ProjectImages/Details Page.png" alt="Screenshot 3" width="100%" />
 
   ### Watch
-  <img src="ProjectImages/V-Anime-Watch.png" alt="Screenshot 4" width="100%" />
+  <img src="ProjectImages/WatchAnime.png" alt="Screenshot 4" width="100%" />
 </p>
 
 ## Getting Started
